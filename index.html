@@ -3,18 +3,40 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Muscle Flex Therapy: massaggi decontratturanti, sportivi, linfodrenaggio e trattamenti rilassanti con Camelia, su appuntamento.">
-<link rel="icon" type="image/png" href="assets/logo-simbolo.png">
+<meta name="description" content="Massaggi decontratturanti, sportivi, linfodrenaggio e massaggi rilassanti con Camelia a [Città], solo su appuntamento. Prenota con un messaggio WhatsApp.">
+<!-- BOZZA: togliere il noindex prima del lancio (vedi README) -->
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#f5f8f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121a19" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" sizes="48x48" href="assets/icon-48.png">
+<link rel="icon" type="image/png" sizes="96x96" href="assets/icon-96.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="canonical" href="https://muscleflextherapy.it/">
+<!-- Anteprima nei link condivisi -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Muscle Flex Therapy">
+<meta property="og:locale" content="it_IT">
+<meta property="og:title" content="Muscle Flex Therapy · Massaggi con Camelia">
+<meta property="og:description" content="Massaggi decontratturanti, sportivi, linfodrenaggio e rilassanti, solo su appuntamento.">
+<meta property="og:url" content="https://muscleflextherapy.it/">
+<meta property="og:image" content="https://muscleflextherapy.it/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Logo di Muscle Flex Therapy">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="assets/fonts/figtree-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
 <style>
 :root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
 body { margin: 0; }
 img { max-width: 100%; }
 [hidden] { display: none !important; }
 </style>
-<title>Muscle Flex Therapy</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Figtree:wght@400;500;600&display=swap">
+<title>Muscle Flex Therapy · Massaggi con Camelia a [Città]</title>
 <style>
+/* Font ospitati nel sito (licenza OFL, vedi assets/fonts) */
+@font-face { font-family: "Figtree"; src: url("assets/fonts/figtree-latin-wght.woff2") format("woff2"); font-weight: 300 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "Marcellus"; src: url("assets/fonts/marcellus-latin-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
 /* Layout: la colonna vertebrale sta fissa al centro dello schermo; ogni sezione si apre ai suoi lati (titolo a sinistra, contenuto a destra) e lascia libero il corridoio centrale */
 :root {
   --bg: #f5f8f7;
@@ -31,6 +53,7 @@ img { max-width: 100%; }
   --gut: 240px;           /* corridoio centrale riservato alla colonna */
   --edge: 0px;            /* striscia della colonna sul telefono */
 }
+@media (min-width: 1440px) { :root { --gut: 280px; } }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #121a19; --surface: #1a2422; --band: #16211f; --fg: #e6efec; --muted: #9fb3ad;
@@ -77,12 +100,13 @@ section { padding-block: 88px; }
 .hero .r { display: grid; gap: 28px; }
 .hero p.lead { color: var(--muted); font-size: 1.12rem; max-width: 30em; }
 .actions { display: flex; gap: 12px; flex-wrap: wrap; }
-.btn { display: inline-block; padding: 13px 22px; border-radius: 999px; font-weight: 600; text-decoration: none; font-size: .98rem; }
+.btn { display: inline-block; border: 1px solid transparent; padding: 13px 22px; border-radius: 999px; font-weight: 600; text-decoration: none; font-size: .98rem; }
 .btn.primary { background: var(--accent); color: #fff; }
 :root[data-theme="dark"] .btn.primary { color: #0d1f1b; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn.primary { color: #0d1f1b; } }
 .btn.ghost { border: 1px solid var(--line); color: var(--fg); background: var(--bg); }
 
+ul.menu, ul.creds, ol.steps { list-style: none; margin: 0; padding: 0; }
 .menu { border-top: 1px solid var(--line); }
 .item { display: grid; grid-template-columns: 1fr auto; gap: 6px 24px; padding-block: 22px; border-bottom: 1px solid var(--line); }
 .item h3 { font-size: 1.3rem; }
@@ -96,7 +120,7 @@ section { padding-block: 88px; }
 .about .r { display: grid; gap: 16px; align-content: center; }
 .about .r p { color: var(--muted); max-width: 32em; }
 .creds { display: flex; flex-wrap: wrap; gap: 8px; }
-.creds span { border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; font-size: .85rem; background: var(--surface); }
+.creds li { border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; font-size: .85rem; background: var(--surface); }
 
 .steps { display: grid; gap: 28px; }
 .step { display: grid; grid-template-columns: 2.2rem 1fr; gap: 4px 12px; }
@@ -110,7 +134,9 @@ section { padding-block: 88px; }
 .row .k { font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
 .row .v { font-size: 1.1rem; user-select: all; overflow-wrap: anywhere; }
 table.hours { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
-table.hours td { padding-block: 7px; border-bottom: 1px solid var(--line); }
+table.hours th, table.hours td { padding-block: 7px; border-bottom: 1px solid var(--line); }
+table.hours th { text-align: left; font-weight: 400; }
+.card h3.eyebrow { font-family: var(--body); line-height: 1.6; }
 table.hours td:last-child { text-align: right; color: var(--muted); }
 
 footer { position: relative; z-index: 8; border-top: 1px solid var(--line); background: var(--bg); }
@@ -118,22 +144,37 @@ footer .split { align-items: center; padding-block: 28px; color: var(--muted); f
 .foot-brand { display: flex; align-items: center; gap: 12px; }
 footer .r { text-align: right; }
 
-/* Colonna vertebrale fissa al centro: guida e navigazione tra le sezioni */
-#spine3d { position: fixed; top: 0; left: 50%; transform: translateX(-50%); width: var(--gut); height: 100vh; height: 100dvh; display: block; z-index: 5; pointer-events: none; }
-.spine-nav { position: fixed; top: 0; left: 50%; transform: translateX(-50%); width: var(--gut); height: 100vh; height: 100dvh; z-index: 6; pointer-events: none; }
-.spine-nav a { position: absolute; left: 0; top: 0; pointer-events: auto; display: flex; align-items: center; gap: 8px; transform: translate(-7px, -50%); text-decoration: none; color: var(--muted); padding: 6px 2px; transition: color .25s; }
+/* Colonna vertebrale fissa al centro: guida e navigazione tra le sezioni.
+   Sta sopra intestazione e piè di pagina, che lasciano libero il corridoio centrale. */
+#spine3d { position: fixed; top: 0; left: 50%; transform: translateX(-50%); width: var(--gut); height: 100vh; height: 100dvh; display: block; z-index: 9; pointer-events: none; }
+.spine-nav { position: fixed; top: 0; left: 50%; transform: translateX(-50%); width: var(--gut); height: 100vh; height: 100dvh; z-index: 10; pointer-events: none; }
+/* il punto sta sull'asse della colonna; la sigla a destra, fuori dall'ingombro delle vertebre (--lx lo calcola lo script) */
+.spine-nav a { --lx: 24px; position: absolute; left: 50%; top: 50%; width: 24px; height: 24px; transform: translate(-50%, -50%); pointer-events: auto; display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--muted); transition: color .25s; }
+.spine-nav a:nth-child(1) { top: 18%; } .spine-nav a:nth-child(2) { top: 34%; } .spine-nav a:nth-child(3) { top: 50%; } .spine-nav a:nth-child(4) { top: 66%; } .spine-nav a:nth-child(5) { top: 82%; }
 .spine-nav a::before { content: ""; flex: none; width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--accent); background: var(--bg); transition: background .25s, transform .25s; }
-.spine-nav a .lv { font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.spine-nav a .lv { position: absolute; left: calc(var(--lx) + 12px); top: 50%; transform: translateY(-50%); padding: 4px 2px; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .spine-nav a.on { color: var(--accent); }
-.spine-nav a.on::before { background: var(--accent); transform: scale(1.25); }
+.spine-nav a.on::before { background: var(--accent); transform: scale(1.25); box-shadow: 0 0 0 2px var(--bg); }
 .spine-nav a:hover { color: var(--accent); }
-.spine-nav a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+.spine-nav a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 50%; }
+@media (forced-colors: active) {
+  .spine-nav a.on::before { forced-color-adjust: none; background: Highlight; border-color: Highlight; }
+}
+
+.skip { position: absolute; left: 16px; top: -100px; z-index: 20; padding: 10px 16px; border-radius: 8px; background: var(--accent); color: #fff; font-weight: 600; text-decoration: none; }
+.skip:focus { top: 12px; }
+:root[data-theme="dark"] .skip { color: #0d1f1b; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .skip { color: #0d1f1b; } }
+
+@media (min-width: 900px) and (max-width: 1000px) {
+  header.top nav { gap: 12px; font-size: .85rem; flex-wrap: nowrap; }
+}
 
 @media (max-width: 899px) {
   :root { --edge: 52px; }
   .split { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .split > .l, .split > .r { grid-column: 1; }
-  main .wrap, .note .wrap { padding-right: calc(var(--edge) + 8px); }
+  main .wrap, .note .wrap, header.top .wrap, footer .wrap { padding-right: calc(var(--edge) + 8px); }
   .head { justify-items: start; text-align: left; }
   .hero .split { min-height: 0; }
   section { padding-block: 56px; }
@@ -146,11 +187,17 @@ footer .r { text-align: right; }
   .spine-nav a { transform: translate(-50%, -50%); width: 44px; height: 44px; justify-content: center; padding: 0; }
   .spine-nav a .lv { display: none; }
 }
+@media (max-width: 359px) {
+  .card { padding: 20px; }
+  .btn { padding-inline: 18px; white-space: nowrap; }
+  .row .v { font-size: 1rem; }
+}
 @media (prefers-reduced-motion: reduce) { .spine-nav a, .spine-nav a::before { transition: none; } }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 </style>
 </head>
 <body>
+<a class="skip" href="#contenuto">Salta al contenuto</a>
 <div class="note"><div class="wrap split"><p class="l">Bozza di anteprima: logo vero, ma testi, prezzi e contatti sono ancora esempi da sostituire.</p></div></div>
 
 <header class="top">
@@ -168,16 +215,7 @@ footer .r { text-align: right; }
   </div>
 </header>
 
-<canvas id="spine3d" aria-hidden="true"></canvas>
-<nav class="spine-nav" aria-label="Sezioni lungo la colonna">
-  <a href="#benvenuto" title="Benvenuto" aria-label="C1–C7, Benvenuto"><span class="lv">C1–C7</span></a>
-  <a href="#trattamenti" title="Trattamenti" aria-label="T1–T6, Trattamenti"><span class="lv">T1–T6</span></a>
-  <a href="#chi-sono" title="Chi sono" aria-label="T7–T12, Chi sono"><span class="lv">T7–T12</span></a>
-  <a href="#come-funziona" title="Prima seduta" aria-label="L1–L5, Prima seduta"><span class="lv">L1–L5</span></a>
-  <a href="#contatti" title="Contatti" aria-label="Sacro, Contatti"><span class="lv">Sacro</span></a>
-</nav>
-
-<main>
+<main id="contenuto">
   <section id="benvenuto" class="hero">
     <div class="wrap split">
       <div class="l head">
@@ -201,33 +239,33 @@ footer .r { text-align: right; }
         <h2>Listino</h2>
         <p>Durata e prezzi indicativi. Pacchetti da 5 sedute disponibili su richiesta.</p>
       </div>
-      <div class="r menu">
-        <div class="item">
+      <ul class="r menu">
+        <li class="item">
           <h3>Massaggio decontratturante</h3>
           <p class="desc">Lavoro profondo su collo, spalle e schiena per contratture, rigidità e dolori da postura.</p>
           <div class="price"><strong>€ 55</strong><small>50 min</small></div>
-        </div>
-        <div class="item">
+        </li>
+        <li class="item">
           <h3>Massaggio sportivo</h3>
           <p class="desc">Prima o dopo l'allenamento o la gara: prepara i muscoli e accelera il recupero.</p>
           <div class="price"><strong>€ 60</strong><small>50 min</small></div>
-        </div>
-        <div class="item">
+        </li>
+        <li class="item">
           <h3>Linfodrenaggio manuale</h3>
           <p class="desc">Tecnica delicata e ritmica che aiuta la circolazione e riduce gonfiore e ritenzione.</p>
           <div class="price"><strong>€ 60</strong><small>60 min</small></div>
-        </div>
-        <div class="item">
+        </li>
+        <li class="item">
           <h3>Massaggio rilassante</h3>
           <p class="desc">Manovre lente e avvolgenti per staccare dallo stress e ritrovare un buon sonno.</p>
           <div class="price"><strong>€ 50</strong><small>50 min</small></div>
-        </div>
-        <div class="item">
+        </li>
+        <li class="item">
           <h3>Trattamento schiena e cervicale</h3>
           <p class="desc">Seduta mirata e breve per chi ha poco tempo ma un punto preciso che fa male.</p>
           <div class="price"><strong>€ 35</strong><small>30 min</small></div>
-        </div>
-      </div>
+        </li>
+      </ul>
     </div>
   </section>
 
@@ -239,13 +277,13 @@ footer .r { text-align: right; }
       <div class="r">
         <span class="eyebrow"><b>T7–T12</b> · Chi sono</span>
         <h2>Ciao, sono Camelia</h2>
-        <p>Sono massoterapista diplomata e da anni aiuto persone di ogni età a stare meglio nel proprio corpo: sportivi, chi lavora tante ore alla scrivania, chi ha bisogno di una pausa vera.</p>
+        <p>Sono [titolo professionale] e da [anni di esperienza] anni aiuto persone di ogni età a stare meglio nel proprio corpo: sportivi, chi lavora tante ore alla scrivania, chi ha bisogno di una pausa vera.</p>
         <p>Credo in un approccio semplice: ascoltarti, capire l'origine della tensione e scegliere insieme il trattamento giusto, senza promesse miracolose.</p>
-        <div class="creds">
-          <span>Diploma di Massoterapista (MCB)</span>
-          <span>Massaggio sportivo</span>
-          <span>Linfodrenaggio Vodder</span>
-        </div>
+        <ul class="creds">
+          <li>[Diploma o titolo professionale]</li>
+          <li>[Corso o specializzazione]</li>
+          <li>[Corso o specializzazione]</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -253,15 +291,15 @@ footer .r { text-align: right; }
   <section id="come-funziona" class="band">
     <div class="wrap split">
       <div class="l head">
-        <span class="eyebrow"><b>L1–L5</b> · Come funziona</span>
+        <span class="eyebrow"><b>L1–L5</b> · Prima seduta</span>
         <h2>La tua prima seduta</h2>
         <p>Dal primo messaggio al trattamento, in tre passaggi.</p>
       </div>
-      <div class="r steps">
-        <div class="step"><b>1</b><h3>Prenoti</h3><p>Scrivimi su WhatsApp o chiamami: troviamo insieme giorno e orario.</p></div>
-        <div class="step"><b>2</b><h3>Parliamo</h3><p>Pochi minuti per capire dove senti dolore, le tue abitudini ed eventuali controindicazioni.</p></div>
-        <div class="step"><b>3</b><h3>Trattamento</h3><p>Il massaggio vero e proprio, con qualche consiglio pratico da portarti a casa.</p></div>
-      </div>
+      <ol class="r steps">
+        <li class="step"><b aria-hidden="true">1</b><h3>Prenoti</h3><p>Scrivimi su WhatsApp o chiamami: troviamo insieme giorno e orario.</p></li>
+        <li class="step"><b aria-hidden="true">2</b><h3>Parliamo</h3><p>Pochi minuti per capire dove senti tensione, conoscere le tue abitudini e verificare eventuali controindicazioni.</p></li>
+        <li class="step"><b aria-hidden="true">3</b><h3>Trattamento</h3><p>Il massaggio vero e proprio, con qualche consiglio pratico da portarti a casa.</p></li>
+      </ol>
     </div>
   </section>
 
@@ -274,8 +312,9 @@ footer .r { text-align: right; }
       </div>
       <div class="r">
         <div class="card">
+          <h3 class="eyebrow">Recapiti</h3>
           <div class="row"><span class="k">Telefono e WhatsApp</span><span class="v">+39 333 000 0000</span></div>
-          <div class="row"><span class="k">Email</span><span class="v">info@muscleflextherapy.it</span></div>
+          <div class="row"><span class="k">Email</span><span class="v">[email]</span></div>
           <div class="row"><span class="k">Indirizzo</span><span class="v">Via Esempio 12, [Città]</span></div>
           <div class="actions">
             <a class="btn primary" href="https://wa.me/393330000000">Scrivi su WhatsApp</a>
@@ -283,11 +322,11 @@ footer .r { text-align: right; }
           </div>
         </div>
         <div class="card">
-          <span class="eyebrow">Orari</span>
-          <table class="hours">
-            <tr><td>Lunedì – Venerdì</td><td>9:00 – 19:30</td></tr>
-            <tr><td>Sabato</td><td>9:00 – 13:00</td></tr>
-            <tr><td>Domenica</td><td>Chiuso</td></tr>
+          <h3 class="eyebrow" id="orari-t">Orari (su appuntamento)</h3>
+          <table class="hours" aria-labelledby="orari-t">
+            <tr><th scope="row">Lunedì – Venerdì</th><td>9:00 – 19:30</td></tr>
+            <tr><th scope="row">Sabato</th><td>9:00 – 13:00</td></tr>
+            <tr><th scope="row">Domenica</th><td>Chiuso</td></tr>
           </table>
         </div>
       </div>
@@ -295,179 +334,252 @@ footer .r { text-align: right; }
   </section>
 </main>
 
+<canvas id="spine3d" aria-hidden="true"></canvas>
+<nav class="spine-nav" aria-label="Sezioni lungo la colonna">
+  <a href="#benvenuto" title="Benvenuto" aria-label="C1–C7, Benvenuto"><span class="lv">C1–C7</span></a>
+  <a href="#trattamenti" title="Trattamenti" aria-label="T1–T6, Trattamenti"><span class="lv">T1–T6</span></a>
+  <a href="#chi-sono" title="Chi sono" aria-label="T7–T12, Chi sono"><span class="lv">T7–T12</span></a>
+  <a href="#come-funziona" title="Prima seduta" aria-label="L1–L5, Prima seduta"><span class="lv">L1–L5</span></a>
+  <a href="#contatti" title="Contatti" aria-label="Sacro, Contatti"><span class="lv">Sacro</span></a>
+</nav>
+
 <footer>
   <div class="wrap split">
-    <span class="l foot-brand"><img src="assets/logo-tondo.png" alt="Logo Muscle Flex Therapy" width="56" height="56">© 2026 Muscle Flex Therapy · P.IVA [da inserire]</span>
+    <span class="l foot-brand"><img src="assets/logo-tondo.png" alt="" width="56" height="56">© 2026 Muscle Flex Therapy · P.IVA [da inserire]</span>
     <span class="r">I trattamenti non sostituiscono il parere del medico.</span>
   </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="assets/vendor/three.min.js"></script>
 <script>
 (function () {
   var canvas = document.getElementById('spine3d');
   var links = Array.prototype.slice.call(document.querySelectorAll('.spine-nav a'));
   var sections = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Sezione attiva: l'ultima il cui inizio ha superato il 40% dello schermo
-  var active = -1;
-  function updateActive() {
-    var line = window.innerHeight * 0.4, idx = 0;
-    sections.forEach(function (s, i) { if (s && s.getBoundingClientRect().top <= line) idx = i; });
-    if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 2) idx = sections.length - 1;
+  // Sezione attiva: l'ultima il cui inizio ha superato la linea di lettura.
+  // Dopo un clic su un link interno resta accesa la sezione scelta finché chi legge non scorre di nuovo.
+  var active = -1, locked = -1;
+  function setActive(idx) {
     if (idx === active) return;
     active = idx;
     links.forEach(function (a, i) {
       a.classList.toggle('on', i === idx);
       if (i === idx) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
     });
-    if (window.__spineSetActive) window.__spineSetActive(idx);
+    if (onActive) onActive(idx);
   }
-  window.addEventListener('scroll', updateActive, { passive: true });
+  function updateActive() {
+    if (locked >= 0) { setActive(locked); return; }
+    var line = Math.min(window.innerHeight * 0.4, 240), idx = 0;
+    sections.forEach(function (s, i) { if (s && s.getBoundingClientRect().top <= line) idx = i; });
+    if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 2) idx = sections.length - 1;
+    setActive(idx);
+  }
+  var onActive = null;
+  // il blocco dura per lo scorrimento verso la sezione; il primo scroll successivo lo scioglie
+  var settled = true, settleTimer = 0;
+  function lockTo(hash, wait) {
+    var el = hash && hash.length > 1 ? document.getElementById(decodeURIComponent(hash.slice(1))) : null;
+    var i = sections.indexOf(el);
+    if (i < 0) return;
+    locked = i; settled = false; setActive(i);
+    clearTimeout(settleTimer); settleTimer = setTimeout(function () { settled = true; }, wait || 250);
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (a) lockTo(a.getAttribute('href'));
+  });
+  window.addEventListener('hashchange', function () { lockTo(location.hash); });
+  window.addEventListener('scroll', function () {
+    if (locked >= 0) {
+      if (settled) locked = -1;
+      else { clearTimeout(settleTimer); settleTimer = setTimeout(function () { settled = true; }, 250); }
+    }
+    updateActive();
+  }, { passive: true });
   window.addEventListener('resize', updateActive);
+  lockTo(location.hash, 1500);   // apertura con #sezione: il browser salta lì dopo il caricamento
   updateActive();
 
-  if (!canvas || !window.THREE) { placeFallback(); window.addEventListener('resize', placeFallback); return; }
-  var renderer;
-  try { renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true }); } catch (e) { placeFallback(); return; }
-
-  // Senza WebGL i link restano comunque in colonna, equidistanti
+  // Senza 3D i punti restano in colonna, equidistanti (stesse posizioni del CSS)
   function placeFallback() {
-    var h = window.innerHeight;
-    links.forEach(function (a, i) { a.style.left = (window.innerWidth < 900 ? 26 : 166) + 'px'; a.style.top = (h * (0.18 + i * 0.16)) + 'px'; });
-  }
-
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-  var scene = new THREE.Scene();
-  var camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
-  scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-  var key = new THREE.DirectionalLight(0xffffff, 0.85); key.position.set(4, 5, 8); scene.add(key);
-  var rim = new THREE.DirectionalLight(0xffffff, 0.45); rim.position.set(-5, -3, -4); scene.add(rim);
-
-  function token(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim() || '#5ac0a8'; }
-
-  // Anatomia semplificata: 7 cervicali, 12 dorsali, 5 lombari e l'osso sacro
-  var VERT = [];
-  for (var c = 1; c <= 7; c++) VERT.push({ seg: 0, s: 0.55 + c * 0.025 });
-  for (var t = 1; t <= 12; t++) VERT.push({ seg: t <= 6 ? 1 : 2, s: 0.75 + t * 0.018 });
-  for (var l = 1; l <= 5; l++) VERT.push({ seg: 3, s: 1.0 + l * 0.05 });
-  var TOP = 4.1, BOTTOM = -3.3, SEGS = 5;
-
-  var spine = new THREE.Group();
-  var boneMats = [], segCenters = [];
-  for (var k = 0; k < SEGS; k++) {
-    boneMats.push(new THREE.MeshStandardMaterial({ roughness: 0.4, metalness: 0.1 }));
-    segCenters.push({ y: 0, n: 0, sumY: 0, x: 0, z: 0 });
-  }
-  var discMat = new THREE.MeshStandardMaterial({ roughness: 0.7, transparent: true, opacity: 0.8 });
-  var bodyGeo = new THREE.CylinderGeometry(0.34, 0.31, 0.2, 28);
-  var discGeo = new THREE.CylinderGeometry(0.31, 0.31, 0.07, 28);
-  var procGeo = new THREE.BoxGeometry(0.11, 0.09, 0.4);
-  var wingGeo = new THREE.BoxGeometry(0.62, 0.07, 0.1);
-
-  function curve(u) {
-    // u: 0 in alto, 1 in basso. Lordosi cervicale, cifosi dorsale, lordosi lombare in profondità
-    return { x: Math.sin(u * Math.PI * 2) * 0.12, y: TOP - u * (TOP - BOTTOM), z: Math.cos(u * Math.PI * 2) * 0.42 };
-  }
-  var N = VERT.length;
-  VERT.forEach(function (v, i) {
-    var u = i / (N - 1), p = curve(u), mat = boneMats[v.seg];
-    var g = new THREE.Group();
-    g.add(new THREE.Mesh(bodyGeo, mat));
-    var pr = new THREE.Mesh(procGeo, mat); pr.position.set(0, -0.02, -0.43); pr.rotation.x = 0.4; g.add(pr);
-    var wg = new THREE.Mesh(wingGeo, mat); wg.position.set(0, 0, -0.22); g.add(wg);
-    g.position.set(p.x, p.y, p.z); g.scale.setScalar(v.s);
-    var p2 = curve(Math.min(1, u + 0.01)); g.rotation.x = -Math.atan2(p2.z - p.z, p.y - p2.y);
-    spine.add(g);
-    var sc = segCenters[v.seg]; sc.sumY += p.y; sc.n++;
-    if (i < N - 1) {
-      var q = curve((i + 0.5) / (N - 1)), d = new THREE.Mesh(discGeo, discMat);
-      d.position.set(q.x, q.y, q.z); d.scale.setScalar(v.s); d.rotation.x = g.rotation.x;
-      spine.add(d);
-    }
-  });
-  var sac = new THREE.Mesh(new THREE.CylinderGeometry(0.46, 0.1, 0.95, 28), boneMats[4]);
-  var ps = curve(1); sac.position.set(ps.x, ps.y - 0.68, ps.z - 0.12); sac.rotation.x = 0.35; spine.add(sac);
-  segCenters[4].sumY = sac.position.y; segCenters[4].n = 1;
-  segCenters.forEach(function (sc) { sc.y = sc.sumY / sc.n; });
-  scene.add(spine);
-
-  var target = 0, glow = [1, 0, 0, 0, 0];
-  window.__spineSetActive = function (i) { target = i; if (reduce) render(performance.now()); };
-  target = Math.max(0, active);
-
-  var accent, dim, accentSoft;
-  function applyColors() {
-    accent = new THREE.Color(token('--accent'));
-    accentSoft = new THREE.Color(token('--accent-soft'));
-    dim = accent.clone().lerp(new THREE.Color(token('--bg')), 0.55);
-    discMat.color = accentSoft.clone().lerp(accent, 0.25);
-    if (reduce) render(performance.now());
-  }
-  applyColors();
-  var mq = window.matchMedia('(prefers-color-scheme: dark)');
-  if (mq.addEventListener) mq.addEventListener('change', applyColors);
-  new MutationObserver(applyColors).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-
-  var narrow = false, W = 1, H = 1;
-  function resize() {
-    W = canvas.clientWidth; H = canvas.clientHeight;
-    renderer.setSize(W, H, false);
-    camera.aspect = W / H;
-    narrow = window.innerWidth < 900;
-    // la colonna intera (circa 9 unità) occupa l'85% dell'altezza
-    var fit = narrow ? 0.9 : 0.82;
-    camera.position.set(0, 0.1, 9.6 / fit / (2 * Math.tan(camera.fov * Math.PI / 360)));
-    spine.scale.set(narrow ? 0.5 : 1, 1, narrow ? 0.5 : 1);
-    camera.updateProjectionMatrix();
-    if (reduce) render(performance.now());
-  }
-  window.addEventListener('resize', resize); resize();
-
-  var v3 = new THREE.Vector3();
-  function placeLinks() {
-    spine.updateMatrixWorld();
+    var h = window.innerHeight, narrowNow = window.innerWidth < 900;
     links.forEach(function (a, i) {
-      var sc = segCenters[i];
-      v3.set(0, sc.y, 0).applyMatrix4(spine.matrixWorld).project(camera);
-      var x = (v3.x * 0.5 + 0.5) * W, y = (-v3.y * 0.5 + 0.5) * H;
-      a.style.left = (narrow ? x : x + 46) + 'px';
-      a.style.top = y + 'px';
+      a.style.left = (narrowNow ? 26 : canvas.clientWidth / 2) + 'px';
+      a.style.top = (h * (0.18 + i * 0.16)) + 'px';
+      a.style.setProperty('--lx', '24px');
     });
   }
+  function fallback() { placeFallback(); window.addEventListener('resize', placeFallback); }
 
-  var start = performance.now(), last = start;
-  function render(now) {
-    var dt = Math.min(0.05, (now - last) / 1000); last = now;
-    var tm = (now - start) / 1000;
-    var max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-    var prog = window.scrollY / max;
-    spine.rotation.y = -0.9 + prog * Math.PI * 0.9 + (reduce ? 0 : Math.sin(tm * 0.4) * 0.12);
-    for (var i = 0; i < SEGS; i++) {
-      glow[i] += ((i === target ? 1 : 0) - glow[i]) * (reduce ? 1 : Math.min(1, dt * 6));
-      var m = boneMats[i];
-      m.color.copy(dim).lerp(accent, glow[i]);
-      m.emissive.copy(accent).multiplyScalar(0.28 * glow[i]);
+  if (!canvas || !window.THREE) { fallback(); return; }
+  var probe = document.createElement('canvas');
+  if (!(probe.getContext('webgl') || probe.getContext('experimental-webgl'))) { fallback(); return; }
+  var renderer;
+  try { renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true }); } catch (e) { fallback(); return; }
+
+  try {
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
+    var TAN = Math.tan(camera.fov * Math.PI / 360);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+    var key = new THREE.DirectionalLight(0xffffff, 0.85); key.position.set(4, 5, 8); scene.add(key);
+    var rim = new THREE.DirectionalLight(0xffffff, 0.45); rim.position.set(-5, -3, -4); scene.add(rim);
+
+    function token(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim() || '#5ac0a8'; }
+
+    // Anatomia semplificata: 7 cervicali, 12 dorsali, 5 lombari e l'osso sacro
+    var VERT = [];
+    for (var c = 1; c <= 7; c++) VERT.push({ seg: 0, s: 0.55 + c * 0.025 });
+    for (var t = 1; t <= 12; t++) VERT.push({ seg: t <= 6 ? 1 : 2, s: 0.75 + t * 0.018 });
+    for (var l = 1; l <= 5; l++) VERT.push({ seg: 3, s: 1.0 + l * 0.05 });
+    var TOP = 4.1, BOTTOM = -3.3, SEGS = 5;
+    var HEIGHT = 9.6;   // altezza della colonna con il sacro, in unità
+    var HALF = 1.0;     // ingombro massimo dall'asse quando ruota, in unità
+
+    var spine = new THREE.Group();
+    var boneMats = [], segCenters = [];
+    for (var k = 0; k < SEGS; k++) {
+      boneMats.push(new THREE.MeshStandardMaterial({ roughness: 0.4, metalness: 0.1 }));
+      segCenters.push({ x: 0, y: 0, z: 0, n: 0, sumX: 0, sumY: 0, sumZ: 0 });
     }
-    placeLinks();
-    renderer.render(scene, camera);
-  }
+    var discMat = new THREE.MeshStandardMaterial({ roughness: 0.7, transparent: true, opacity: 0.8 });
+    var bodyGeo = new THREE.CylinderGeometry(0.34, 0.31, 0.2, 28);
+    var discGeo = new THREE.CylinderGeometry(0.31, 0.31, 0.07, 28);
+    var procGeo = new THREE.BoxGeometry(0.11, 0.09, 0.4);
+    var wingGeo = new THREE.BoxGeometry(0.62, 0.07, 0.1);
 
-  var running = false;
-  function loop() {
-    if (running) return; running = true;
-    (function tick(now) {
-      if (document.hidden) { running = false; return; }
-      render(now); requestAnimationFrame(tick);
-    })(performance.now());
-  }
-  if (reduce) {
-    window.addEventListener('scroll', function () { render(performance.now()); }, { passive: true });
-    render(performance.now());
-  } else {
-    document.addEventListener('visibilitychange', function () { if (!document.hidden) loop(); });
-    loop();
+    function curve(u) {
+      // u: 0 in alto, 1 in basso. Lordosi cervicale, cifosi dorsale, lordosi lombare in profondità
+      return { x: Math.sin(u * Math.PI * 2) * 0.12, y: TOP - u * (TOP - BOTTOM), z: Math.cos(u * Math.PI * 2) * 0.42 };
+    }
+    var N = VERT.length;
+    VERT.forEach(function (v, i) {
+      var u = i / (N - 1), p = curve(u), mat = boneMats[v.seg];
+      var g = new THREE.Group();
+      g.add(new THREE.Mesh(bodyGeo, mat));
+      var pr = new THREE.Mesh(procGeo, mat); pr.position.set(0, -0.02, -0.43); pr.rotation.x = 0.4; g.add(pr);
+      var wg = new THREE.Mesh(wingGeo, mat); wg.position.set(0, 0, -0.22); g.add(wg);
+      g.position.set(p.x, p.y, p.z); g.scale.setScalar(v.s);
+      var p2 = curve(Math.min(1, u + 0.01)); g.rotation.x = -Math.atan2(p2.z - p.z, p.y - p2.y);
+      spine.add(g);
+      var sc = segCenters[v.seg]; sc.sumX += p.x; sc.sumY += p.y; sc.sumZ += p.z; sc.n++;
+      if (i < N - 1) {
+        var q = curve((i + 0.5) / (N - 1)), d = new THREE.Mesh(discGeo, discMat);
+        d.position.set(q.x, q.y, q.z); d.scale.setScalar(v.s); d.rotation.x = g.rotation.x;
+        spine.add(d);
+      }
+    });
+    var sac = new THREE.Mesh(new THREE.CylinderGeometry(0.46, 0.1, 0.95, 28), boneMats[4]);
+    var ps = curve(1); sac.position.set(ps.x, ps.y - 0.68, ps.z - 0.12); sac.rotation.x = 0.35; spine.add(sac);
+    var s4 = segCenters[4]; s4.sumX = sac.position.x; s4.sumY = sac.position.y + 0.15; s4.sumZ = sac.position.z; s4.n = 1;
+    segCenters.forEach(function (sc) { sc.x = sc.sumX / sc.n; sc.y = sc.sumY / sc.n; sc.z = sc.sumZ / sc.n; });
+    scene.add(spine);
+
+    // Stato condiviso, dichiarato prima di qualunque render
+    var ready = false, narrow = false, W = 1, H = 1, labelX = 0;
+    var v3 = new THREE.Vector3();
+    var start = performance.now(), last = start;
+    var target = Math.max(0, active), glow = [0, 0, 0, 0, 0];
+    glow[target] = 1;
+    var accent = new THREE.Color(), dim = new THREE.Color();
+
+    function applyColors() {
+      accent.set(token('--accent'));
+      dim.copy(accent).lerp(new THREE.Color(token('--bg')), 0.55);
+      discMat.color = new THREE.Color(token('--accent-soft')).lerp(accent, 0.25);
+      requestRender();
+    }
+
+    function resize() {
+      W = canvas.clientWidth; H = canvas.clientHeight;
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.setSize(W, H, false);
+      camera.aspect = W / H;
+      narrow = window.innerWidth < 900;
+      // Distanza: la colonna sta nell'altezza (82%, 90% sul telefono) e, sul computer,
+      // il suo ingombro resta dentro il corridoio lasciando spazio alle sigle a destra.
+      var fit = narrow ? 0.9 : 0.82;
+      var d = HEIGHT / fit / (2 * TAN);
+      var maxHalfPx = narrow ? W / 2 - 3 : W / 2 - 72;
+      if (!narrow) d = Math.max(d, H * HALF / (maxHalfPx * 2 * TAN));
+      camera.position.set(0, 0.1, d);
+      var pxPerUnit = H / (2 * d * TAN);
+      // sul telefono la colonna si stringe quanto serve per stare nella striscia
+      var sx = narrow ? Math.min(0.5, (W / 2 - 3) / (HALF * pxPerUnit)) : 1;
+      spine.scale.set(sx, 1, sx);
+      labelX = W / 2 + HALF * pxPerUnit * sx + 10;
+      camera.updateProjectionMatrix();
+      requestRender();
+    }
+
+    function placeLinks() {
+      spine.updateMatrixWorld();
+      camera.updateMatrixWorld();
+      links.forEach(function (a, i) {
+        var sc = segCenters[i];
+        v3.set(sc.x, sc.y, sc.z).applyMatrix4(spine.matrixWorld).project(camera);
+        var x = (v3.x * 0.5 + 0.5) * W, y = (-v3.y * 0.5 + 0.5) * H;
+        a.style.left = x + 'px';
+        a.style.top = y + 'px';
+        a.style.setProperty('--lx', (labelX - x) + 'px');
+      });
+    }
+
+    function render(now) {
+      var dt = Math.min(0.05, (now - last) / 1000); last = now;
+      var tm = (now - start) / 1000;
+      var max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      var prog = window.scrollY / max;
+      var settling = false;
+      if (reduce) spine.rotation.y = -0.5;
+      else {
+        // breve oscillazione all'apertura (5 s), poi la colonna gira solo seguendo lo scroll
+        var sway = Math.max(0, 1 - tm / 5);
+        spine.rotation.y = -0.9 + prog * Math.PI * 0.9 + Math.sin(tm * 0.8) * 0.12 * sway;
+        if (sway > 0) settling = true;
+      }
+      for (var i = 0; i < SEGS; i++) {
+        var goal = i === target ? 1 : 0;
+        glow[i] += (goal - glow[i]) * (reduce ? 1 : Math.min(1, dt * 6));
+        if (Math.abs(goal - glow[i]) > 0.01) settling = true; else glow[i] = goal;
+        boneMats[i].color.copy(dim).lerp(accent, glow[i]);
+        boneMats[i].emissive.copy(accent).multiplyScalar(0.28 * glow[i]);
+      }
+      placeLinks();
+      renderer.render(scene, camera);
+      return settling;
+    }
+
+    // Disegno su richiesta: scroll, resize, cambio di sezione o di tema; continua solo finché qualcosa si muove
+    var pending = false;
+    function requestRender() {
+      if (!ready || pending) return;
+      pending = true;
+      requestAnimationFrame(function tick(now) {
+        pending = false;
+        if (render(now) && !document.hidden) { pending = true; requestAnimationFrame(tick); }
+      });
+    }
+
+    onActive = function (i) { target = i; requestRender(); };
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    if (mq.addEventListener) mq.addEventListener('change', applyColors);
+    new MutationObserver(applyColors).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    window.addEventListener('resize', resize);
+    window.addEventListener('scroll', requestRender, { passive: true });
+    document.addEventListener('visibilitychange', requestRender);
+
+    ready = true;
+    applyColors();
+    resize();
+    last = performance.now();
+    render(last);
+    requestRender();
+  } catch (e) {
+    fallback();
   }
 })();
 </script>
