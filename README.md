@@ -27,8 +27,9 @@ Il sito è visibile a Google: niente dati di esempio, ciò che non è confermato
 2. **Prezzi e durate** del listino (oggi "Prezzi su richiesta") e conferma dei 6 trattamenti elencati.
 3. **Orari**, **email**, **via e numero** di Bengi Fitness, **anni di esperienza**, eventuali corsi o attestati.
 4. **P.IVA** nel piè di pagina (obbligatoria per legge sul sito di un'attività) e la pagina dell'**informativa privacy**.
-5. **Ritratto di Camelia** al posto del logo nella sezione "Chi sono".
-6. **Logo, icone e `og.jpg`** rigenerati dal logo originale in alta qualità.
+5. **Logo, icone e `og.jpg`** rigenerati dal logo originale in alta qualità.
+
+La foto di Camelia nella sezione "Chi sono" è in `assets/camelia.webp` e `assets/camelia.jpg` (640×800, ritagliata 4:5): per cambiarla basta sostituire i due file.
 
 Ogni volta che si cambia qualcosa, aggiornare `lastmod` in `sitemap.xml`.
 

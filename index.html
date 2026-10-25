@@ -256,7 +256,6 @@ ul.menu, ul.creds, ol.steps, ul.chips { list-style: none; margin: 0; padding: 0;
 .item h3 { font-size: 1.7rem; font-weight: 550; line-height: 1.1; }
 .price { flex: none; font-family: var(--display); font-size: 2rem; font-weight: 500; line-height: 1; color: var(--accent); font-variant-numeric: lining-nums tabular-nums; white-space: nowrap; }
 .hours-note { margin: 0; color: var(--muted); line-height: 1.6; }
-.portrait .portrait-logo { position: relative; width: 44%; height: auto; border-radius: 50%; }
 .price span { font-size: .6em; vertical-align: .32em; margin-right: .12em; font-weight: 500; }
 .item .desc { color: var(--muted); font-size: .96rem; line-height: 1.62; }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
@@ -270,6 +269,8 @@ ul.menu, ul.creds, ol.steps, ul.chips { list-style: none; margin: 0; padding: 0;
 .portrait::before { content: ""; position: absolute; inset: 14px; border-radius: inherit; border: 1px solid var(--line); background: radial-gradient(80% 60% at 50% 30%, color-mix(in srgb, var(--surface) 80%, transparent), transparent 70%), linear-gradient(180deg, transparent 40%, color-mix(in srgb, var(--accent-soft) 60%, transparent)); }
 .portrait svg { position: absolute; inset: 0; width: 100%; height: 100%; color: var(--accent); opacity: .5; }
 .portrait span { position: relative; padding: 6px 14px; border-radius: 999px; background: var(--glass); border: 1px solid var(--line); }
+.portrait .portrait-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 12%; }
+.portrait.has-photo::after { content: ""; position: absolute; inset: 14px; border-radius: inherit; border: 1px solid rgba(255, 255, 255, .28); background: linear-gradient(180deg, transparent 62%, rgba(0, 0, 0, .32)); pointer-events: none; }
 .about .r { display: grid; gap: 18px; align-content: center; justify-items: start; }
 .about .r p { color: var(--muted); max-width: 32em; }
 .about .r p.intro { color: var(--fg); font-size: 1.12rem; }
@@ -571,17 +572,11 @@ footer .r { text-align: right; }
   <section id="chi-sono">
     <div class="wrap split about">
       <div class="l">
-        <div class="portrait glass" role="img" aria-label="Logo di Muscle Flex Therapy">
-          <svg viewBox="0 0 320 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
-            <g fill="none" stroke="currentColor" stroke-width=".8" vector-effect="non-scaling-stroke">
-              <path d="M-20 300 C 60 250, 120 330, 200 280 S 300 220, 360 250"/>
-              <path d="M-20 316 C 60 266, 120 346, 200 296 S 300 236, 360 266" opacity=".75"/>
-              <path d="M-20 332 C 60 282, 120 362, 200 312 S 300 252, 360 282" opacity=".55"/>
-              <path d="M-20 348 C 60 298, 120 378, 200 328 S 300 268, 360 298" opacity=".4"/>
-              <path d="M-20 364 C 60 314, 120 394, 200 344 S 300 284, 360 314" opacity=".28"/>
-            </g>
-          </svg>
-          <img class="portrait-logo" src="assets/logo-tondo.png" alt="" width="140" height="140">
+        <div class="portrait glass has-photo">
+          <picture>
+            <source srcset="assets/camelia.webp" type="image/webp">
+            <img class="portrait-photo" src="assets/camelia.jpg" alt="Camelia, massoterapista e massaggiatrice sportiva, nel suo studio" width="640" height="800" loading="lazy" decoding="async">
+          </picture>
         </div>
       </div>
       <div class="r flash panel">
