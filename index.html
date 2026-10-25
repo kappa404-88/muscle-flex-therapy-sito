@@ -41,7 +41,9 @@ img { max-width: 100%; }
 }
 * { box-sizing: border-box; }
 body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 17px; line-height: 1.6; }
-.wrap { max-width: 1040px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+:root { --spine-w: 56px; --col: 760px; }
+@media (min-width: 900px) { :root { --spine-w: min(36vw, 480px); } }
+.wrap { max-width: var(--col); margin-left: max(0px, calc((100% - var(--spine-w) - var(--col)) / 2)); margin-right: calc(var(--spine-w) + max(0px, calc((100% - var(--spine-w) - var(--col)) / 2))); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.15; text-wrap: balance; margin: 0; }
 h2 { font-size: clamp(1.8rem, 4vw, 2.4rem); }
 p { margin: 0; }
@@ -58,11 +60,8 @@ nav { display: flex; gap: 20px; flex-wrap: wrap; font-size: .95rem; }
 nav a { color: var(--muted); text-decoration: none; }
 nav a:hover { color: var(--accent); }
 
-.hero { position: relative; overflow: hidden; background: radial-gradient(120% 90% at 78% 40%, var(--accent-soft), transparent 60%), var(--bg); }
-#hero3d { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
-.hero .wrap { position: relative; z-index: 1; min-height: 560px; }
-.hero-space { min-height: 1px; }
-.hero .wrap { display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center; padding-block: 64px 72px; }
+.hero { padding-block: 0; background: radial-gradient(90% 80% at 100% 30%, var(--accent-soft), transparent 65%), var(--bg); }
+.hero .wrap { padding-block: 80px 88px; }
 .hero h1 { font-size: clamp(2.4rem, 6vw, 3.8rem); margin-block: 14px 18px; }
 .hero h1 em { font-style: normal; color: var(--accent); }
 .hero p.lead { color: var(--muted); font-size: 1.12rem; max-width: 34em; }
@@ -72,8 +71,6 @@ nav a:hover { color: var(--accent); }
 :root[data-theme="dark"] .btn.primary { color: #0d1f1b; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn.primary { color: #0d1f1b; } }
 .btn.ghost { border: 1px solid var(--line); color: var(--fg); }
-.hero-art { aspect-ratio: 4/5; max-width: 100%; border-radius: 200px 200px 16px 16px; background: var(--band); display: grid; place-items: center; overflow: hidden; }
-.hero-art span { font-size: .85rem; color: var(--muted); }
 
 section { padding-block: 72px; }
 .band { background: var(--band); }
@@ -114,15 +111,32 @@ footer { border-top: 1px solid var(--line); }
 .foot-brand { display: flex; align-items: center; gap: 12px; }
 footer .wrap { align-items: center; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-block: 28px; color: var(--muted); font-size: .88rem; }
 
-@media (max-width: 760px) {
-  .hero .wrap, .about, .contact { grid-template-columns: 1fr; }
-  .hero .wrap { min-height: 0; padding-block: 48px 340px; }
-  .hero-space { display: none; }
+@media (max-width: 899px) {
+  .about, .contact { grid-template-columns: 1fr; }
+  .hero .wrap { padding-block: 48px 56px; }
   .portrait { width: 200px; }
   .steps { grid-template-columns: 1fr; gap: 24px; }
-  nav { display: none; }
+  header.top nav { display: none; }
   section { padding-block: 52px; }
 }
+
+/* Colonna vertebrale fissa: guida e navigazione tra le sezioni */
+#spine3d { position: fixed; top: 0; right: 0; width: var(--spine-w); height: 100vh; height: 100dvh; display: block; z-index: 5; pointer-events: none; }
+.spine-nav { display: block; position: fixed; top: 0; right: 0; width: var(--spine-w); height: 100vh; height: 100dvh; z-index: 6; pointer-events: none; }
+.spine-nav a { position: absolute; left: 0; top: 0; pointer-events: auto; display: flex; align-items: center; gap: 10px; transform: translate(-100%, -50%); text-decoration: none; color: var(--muted); font-size: .86rem; white-space: nowrap; padding: 6px 4px; transition: color .25s; }
+.spine-nav a .lv { font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; font-variant-numeric: tabular-nums; opacity: .8; }
+.spine-nav a .nm { font-family: var(--display); font-size: 1.05rem; color: inherit; }
+.spine-nav a::after { content: ""; width: 34px; height: 1px; background: currentColor; opacity: .5; transition: width .25s, opacity .25s; }
+.spine-nav a.on { color: var(--accent); }
+.spine-nav a.on::after { width: 54px; opacity: 1; }
+.spine-nav a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+@media (max-width: 899px) {
+  .spine-nav a { transform: translate(-50%, -50%); width: 44px; height: 44px; justify-content: center; padding: 0; }
+  .spine-nav a .lv, .spine-nav a .nm, .spine-nav a::after { display: none; }
+  .spine-nav a::before { content: ""; width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--accent); background: var(--bg); }
+  .spine-nav a.on::before { background: var(--accent); }
+}
+@media (prefers-reduced-motion: reduce) { .spine-nav a, .spine-nav a::after { transition: none; } }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 </style>
 </head>
@@ -131,7 +145,7 @@ footer .wrap { align-items: center; display: flex; justify-content: space-betwee
 
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#top" aria-label="Muscle Flex Therapy">
+    <a class="brand" href="#benvenuto" aria-label="Muscle Flex Therapy">
       <img src="assets/logo-simbolo.png" alt="" width="34" height="35">
       Muscle Flex Therapy
     </a>
@@ -144,9 +158,17 @@ footer .wrap { align-items: center; display: flex; justify-content: space-betwee
   </div>
 </header>
 
+<canvas id="spine3d" aria-hidden="true"></canvas>
+<nav class="spine-nav" aria-label="Sezioni lungo la colonna">
+  <a href="#benvenuto" data-seg="0"><span class="lv">C1–C7</span><span class="nm">Benvenuto</span></a>
+  <a href="#trattamenti" data-seg="1"><span class="lv">T1–T6</span><span class="nm">Trattamenti</span></a>
+  <a href="#chi-sono" data-seg="2"><span class="lv">T7–T12</span><span class="nm">Chi sono</span></a>
+  <a href="#come-funziona" data-seg="3"><span class="lv">L1–L5</span><span class="nm">Prima seduta</span></a>
+  <a href="#contatti" data-seg="4"><span class="lv">Sacro</span><span class="nm">Contatti</span></a>
+</nav>
+
 <main id="top">
-  <div class="hero">
-    <canvas id="hero3d" aria-hidden="true"></canvas>
+  <section id="benvenuto" class="hero">
     <div class="wrap">
       <div>
         <span class="eyebrow">Massoterapia con Camelia · [Città]</span>
@@ -157,9 +179,8 @@ footer .wrap { align-items: center; display: flex; justify-content: space-betwee
           <a class="btn ghost" href="#trattamenti">Vedi trattamenti e prezzi</a>
         </div>
       </div>
-      <div class="hero-space" aria-hidden="true"></div>
     </div>
-  </div>
+  </section>
 
   <section id="trattamenti" class="band">
     <div class="wrap">
@@ -269,123 +290,170 @@ footer .wrap { align-items: center; display: flex; justify-content: space-betwee
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 (function () {
-  var canvas = document.getElementById('hero3d');
-  if (!canvas || !window.THREE) return;
-  var hero = canvas.parentElement;
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var canvas = document.getElementById('spine3d');
+  var links = Array.prototype.slice.call(document.querySelectorAll('.spine-nav a'));
+  var sections = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+
+  // Sezione attiva: l'ultima il cui inizio ha superato il 40% dello schermo
+  var active = -1;
+  function updateActive() {
+    var line = window.innerHeight * 0.4, idx = 0;
+    sections.forEach(function (s, i) { if (s && s.getBoundingClientRect().top <= line) idx = i; });
+    if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 2) idx = sections.length - 1;
+    if (idx === active) return;
+    active = idx;
+    links.forEach(function (a, i) {
+      a.classList.toggle('on', i === idx);
+      if (i === idx) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+    });
+    if (window.__spineSetActive) window.__spineSetActive(idx);
+  }
+  window.addEventListener('scroll', updateActive, { passive: true });
+  window.addEventListener('resize', updateActive);
+  updateActive();
+
+  if (!canvas || !window.THREE) { placeFallback(); window.addEventListener('resize', placeFallback); return; }
   var renderer;
-  try { renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true }); } catch (e) { return; }
+  try { renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true }); } catch (e) { placeFallback(); return; }
+
+  // Senza WebGL i link restano comunque in colonna, equidistanti
+  function placeFallback() {
+    var h = window.innerHeight;
+    links.forEach(function (a, i) { a.style.left = (window.innerWidth < 900 ? 28 : 0) + 'px'; a.style.top = (h * (0.18 + i * 0.16)) + 'px'; });
+  }
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   var scene = new THREE.Scene();
-  var camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
-  camera.position.set(0, 0, 9);
+  var camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+  var key = new THREE.DirectionalLight(0xffffff, 0.85); key.position.set(4, 5, 8); scene.add(key);
+  var rim = new THREE.DirectionalLight(0xffffff, 0.45); rim.position.set(-5, -3, -4); scene.add(rim);
 
-  function token(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || '#5ac0a8'; }
+  function token(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim() || '#5ac0a8'; }
 
-  scene.add(new THREE.AmbientLight(0xffffff, 0.55));
-  var key = new THREE.DirectionalLight(0xffffff, 0.9); key.position.set(3, 4, 6); scene.add(key);
-  var rim = new THREE.DirectionalLight(0xffffff, 0.5); rim.position.set(-4, -2, -3); scene.add(rim);
+  // Anatomia semplificata: 7 cervicali, 12 dorsali, 5 lombari e l'osso sacro
+  var VERT = [];
+  for (var c = 1; c <= 7; c++) VERT.push({ seg: 0, s: 0.55 + c * 0.025 });
+  for (var t = 1; t <= 12; t++) VERT.push({ seg: t <= 6 ? 1 : 2, s: 0.75 + t * 0.018 });
+  for (var l = 1; l <= 5; l++) VERT.push({ seg: 3, s: 1.0 + l * 0.05 });
+  var TOP = 4.1, BOTTOM = -3.3, SEGS = 5;
 
-  // Colonna vertebrale stilizzata: vertebre e dischi lungo una curva a S, come nel logo
   var spine = new THREE.Group();
-  var boneMat = new THREE.MeshStandardMaterial({ roughness: 0.35, metalness: 0.15 });
-  var discMat = new THREE.MeshStandardMaterial({ roughness: 0.6, metalness: 0, transparent: true, opacity: 0.85 });
-  var bodyGeo = new THREE.CylinderGeometry(0.34, 0.3, 0.2, 32);
-  var discGeo = new THREE.CylinderGeometry(0.31, 0.31, 0.06, 32);
-  var procGeo = new THREE.BoxGeometry(0.12, 0.1, 0.38);
+  var boneMats = [], segCenters = [];
+  for (var k = 0; k < SEGS; k++) {
+    boneMats.push(new THREE.MeshStandardMaterial({ roughness: 0.4, metalness: 0.1 }));
+    segCenters.push({ y: 0, n: 0, sumY: 0, x: 0, z: 0 });
+  }
+  var discMat = new THREE.MeshStandardMaterial({ roughness: 0.7, transparent: true, opacity: 0.8 });
+  var bodyGeo = new THREE.CylinderGeometry(0.34, 0.31, 0.2, 28);
+  var discGeo = new THREE.CylinderGeometry(0.31, 0.31, 0.07, 28);
+  var procGeo = new THREE.BoxGeometry(0.11, 0.09, 0.4);
   var wingGeo = new THREE.BoxGeometry(0.62, 0.07, 0.1);
-  var N = 18;
-  for (var i = 0; i < N; i++) {
-    var t = i / (N - 1);
-    var y = 2.5 - t * 5;
-    var x = Math.sin(t * Math.PI * 1.6) * 0.45;
-    var z = Math.cos(t * Math.PI * 1.2) * 0.35;
-    var s = 0.75 + t * 0.45;
-    var v = new THREE.Group();
-    var body = new THREE.Mesh(bodyGeo, boneMat); v.add(body);
-    var pr = new THREE.Mesh(procGeo, boneMat); pr.position.set(0, 0, -0.42); pr.rotation.x = 0.35; v.add(pr);
-    var wg = new THREE.Mesh(wingGeo, boneMat); wg.position.set(0, 0, -0.22); v.add(wg);
-    v.position.set(x, y, z); v.scale.setScalar(s);
-    var dx = Math.cos(t * Math.PI * 1.6) * 0.45 * Math.PI * 1.6 / 5;
-    v.rotation.z = Math.atan(dx);
-    spine.add(v);
+
+  function curve(u) {
+    // u: 0 in alto, 1 in basso. Lordosi cervicale, cifosi dorsale, lordosi lombare in profondità
+    return { x: Math.sin(u * Math.PI * 2) * 0.12, y: TOP - u * (TOP - BOTTOM), z: Math.cos(u * Math.PI * 2) * 0.42 };
+  }
+  var N = VERT.length;
+  VERT.forEach(function (v, i) {
+    var u = i / (N - 1), p = curve(u), mat = boneMats[v.seg];
+    var g = new THREE.Group();
+    g.add(new THREE.Mesh(bodyGeo, mat));
+    var pr = new THREE.Mesh(procGeo, mat); pr.position.set(0, -0.02, -0.43); pr.rotation.x = 0.4; g.add(pr);
+    var wg = new THREE.Mesh(wingGeo, mat); wg.position.set(0, 0, -0.22); g.add(wg);
+    g.position.set(p.x, p.y, p.z); g.scale.setScalar(v.s);
+    var p2 = curve(Math.min(1, u + 0.01)); g.rotation.x = -Math.atan2(p2.z - p.z, p.y - p2.y);
+    spine.add(g);
+    var sc = segCenters[v.seg]; sc.sumY += p.y; sc.n++;
     if (i < N - 1) {
-      var d = new THREE.Mesh(discGeo, discMat);
-      var t2 = (i + 0.5) / (N - 1);
-      d.position.set(Math.sin(t2 * Math.PI * 1.6) * 0.45, 2.5 - t2 * 5, Math.cos(t2 * Math.PI * 1.2) * 0.35);
-      d.scale.setScalar(0.75 + t2 * 0.45); d.rotation.z = v.rotation.z;
+      var q = curve((i + 0.5) / (N - 1)), d = new THREE.Mesh(discGeo, discMat);
+      d.position.set(q.x, q.y, q.z); d.scale.setScalar(v.s); d.rotation.x = g.rotation.x;
       spine.add(d);
     }
-  }
+  });
+  var sac = new THREE.Mesh(new THREE.CylinderGeometry(0.46, 0.1, 0.95, 28), boneMats[4]);
+  var ps = curve(1); sac.position.set(ps.x, ps.y - 0.68, ps.z - 0.12); sac.rotation.x = 0.35; spine.add(sac);
+  segCenters[4].sumY = sac.position.y; segCenters[4].n = 1;
+  segCenters.forEach(function (sc) { sc.y = sc.sumY / sc.n; });
   scene.add(spine);
 
-  // Onda di particelle sullo sfondo, come un tessuto che si distende
-  var COLS = 90, ROWS = 36, pos = new Float32Array(COLS * ROWS * 3);
-  for (var r = 0; r < ROWS; r++) for (var c = 0; c < COLS; c++) {
-    var k = (r * COLS + c) * 3;
-    pos[k] = (c / (COLS - 1) - 0.5) * 22; pos[k + 1] = 0; pos[k + 2] = (r / (ROWS - 1) - 0.5) * 10;
-  }
-  var waveGeo = new THREE.BufferGeometry();
-  waveGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-  var waveMat = new THREE.PointsMaterial({ size: 0.05, transparent: true, opacity: 0.55, depthWrite: false });
-  var wave = new THREE.Points(waveGeo, waveMat);
-  wave.position.set(0, -2.3, -3); wave.rotation.x = 0.28;
-  scene.add(wave);
+  var target = 0, glow = [1, 0, 0, 0, 0];
+  window.__spineSetActive = function (i) { target = i; if (reduce) render(performance.now()); };
+  target = Math.max(0, active);
 
+  var accent, dim, accentSoft;
   function applyColors() {
-    var a = new THREE.Color(token('--accent'));
-    var light = new THREE.Color(token('--accent-soft'));
-    boneMat.color = a.clone().lerp(new THREE.Color(0xffffff), 0.15);
-    discMat.color = light.clone().lerp(a, 0.35);
-    waveMat.color = a;
+    accent = new THREE.Color(token('--accent'));
+    accentSoft = new THREE.Color(token('--accent-soft'));
+    dim = accent.clone().lerp(new THREE.Color(token('--bg')), 0.55);
+    discMat.color = accentSoft.clone().lerp(accent, 0.25);
+    if (reduce) render(performance.now());
   }
   applyColors();
   var mq = window.matchMedia('(prefers-color-scheme: dark)');
   if (mq.addEventListener) mq.addEventListener('change', applyColors);
   new MutationObserver(applyColors).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
-  var narrow = false;
+  var narrow = false, W = 1, H = 1;
   function resize() {
-    var w = hero.clientWidth, hgt = hero.clientHeight;
-    renderer.setSize(w, hgt, false);
-    camera.aspect = w / hgt; camera.updateProjectionMatrix();
-    narrow = w < 760;
-    var halfH = Math.tan(camera.fov * Math.PI / 360) * camera.position.z;
-    if (narrow) { spine.position.set(0.4, -halfH + 1.25, 0); spine.scale.setScalar(0.42); spine.rotation.x = 0; }
-    else {
-      // colonna a destra del testo, a circa il 75% della larghezza
-      var halfW = Math.tan(camera.fov * Math.PI / 360) * camera.position.z * camera.aspect;
-      spine.position.set(halfW * 0.5, 0, 0); spine.scale.setScalar(0.95);
-    }
+    W = canvas.clientWidth; H = canvas.clientHeight;
+    renderer.setSize(W, H, false);
+    camera.aspect = W / H;
+    narrow = window.innerWidth < 900;
+    // la colonna intera (circa 9 unità) occupa l'85% dell'altezza
+    var fit = narrow ? 0.9 : 0.82;
+    camera.position.set(0, 0.1, 9.6 / fit / (2 * Math.tan(camera.fov * Math.PI / 360)));
+    spine.scale.set(narrow ? 0.5 : 1, 1, narrow ? 0.5 : 1);
+    camera.updateProjectionMatrix();
+    if (reduce) render(performance.now());
   }
   window.addEventListener('resize', resize); resize();
 
-  var mx = 0, my = 0;
-  window.addEventListener('pointermove', function (e) {
-    mx = (e.clientX / window.innerWidth - 0.5); my = (e.clientY / window.innerHeight - 0.5);
-  });
+  var v3 = new THREE.Vector3();
+  function placeLinks() {
+    spine.updateMatrixWorld();
+    links.forEach(function (a, i) {
+      var sc = segCenters[i];
+      v3.set(0, sc.y, 0).applyMatrix4(spine.matrixWorld).project(camera);
+      var x = (v3.x * 0.5 + 0.5) * W, y = (-v3.y * 0.5 + 0.5) * H;
+      a.style.left = (narrow ? x : x - 40 * (W / 480) - 20) + 'px';
+      a.style.top = y + 'px';
+    });
+  }
 
-  var visible = true;
-  if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; if (visible && !reduce) loop(); }).observe(hero);
-
-  var start = performance.now(), running = false;
-  function frame(now) {
+  var start = performance.now(), last = start;
+  function render(now) {
+    var dt = Math.min(0.05, (now - last) / 1000); last = now;
     var tm = (now - start) / 1000;
-    spine.rotation.y = 0.5 + tm * 0.25 + mx * 0.4;
-    spine.rotation.x = narrow ? 0 : my * 0.15;
-    for (var i = 0; i < pos.length; i += 3) pos[i + 1] = Math.sin(pos[i] * 0.45 + tm * 0.9) * Math.cos(pos[i + 2] * 0.6 + tm * 0.6) * 0.35;
-    waveGeo.attributes.position.needsUpdate = true;
+    var max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    var prog = window.scrollY / max;
+    spine.rotation.y = -0.9 + prog * Math.PI * 0.9 + (reduce ? 0 : Math.sin(tm * 0.4) * 0.12);
+    for (var i = 0; i < SEGS; i++) {
+      glow[i] += ((i === target ? 1 : 0) - glow[i]) * (reduce ? 1 : Math.min(1, dt * 6));
+      var m = boneMats[i];
+      m.color.copy(dim).lerp(accent, glow[i]);
+      m.emissive.copy(accent).multiplyScalar(0.28 * glow[i]);
+    }
+    placeLinks();
     renderer.render(scene, camera);
   }
+
+  var running = false;
   function loop() {
     if (running) return; running = true;
     (function tick(now) {
-      if (!visible || document.hidden) { running = false; return; }
-      frame(now); requestAnimationFrame(tick);
+      if (document.hidden) { running = false; return; }
+      render(now); requestAnimationFrame(tick);
     })(performance.now());
   }
-  document.addEventListener('visibilitychange', function () { if (!document.hidden && !reduce) loop(); });
-  if (reduce) frame(start + 2000); else loop();
+  if (reduce) {
+    window.addEventListener('scroll', function () { render(performance.now()); }, { passive: true });
+    render(performance.now());
+  } else {
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) loop(); });
+    loop();
+  }
 })();
 </script>
 </body>
