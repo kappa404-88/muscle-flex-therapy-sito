@@ -14,7 +14,6 @@ e poi apri http://localhost:8000 (aperto direttamente come file alcuni browser b
 
 - `index.html`: pagina, stili e script della colonna vertebrale 3D.
 - `assets/fonts/`: Cormorant Garamond (titoli) e Manrope (testo) ospitati nel sito, nessuna richiesta a Google Fonts.
-- `assets/fibers.svg`: il motivo di fibre muscolari dello sfondo (usato come maschera, il colore lo decide il CSS).
 - `assets/vendor/three.min.js`: three.js r128, ospitato nel sito.
 - `assets/logo-*.png`, `assets/icon-*.png`, `assets/apple-touch-icon.png`: logo e icone, ricavati da un'immagine di 378 px. Vanno rigenerati dal logo originale in alta qualità.
 - `assets/og.jpg`: immagine di anteprima quando si condivide il link (1200×630).
