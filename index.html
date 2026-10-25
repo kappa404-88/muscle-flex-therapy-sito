@@ -374,7 +374,22 @@ footer .r { text-align: right; }
   #spine3d, .spine-nav { left: auto; right: 0; transform: none; width: var(--edge); }
   .spine-nav a { transform: translate(-50%, -50%); width: 44px; height: 44px; justify-content: center; padding: 0; }
   .spine-nav a .lv { display: none; }
+  /* menu delle sezioni: si apre sotto l'intestazione */
+  .menu-btn { display: inline-flex; position: absolute; right: calc(var(--edge) + 8px); top: 50%; transform: translateY(-50%); align-items: center; gap: 8px; padding: 9px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--glass-solid); color: var(--fg); font: 600 .82rem/1 var(--body); letter-spacing: .06em; cursor: pointer; }
+  .menu-btn::before { content: ""; width: 14px; height: 9px; border-block: 1.5px solid currentColor; background: linear-gradient(currentColor, currentColor) center / 100% 1.5px no-repeat; }
+  header.top.open { z-index: 12; }
+  header.top.open nav { display: grid; position: absolute; left: var(--pad); right: calc(var(--edge) + 8px); top: calc(100% + 8px); gap: 2px; padding: 10px; border-radius: 18px; background: var(--glass-solid); border: 1px solid var(--glass-edge); box-shadow: var(--shadow); font-size: 1.05rem; }
+  header.top.open nav a { padding: 12px 14px; border-radius: 12px; color: var(--fg); background: none; }
+  header.top.open nav { justify-content: stretch; justify-items: stretch; text-align: left; }
+  header.top.open nav a { display: block; padding: 12px 14px; border-radius: 12px; color: var(--fg); background: none; }
+  header.top .brand { max-width: calc(100% - 104px); white-space: normal; line-height: 1.3; letter-spacing: .18em; }
+  header.top.open nav a:hover, header.top.open nav a:focus-visible { background: var(--accent-soft); }
+  /* barra Prenota sempre a portata di pollice, a sinistra della striscia della colonna */
+  .book-bar { position: fixed; left: 0; right: var(--edge); bottom: 0; z-index: 11; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px var(--pad) calc(10px + env(safe-area-inset-bottom, 0px)); background: color-mix(in srgb, var(--bg) 82%, transparent); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-top: 1px solid var(--line); }
+  .book-bar .btn { justify-content: center; padding-block: 12px; }
+  body { padding-bottom: calc(70px + env(safe-area-inset-bottom, 0px)); }
 }
+@media (min-width: 900px) { .menu-btn, .book-bar { display: none; } }
 @media (max-width: 480px) {
   .item { padding: 22px 20px 20px; }
   .item h3 { font-size: 1.5rem; }
@@ -446,7 +461,8 @@ footer .r { text-align: right; }
       <img src="assets/logo-simbolo.png" alt="" width="32" height="33">
       <span>Muscle Flex Therapy</span>
     </a>
-    <nav class="r" aria-label="Sezioni">
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu-sezioni">Menu</button>
+    <nav class="r" id="menu-sezioni" aria-label="Sezioni">
       <a href="#trattamenti">Trattamenti</a>
       <a href="#chi-sono">Chi sono</a>
       <a href="#come-funziona">Prima seduta</a>
@@ -487,7 +503,7 @@ footer .r { text-align: right; }
         <div class="qi">
           <svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg>
           <dt>Prenota</dt>
-          <dd><a href="https://wa.me/393330000000">WhatsApp</a><small>+39 333 000 0000</small></dd>
+          <dd><a href="https://wa.me/393330000000?text=Ciao%20Camelia%2C%20vorrei%20prenotare%20un%20massaggio">WhatsApp</a><small>+39 333 000 0000</small></dd>
         </div>
         <div class="qi">
           <svg class="ico" aria-hidden="true"><use href="#i-cam"/></svg>
@@ -609,7 +625,7 @@ footer .r { text-align: right; }
           <div class="row"><span class="badge" aria-hidden="true"><svg class="ico"><use href="#i-mail"/></svg></span><span class="k">Email</span><span class="v">[email]</span></div>
           <div class="row"><span class="badge" aria-hidden="true"><svg class="ico"><use href="#i-pin"/></svg></span><span class="k">Indirizzo</span><span class="v">Bengi Fitness, [via e numero], Paratico&nbsp;(BS)</span></div>
           <div class="actions">
-            <a class="btn primary" href="https://wa.me/393330000000"><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg>Scrivi su WhatsApp</a>
+            <a class="btn primary" href="https://wa.me/393330000000?text=Ciao%20Camelia%2C%20vorrei%20prenotare%20un%20massaggio"><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg>Scrivi su WhatsApp</a>
             <a class="btn ghost" href="https://www.instagram.com/muscle_flex_therapy/"><svg class="ico" aria-hidden="true"><use href="#i-cam"/></svg>Instagram</a>
           </div>
         </div>
@@ -637,6 +653,11 @@ footer .r { text-align: right; }
   <a href="#come-funziona" title="Prima seduta" aria-label="L1–L5, Prima seduta"><span class="lv">L1–L5</span></a>
   <a href="#contatti" title="Contatti" aria-label="Sacro, Contatti"><span class="lv">Sacro</span></a>
 </nav>
+
+<div class="book-bar" aria-label="Prenota">
+  <a class="btn primary" href="https://wa.me/393330000000?text=Ciao%20Camelia%2C%20vorrei%20prenotare%20un%20massaggio"><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg>WhatsApp</a>
+  <a class="btn ghost" href="tel:+393330000000"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>Chiama</a>
+</div>
 
 <footer>
   <div class="rule wrap" role="presentation"></div>
@@ -746,6 +767,16 @@ document.documentElement.classList.add('js');
   } else flashes.forEach(function (f) { if (f) f.classList.add('in'); });
   window.addEventListener('scroll', queueTie, { passive: true });
   window.addEventListener('resize', queueTie);
+
+  // Menu delle sezioni sul telefono
+  var head = document.querySelector('header.top'), menuBtn = head && head.querySelector('.menu-btn');
+  function setMenu(open) { head.classList.toggle('open', open); menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+  if (menuBtn) {
+    menuBtn.addEventListener('click', function () { setMenu(!head.classList.contains('open')); });
+    head.querySelectorAll('nav a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && head.classList.contains('open')) { setMenu(false); menuBtn.focus(); } });
+    document.addEventListener('click', function (e) { if (head.classList.contains('open') && !head.contains(e.target)) setMenu(false); });
+  }
 
   lockTo(location.hash, 1500);   // apertura con #sezione: il browser salta lì dopo il caricamento
   updateActive();

@@ -37,7 +37,17 @@ Il sito contiene ancora dati di esempio. Da fare, in quest'ordine:
 
 ## Pubblicazione
 
-Hosting ancora da scegliere. Con GitHub Pages: Settings → Pages → Deploy from a branch → `main` / root, poi impostare il dominio personalizzato `muscleflextherapy.it` e configurare il DNS presso il registrar come indicato da GitHub.
+Il repository è già pronto per GitHub Pages: contiene `CNAME` (con `muscleflextherapy.it`), `.nojekyll` e una pagina `404.html`. Quando si decide di pubblicare:
+
+1. Unire la PR in `main`.
+2. Su GitHub: Settings → Pages → Build and deployment → Deploy from a branch → `main` / `/ (root)`. Il dominio personalizzato viene letto dal file `CNAME`.
+3. Presso il registrar di muscleflextherapy.it, nei DNS:
+   - record **A** per `@`: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+   - record **AAAA** per `@`: `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153`
+   - record **CNAME** per `www`: `kappa404-88.github.io`
+4. Quando GitHub conferma il dominio (può volerci fino a un giorno), attivare "Enforce HTTPS".
+5. **muscleflextherapy.art, .online e .shop**: GitHub Pages accetta un solo dominio per sito, quindi vanno reindirizzati con l'inoltro (redirect 301) del registrar verso `https://muscleflextherapy.it`.
+6. Prima del lancio vero, togliere il `noindex` e la fascia "Bozza" (vedi sopra).
 
 ## Crediti
 
