@@ -50,10 +50,11 @@ img { max-width: 100%; }
   --leaf: #2c6b7a;        /* blu petrolio di supporto */
   --display: "Marcellus", "Iowan Old Style", Georgia, serif;
   --body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --gut: 240px;           /* corridoio centrale riservato alla colonna */
+  /* corridoio centrale riservato alla colonna: cresce con l'altezza dello schermo,
+     perché la colonna la occupa tutta e si allarga di conseguenza */
+  --gut: clamp(240px, calc(24vh + 140px), min(36vw, 520px));
   --edge: 0px;            /* striscia della colonna sul telefono */
 }
-@media (min-width: 1440px) { :root { --gut: 280px; } }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #121a19; --surface: #1a2422; --band: #16211f; --fg: #e6efec; --muted: #9fb3ad;
@@ -442,8 +443,6 @@ footer .r { text-align: right; }
     for (var t = 1; t <= 12; t++) VERT.push({ seg: t <= 6 ? 1 : 2, s: 0.75 + t * 0.018 });
     for (var l = 1; l <= 5; l++) VERT.push({ seg: 3, s: 1.0 + l * 0.05 });
     var TOP = 4.1, BOTTOM = -3.3, SEGS = 5;
-    var HEIGHT = 9.6;   // altezza della colonna con il sacro, in unità
-    var HALF = 1.0;     // ingombro massimo dall'asse quando ruota, in unità
 
     var spine = new THREE.Group();
     var boneMats = [], segCenters = [];
@@ -482,6 +481,22 @@ footer .r { text-align: right; }
     var ps = curve(1); sac.position.set(ps.x, ps.y - 0.68, ps.z - 0.12); sac.rotation.x = 0.35; spine.add(sac);
     var s4 = segCenters[4]; s4.sumX = sac.position.x; s4.sumY = sac.position.y + 0.15; s4.sumZ = sac.position.z; s4.n = 1;
     segCenters.forEach(function (sc) { sc.x = sc.sumX / sc.n; sc.y = sc.sumY / sc.n; sc.z = sc.sumZ / sc.n; });
+
+    // Ingombro misurato sui vertici: altezza dalla prima cervicale alla punta del sacro
+    // e distanza massima dall'asse di rotazione (la larghezza quando la colonna gira)
+    var YMIN = Infinity, YMAX = -Infinity, HALF = 0, pv = new THREE.Vector3();
+    spine.updateMatrixWorld(true);
+    spine.traverse(function (o) {
+      if (!o.isMesh) return;
+      var pos = o.geometry.attributes.position;
+      for (var j = 0; j < pos.count; j++) {
+        pv.fromBufferAttribute(pos, j).applyMatrix4(o.matrixWorld);
+        YMIN = Math.min(YMIN, pv.y); YMAX = Math.max(YMAX, pv.y);
+        HALF = Math.max(HALF, Math.sqrt(pv.x * pv.x + pv.z * pv.z));
+      }
+    });
+    var MID = (YMIN + YMAX) / 2, HALF_SPAN = (YMAX - YMIN) / 2;
+    var END_Z = 0.2;    // profondità tipica delle estremità verso la camera
     scene.add(spine);
 
     // Stato condiviso, dichiarato prima di qualunque render
@@ -505,16 +520,16 @@ footer .r { text-align: right; }
       renderer.setSize(W, H, false);
       camera.aspect = W / H;
       narrow = window.innerWidth < 900;
-      // Distanza: la colonna sta nell'altezza (82%, 90% sul telefono) e, sul computer,
-      // il suo ingombro resta dentro il corridoio lasciando spazio alle sigle a destra.
-      var fit = narrow ? 0.9 : 0.82;
-      var d = HEIGHT / fit / (2 * TAN);
-      var maxHalfPx = narrow ? W / 2 - 3 : W / 2 - 72;
-      if (!narrow) d = Math.max(d, H * HALF / (maxHalfPx * 2 * TAN));
-      camera.position.set(0, 0.1, d);
+      // Distanza: la colonna riempie tutta l'altezza, dalla prima cervicale alla punta del sacro.
+      var d = HALF_SPAN / TAN + END_Z;
+      camera.position.set(0, MID, d);
       var pxPerUnit = H / (2 * d * TAN);
-      // sul telefono la colonna si stringe quanto serve per stare nella striscia
-      var sx = narrow ? Math.min(0.5, (W / 2 - 3) / (HALF * pxPerUnit)) : 1;
+      // In larghezza resta nel corridoio, lasciando spazio alle sigle a destra; se non basta
+      // si stringe (sempre sul telefono, dove è una striscia sul bordo)
+      var lv = 0;
+      links.forEach(function (a) { var s = a.querySelector('.lv'); if (s) lv = Math.max(lv, s.offsetWidth); });
+      var room = narrow ? W / 2 - 3 : W / 2 - (lv + 16);
+      var sx = Math.min(narrow ? 0.5 : 1, room / (HALF * pxPerUnit));
       spine.scale.set(sx, 1, sx);
       labelX = W / 2 + HALF * pxPerUnit * sx + 10;
       camera.updateProjectionMatrix();
