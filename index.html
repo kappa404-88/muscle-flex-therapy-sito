@@ -6,8 +6,8 @@
 <meta name="description" content="Camelia, massoterapista e massaggiatrice sportiva a Paratico (BS), presso Bengi Fitness. Recupero e prevenzione su misura, solo su appuntamento. Prenota con un messaggio WhatsApp.">
 <!-- BOZZA: togliere il noindex prima del lancio (vedi README) -->
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#f5f8f7" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#121a19" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f3f8f6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0c1716" media="(prefers-color-scheme: dark)">
 <link rel="icon" type="image/png" sizes="48x48" href="assets/icon-48.png">
 <link rel="icon" type="image/png" sizes="96x96" href="assets/icon-96.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
@@ -25,7 +25,8 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Logo di Muscle Flex Therapy">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preload" href="assets/fonts/figtree-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/cormorant-garamond-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <style>
 :root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
 body { margin: 0; }
@@ -35,115 +36,248 @@ img { max-width: 100%; }
 <title>Muscle Flex Therapy · Massoterapia e massaggio sportivo a Paratico</title>
 <style>
 /* Font ospitati nel sito (licenza OFL, vedi assets/fonts) */
-@font-face { font-family: "Figtree"; src: url("assets/fonts/figtree-latin-wght.woff2") format("woff2"); font-weight: 300 900; font-style: normal; font-display: swap; }
-@font-face { font-family: "Marcellus"; src: url("assets/fonts/marcellus-latin-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
-/* Layout: la colonna vertebrale sta fissa al centro dello schermo; ogni sezione si apre ai suoi lati (titolo a sinistra, contenuto a destra) e lascia libero il corridoio centrale */
+@font-face { font-family: "Cormorant Garamond"; src: url("assets/fonts/cormorant-garamond-latin-wght-normal.woff2") format("woff2"); font-weight: 300 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Cormorant Garamond"; src: url("assets/fonts/cormorant-garamond-latin-wght-italic.woff2") format("woff2"); font-weight: 300 700; font-style: italic; font-display: swap; }
+@font-face { font-family: "Manrope"; src: url("assets/fonts/manrope-latin-wght-normal.woff2") format("woff2"); font-weight: 200 800; font-style: normal; font-display: swap; }
+
+/* Direzione "Luce": bianchi luminosi, menta del logo, vetro smerigliato, linee sottili.
+   Layout: la colonna vertebrale sta fissa al centro dello schermo; ogni sezione si apre ai suoi lati
+   (titolo a sinistra, contenuto a destra) e lascia libero il corridoio centrale */
 :root {
-  --bg: #f5f8f7;
+  --bg: #f3f8f6;
   --surface: #ffffff;
-  --band: #e4f1ed;
-  --fg: #1f2d2a;
-  --muted: #566a65;
-  --line: #cfe0db;
-  --accent: #187a66;      /* verde acqua del logo, scurito per la leggibilità */
-  --accent-soft: #d6efe8;
-  --leaf: #2c6b7a;        /* blu petrolio di supporto */
-  --display: "Marcellus", "Iowan Old Style", Georgia, serif;
-  --body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --fg: #11302a;
+  --muted: #4a615c;
+  --line: rgba(17, 60, 52, .13);
+  --accent: #0e6b5c;      /* verde acqua del logo, scurito per la leggibilità */
+  --accent-soft: #d3eee6;
+  --mint: #58c0a8;        /* il colore esatto del logo, solo per grafica */
+  --leaf: #2a6676;        /* blu petrolio di supporto */
+  --on-accent: #ffffff;
+  --glass: rgba(255, 255, 255, .6);
+  --glass-solid: #fbfdfc;
+  --glass-edge: rgba(255, 255, 255, .85);
+  --shadow: 0 0 0 1px rgba(17, 60, 52, .07), 0 1px 2px rgba(17, 60, 52, .05), 0 22px 44px -26px rgba(17, 60, 52, .28);
+  --m1: rgba(88, 192, 168, .36); --m2: rgba(150, 205, 222, .42); --m3: rgba(196, 232, 214, .55); --m4: rgba(120, 196, 190, .22);
+  --halo: rgba(255, 255, 255, .95);
+  --fiber: rgba(14, 107, 92, .085);
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .07 0 0 0 0 .19 0 0 0 0 .16 0 0 0 1.25 -.58'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  --grain-o: .16;
+  --bone: #d3e4df;        /* vertebre a riposo: porcellana */
+  --glow: #45b398;        /* vertebre del tratto attivo */
+  --display: "Cormorant Garamond", "Cormorant", "Iowan Old Style", Georgia, serif;
+  --body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
   /* corridoio centrale riservato alla colonna: cresce con l'altezza dello schermo,
      perché la colonna la occupa tutta e si allarga di conseguenza, ma lascia
      almeno 300px a ciascuna colonna di testo (menu e orari restano su una riga) */
   --gut: clamp(240px, calc(24vh + 140px), min(36vw, 520px, calc(100vw - 648px)));
   --edge: 0px;            /* striscia della colonna sul telefono */
+  --pad: 24px;
+  --wrapw: clamp(1320px, 76vw, 1560px);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #121a19; --surface: #1a2422; --band: #16211f; --fg: #e6efec; --muted: #9fb3ad;
-    --line: #2a3a37; --accent: #5ac0a8; --accent-soft: #173a33; --leaf: #8cc6d4; color-scheme: dark;
+    --bg: #0c1716; --surface: #13211f; --fg: #e3eeeb; --muted: #a2b8b2; --line: rgba(190, 236, 224, .13);
+    --accent: #74d3bc; --accent-soft: #143a33; --leaf: #8fcad8; --on-accent: #062019;
+    --glass: rgba(20, 38, 36, .55); --glass-solid: #142422; --glass-edge: rgba(255, 255, 255, .07);
+    --shadow: 0 0 0 1px rgba(0, 0, 0, .25), 0 22px 44px -24px rgba(0, 0, 0, .6);
+    --m1: rgba(40, 140, 118, .26); --m2: rgba(30, 86, 104, .30); --m3: rgba(24, 66, 60, .55); --m4: rgba(60, 150, 140, .14);
+    --halo: rgba(88, 192, 168, .10); --fiber: rgba(140, 225, 203, .075);
+    --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .85 0 0 0 0 1 0 0 0 0 .95 0 0 0 1.25 -.58'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+    --grain-o: .22; --bone: #2f4a45; --glow: #6fd8bf;
+    color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #121a19; --surface: #1a2422; --band: #16211f; --fg: #e6efec; --muted: #9fb3ad;
-  --line: #2a3a37; --accent: #5ac0a8; --accent-soft: #173a33; --leaf: #8cc6d4; color-scheme: dark;
+  --bg: #0c1716; --surface: #13211f; --fg: #e3eeeb; --muted: #a2b8b2; --line: rgba(190, 236, 224, .13);
+  --accent: #74d3bc; --accent-soft: #143a33; --leaf: #8fcad8; --on-accent: #062019;
+  --glass: rgba(20, 38, 36, .55); --glass-solid: #142422; --glass-edge: rgba(255, 255, 255, .07);
+  --shadow: 0 0 0 1px rgba(0, 0, 0, .25), 0 22px 44px -24px rgba(0, 0, 0, .6);
+  --m1: rgba(40, 140, 118, .26); --m2: rgba(30, 86, 104, .30); --m3: rgba(24, 66, 60, .55); --m4: rgba(60, 150, 140, .14);
+  --halo: rgba(88, 192, 168, .10); --fiber: rgba(140, 225, 203, .075);
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .85 0 0 0 0 1 0 0 0 0 .95 0 0 0 1.25 -.58'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  --grain-o: .22; --bone: #2f4a45; --glow: #6fd8bf;
+  color-scheme: dark;
 }
 * { box-sizing: border-box; }
-body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 17px; line-height: 1.6; }
-.wrap { max-width: 1280px; margin-inline: auto; padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px)); }
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 16.5px; line-height: 1.68; font-weight: 420; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: clip; }
+.wrap { max-width: var(--wrapw); margin-inline: auto; padding-left: max(var(--pad), env(safe-area-inset-left, 0px)); padding-right: max(var(--pad), env(safe-area-inset-right, 0px)); }
 .split { display: grid; grid-template-columns: minmax(0, 1fr) var(--gut) minmax(0, 1fr); }
 .split > .l { grid-column: 1; min-width: 0; }
 .split > .r { grid-column: 3; min-width: 0; }
-h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.15; text-wrap: balance; margin: 0; }
-h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); }
-p { margin: 0; }
-a { color: var(--accent); }
-a:focus-visible, .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-.eyebrow { font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--leaf); font-weight: 600; }
-.eyebrow b { color: var(--accent); font-weight: 600; font-variant-numeric: tabular-nums; }
-.note { position: relative; z-index: 8; background: var(--accent-soft); color: var(--fg); font-size: .85rem; padding-block: 8px; }
-.note .l { text-align: left; }
+h1, h2, h3 { font-family: var(--display); font-weight: 500; line-height: 1.04; letter-spacing: -.012em; text-wrap: balance; margin: 0; }
+h2 { font-size: clamp(2.5rem, 1.6rem + 2.4vw, 3.9rem); font-weight: 450; }
+h1 em, h2 em { font-style: italic; font-weight: 400; color: var(--accent); }
+p { margin: 0; text-wrap: pretty; }
+a { color: var(--accent); text-underline-offset: .18em; text-decoration-thickness: 1px; }
+a:focus-visible, .btn:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+.ico { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.35; stroke-linecap: round; stroke-linejoin: round; }
+.sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
-header.top { position: relative; z-index: 8; border-bottom: 1px solid var(--line); background: var(--bg); }
-header.top .split { align-items: center; padding-block: 16px; }
-.brand img { display: block; }
-.brand { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-size: 1.35rem; color: var(--fg); text-decoration: none; }
-header.top nav { display: flex; gap: 22px; flex-wrap: wrap; justify-content: flex-end; font-size: .95rem; }
-header.top nav a { color: var(--muted); text-decoration: none; white-space: nowrap; }
-header.top nav a:hover { color: var(--accent); }
+/* Sfondo: mesh di luce che scorre piano, fibre muscolari sottilissime, grana leggera */
+.bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.bg > * { position: absolute; }
+.mesh { inset: -18%; }
+.mesh::before, .mesh::after { content: ""; position: absolute; inset: 0; }
+.mesh::before { background:
+  radial-gradient(32% 28% at 20% 16%, var(--m1), transparent 72%),
+  radial-gradient(30% 34% at 86% 26%, var(--m2), transparent 70%),
+  radial-gradient(44% 36% at 50% 62%, var(--m3), transparent 72%); }
+.mesh::after { background:
+  radial-gradient(30% 30% at 16% 78%, var(--m2), transparent 70%),
+  radial-gradient(34% 30% at 80% 84%, var(--m1), transparent 72%),
+  radial-gradient(26% 24% at 62% 8%, var(--m4), transparent 70%); }
+.halo { top: 0; bottom: 0; left: 50%; width: calc(var(--gut) * 1.7); transform: translateX(-50%); background: radial-gradient(50% 58% at 50% 50%, var(--halo), transparent 74%); }
+.fibers { inset: 0; background: var(--fiber); -webkit-mask: url("assets/fibers.svg") center / cover no-repeat; mask: url("assets/fibers.svg") center / cover no-repeat; }
+.grain { inset: 0; background-image: var(--grain); background-size: 180px; opacity: var(--grain-o); }
 
-section { padding-block: 88px; }
-.band { background: var(--band); }
-.head { display: grid; gap: 12px; align-content: start; justify-items: end; text-align: right; }
-.head p { color: var(--muted); max-width: 26em; }
+.note, header.top, main, footer { position: relative; z-index: 8; }
+.note { font-size: .8rem; color: var(--muted); padding-block: 9px; border-bottom: 1px solid var(--line); letter-spacing: .01em; }
+.note p { display: flex; gap: 10px; align-items: baseline; }
+.note p::before { content: ""; flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--mint); transform: translateY(-1px); box-shadow: 0 0 0 3px color-mix(in srgb, var(--mint) 22%, transparent); }
+.note b { color: var(--fg); font-weight: 650; }
 
-.hero { background: radial-gradient(60% 70% at 50% 40%, var(--accent-soft), transparent 70%), var(--bg); }
-.hero .split { align-items: center; min-height: 440px; }
-.hero h1 { font-size: clamp(2.3rem, 4vw, 3.6rem); }
-.hero h1 em { font-style: normal; color: var(--accent); }
-.hero .r { display: grid; gap: 28px; }
-.hero p.lead { color: var(--muted); font-size: 1.12rem; max-width: 30em; }
+header.top .split { align-items: center; padding-block: 18px; }
+.brand { display: flex; align-items: center; gap: 12px; color: var(--fg); text-decoration: none; font-size: .74rem; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; white-space: nowrap; }
+.brand img { display: block; width: 32px; height: auto; }
+header.top nav { display: flex; gap: 26px; justify-content: flex-end; font-size: .9rem; }
+header.top nav a { color: var(--muted); text-decoration: none; white-space: nowrap; padding-block: 6px; background: linear-gradient(var(--accent), var(--accent)) left bottom / 0 1px no-repeat; transition: color .25s, background-size .35s; }
+header.top nav a:hover { color: var(--fg); background-size: 100% 1px; }
+
+/* Divisori: filo sottile che si interrompe dove passa la colonna */
+.rule { height: 1px; background: linear-gradient(to right, var(--line), var(--line) calc(50% - var(--gut) / 2 - 24px), transparent 0, transparent calc(50% + var(--gut) / 2 + 24px), var(--line) 0); }
+.rule.wrap { padding: 0; width: calc(100% - 2 * var(--pad)); max-width: calc(var(--wrapw) - 2 * var(--pad)); }
+
+section { padding-block: 112px; scroll-margin-top: 0; }
+.eyebrow { display: block; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--leaf); font-weight: 650; line-height: 1.4; }
+.eyebrow b { color: var(--accent); font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: .12em; white-space: nowrap; margin-right: 12px; }
+.eyebrow b::after { content: ""; display: inline-block; width: 26px; height: 1px; background: currentColor; opacity: .5; vertical-align: .3em; margin-left: 12px; }
+.head { display: grid; gap: 18px; align-content: start; justify-items: end; text-align: right; }
+.head > p { color: var(--muted); max-width: 25em; font-size: 1.02rem; }
+
+/* Apertura */
+.hero { position: relative; padding-block: clamp(28px, 5vh, 72px) 0; overflow: clip; }
+.hero-main { align-items: center; min-height: clamp(360px, calc(100svh - 390px), 600px); position: relative; }
+.hero .head { gap: 26px; container-type: inline-size; }
+.hero h1 { font-size: clamp(2.9rem, 5.4vw, 5.8rem); font-size: clamp(2.9rem, 17.5cqi, 6rem); font-weight: 500; line-height: .98; letter-spacing: -.02em; }
+.hero h1 em { display: block; font-weight: 400; }
+.hero .r { display: grid; gap: 30px; align-content: center; }
+.hero .actions .btn { padding-inline: 20px; }
+.hero p.lead { color: var(--muted); font-size: 1.1rem; line-height: 1.72; max-width: 29em; }
+.hero p.lead strong { color: var(--fg); font-weight: 650; }
+
 .actions { display: flex; gap: 12px; flex-wrap: wrap; }
-.btn { display: inline-block; border: 1px solid transparent; padding: 13px 22px; border-radius: 999px; font-weight: 600; text-decoration: none; font-size: .98rem; }
-.btn.primary { background: var(--accent); color: #fff; }
-:root[data-theme="dark"] .btn.primary { color: #0d1f1b; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn.primary { color: #0d1f1b; } }
-.btn.ghost { border: 1px solid var(--line); color: var(--fg); background: var(--bg); }
+.btn { display: inline-flex; align-items: center; gap: 10px; border: 1px solid transparent; padding: 14px 22px; border-radius: 999px; font-weight: 650; text-decoration: none; font-size: .95rem; letter-spacing: .01em; line-height: 1.2; transition: background-color .25s, box-shadow .25s, transform .25s, border-color .25s; }
+.btn .ico { width: 18px; height: 18px; stroke-width: 1.6; }
+.btn.primary { background: var(--accent); color: var(--on-accent); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18), 0 10px 24px -12px color-mix(in srgb, var(--accent) 80%, transparent); }
+.btn.primary:hover { background: color-mix(in srgb, var(--accent) 88%, var(--fg)); transform: translateY(-1px); }
+.btn.ghost { border-color: var(--line); color: var(--fg); background: var(--glass); }
+.btn.ghost:hover { border-color: color-mix(in srgb, var(--accent) 45%, transparent); }
 
-ul.menu, ul.creds, ol.steps { list-style: none; margin: 0; padding: 0; }
-.menu { border-top: 1px solid var(--line); }
-.item { display: grid; grid-template-columns: 1fr auto; gap: 6px 24px; padding-block: 22px; border-bottom: 1px solid var(--line); }
-.item h3 { font-size: 1.3rem; }
-.item .desc { color: var(--muted); grid-column: 1; font-size: .97rem; }
-.item .price { grid-row: 1 / span 2; grid-column: 2; text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.price strong { display: block; font-family: var(--display); font-size: 1.5rem; font-weight: 400; color: var(--accent); }
-.price small { color: var(--muted); font-size: .85rem; }
+/* Vetro smerigliato (con ripiego a tinta unita) */
+.glass { background: var(--glass-solid); border: 1px solid var(--glass-edge); box-shadow: var(--shadow); border-radius: 22px; }
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .glass { background: var(--glass); -webkit-backdrop-filter: blur(18px) saturate(150%); backdrop-filter: blur(18px) saturate(150%); }
+}
 
-.portrait { flex: none; width: min(100%, 300px); aspect-ratio: 1; border-radius: 50%; background: var(--surface); border: 1px solid var(--line); display: grid; place-items: center; color: var(--muted); font-size: .85rem; }
+/* Info rapide sotto l'apertura: Dove / Quando a sinistra, Prenota / Instagram a destra */
+.quick { position: relative; margin-top: clamp(24px, 4vh, 56px); padding-bottom: 80px; align-items: stretch; }
+.qbox { container-type: inline-size; min-width: 0; }
+.qbox dl { margin: 0; height: 100%; display: grid; grid-template-columns: 1fr 1fr; }
+.qi { position: relative; display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto 1fr; gap: 2px 12px; align-content: start; padding: 20px 18px 20px 20px; min-width: 0; }
+.qi + .qi { border-left: 1px solid var(--line); }
+.qi .ico { grid-row: span 2; width: 22px; height: 22px; margin-top: -1px; color: var(--accent); }
+.qi dt { font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--leaf); font-weight: 700; line-height: 1.5; }
+.qi dd { margin: 0; display: grid; align-content: start; font-family: var(--display); font-size: 1.3rem; font-weight: 550; line-height: 1.2; color: var(--fg); min-width: 0; }
+.qi dd small { font-family: var(--body); font-size: .78rem; font-weight: 450; color: var(--muted); line-height: 1.5; margin-top: 4px; }
+.qi dd small span { display: block; white-space: nowrap; }
+.qi a { color: inherit; text-decoration: none; }
+.qi a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.qi:has(a) { transition: background-color .25s; }
+.qi:has(a):hover { background: color-mix(in srgb, var(--accent-soft) 45%, transparent); }
+.qi:has(a):hover dd > a { color: var(--accent); }
+.qbox .qi:first-child { border-radius: 21px 0 0 21px; }
+.qbox .qi:last-child { border-radius: 0 21px 21px 0; }
+.qi:has(a:focus-visible) { outline: 2px solid var(--accent); outline-offset: -2px; }
+.qi a:focus-visible { outline: none; }
+@container (max-width: 400px) {
+  .qbox dl { grid-template-columns: 1fr; }
+  .qi + .qi { border-left: 0; border-top: 1px solid var(--line); }
+  .qbox .qi:first-child { border-radius: 21px 21px 0 0; }
+  .qbox .qi:last-child { border-radius: 0 0 21px 21px; }
+  .qi { padding: 16px 20px; }
+}
+
+/* Trattamenti */
+.sticky { position: sticky; top: 48px; align-self: start; }
+.callout { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; align-items: start; text-align: left; padding: 18px 20px; max-width: 22rem; margin-top: 8px; }
+.callout .ico { grid-row: span 2; color: var(--accent); width: 22px; height: 22px; }
+.callout strong { font-family: var(--display); font-size: 1.25rem; font-weight: 600; line-height: 1.2; }
+.callout span { color: var(--muted); font-size: .88rem; line-height: 1.5; }
+ul.menu, ul.creds, ol.steps, ul.chips { list-style: none; margin: 0; padding: 0; }
+.menu { display: grid; gap: 16px; }
+.item { padding: 26px 28px 24px; display: grid; gap: 12px; transition: transform .35s, box-shadow .35s; }
+.item-top { display: flex; align-items: baseline; justify-content: space-between; gap: 18px; }
+.item h3 { font-size: 1.7rem; font-weight: 550; line-height: 1.1; }
+.price { flex: none; font-family: var(--display); font-size: 2rem; font-weight: 500; line-height: 1; color: var(--accent); font-variant-numeric: lining-nums tabular-nums; white-space: nowrap; }
+.price span { font-size: .6em; vertical-align: .32em; margin-right: .12em; font-weight: 500; }
+.item .desc { color: var(--muted); font-size: .96rem; line-height: 1.62; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.chips li { display: inline-flex; align-items: center; gap: 6px; padding: 4px 11px; border-radius: 999px; font-size: .76rem; font-weight: 600; letter-spacing: .02em; color: var(--muted); border: 1px solid var(--line); line-height: 1.5; }
+.chips li.dur { color: var(--accent); background: color-mix(in srgb, var(--accent-soft) 70%, transparent); border-color: transparent; font-variant-numeric: tabular-nums; }
+.chips .ico { width: 14px; height: 14px; stroke-width: 1.7; }
+
+/* Chi sono */
 .about .l { display: flex; justify-content: flex-end; align-items: center; }
-.about .r { display: grid; gap: 16px; align-content: center; }
+.portrait { position: relative; margin: 0; flex: none; width: min(100%, 320px); aspect-ratio: 4 / 5; border-radius: 999px 999px 26px 26px; display: grid; place-items: end center; padding-bottom: 30px; color: var(--muted); font-size: .82rem; letter-spacing: .14em; text-transform: uppercase; overflow: hidden; }
+.portrait::before { content: ""; position: absolute; inset: 14px; border-radius: inherit; border: 1px solid var(--line); background: radial-gradient(80% 60% at 50% 30%, color-mix(in srgb, var(--surface) 80%, transparent), transparent 70%), linear-gradient(180deg, transparent 40%, color-mix(in srgb, var(--accent-soft) 60%, transparent)); }
+.portrait svg { position: absolute; inset: 0; width: 100%; height: 100%; color: var(--accent); opacity: .5; }
+.portrait span { position: relative; padding: 6px 14px; border-radius: 999px; background: var(--glass); border: 1px solid var(--line); }
+.about .r { display: grid; gap: 18px; align-content: center; justify-items: start; }
 .about .r p { color: var(--muted); max-width: 32em; }
-.creds { display: flex; flex-wrap: wrap; gap: 8px; }
-.creds li { border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; font-size: .85rem; background: var(--surface); }
+.about .r p.intro { color: var(--fg); font-size: 1.12rem; }
+.creds { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.creds li { display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; padding: 7px 14px 7px 10px; font-size: .84rem; font-weight: 600; background: var(--glass-solid); border: 1px solid var(--line); }
+.creds .ico { width: 16px; height: 16px; color: var(--accent); stroke-width: 1.8; }
 
-.steps { display: grid; gap: 28px; }
-.step { display: grid; grid-template-columns: 2.2rem 1fr; gap: 4px 12px; }
-.step b { grid-row: span 2; font-family: var(--display); font-weight: 400; color: var(--accent); font-size: 1.6rem; line-height: 1.2; }
-.step h3 { font-size: 1.25rem; }
-.step p { color: var(--muted); font-size: .97rem; }
+/* Prima seduta */
+.steps { display: grid; counter-reset: s; }
+.step { display: grid; grid-template-columns: 5.2rem 1fr; gap: 6px 18px; padding-block: 28px; border-top: 1px solid var(--line); }
+.step:last-child { border-bottom: 1px solid var(--line); }
+.step b { grid-row: span 2; font-family: var(--display); font-weight: 300; font-size: 5.6rem; line-height: .78; color: var(--accent); letter-spacing: -.04em; font-variant-numeric: lining-nums; }
+.step h3 { font-size: 1.7rem; font-weight: 550; align-self: end; }
+.step p { color: var(--muted); font-size: .97rem; max-width: 30em; }
 
-.contact .r { display: grid; gap: 20px; }
-.card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 28px; display: grid; gap: 18px; align-content: start; min-width: 0; }
-.row { display: grid; gap: 2px; }
-.row .k { font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
-.row .v { font-size: 1.1rem; user-select: all; overflow-wrap: anywhere; }
+/* Contatti */
+.contact { grid-template-rows: auto 1fr; }
+.contact .head { grid-row: 1; }
+.contact .r { grid-row: 1 / span 2; display: grid; gap: 16px; align-content: start; }
+.contact .hours-wrap { grid-row: 2; display: flex; justify-content: flex-end; margin-top: 36px; }
+.contact .hours-wrap .card { width: min(100%, 27rem); }
+.card-t .ico { width: 16px; height: 16px; vertical-align: -3px; margin-right: 8px; stroke-width: 1.7; color: var(--accent); }
+.card { padding: 30px; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.card-t { font-family: var(--body); font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--leaf); font-weight: 700; line-height: 1.5; margin-bottom: 8px; }
+.row { display: grid; grid-template-columns: 44px 1fr; gap: 0 16px; align-items: center; padding-block: 12px; position: relative; }
+.row + .row { border-top: 1px solid var(--line); }
+.row .badge { grid-row: span 2; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; color: var(--accent); background: color-mix(in srgb, var(--accent-soft) 75%, transparent); }
+.row .k { font-size: .74rem; letter-spacing: .08em; color: var(--muted); font-weight: 550; }
+.row .v { font-size: 1.12rem; font-weight: 600; color: var(--fg); overflow-wrap: anywhere; line-height: 1.4; }
+.row a.v { text-decoration: none; }
+.row a.v::after { content: ""; position: absolute; inset: 0; }
+.row a.v:hover { color: var(--accent); }
+.card .actions { margin-top: 18px; }
 table.hours { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
-table.hours th, table.hours td { padding-block: 7px; border-bottom: 1px solid var(--line); }
-table.hours th { text-align: left; font-weight: 400; }
-.card h3.eyebrow { font-family: var(--body); line-height: 1.6; }
-table.hours td:last-child { text-align: right; color: var(--muted); }
+table.hours th, table.hours td { padding-block: 11px; border-bottom: 1px solid var(--line); }
+table.hours tr:last-child th, table.hours tr:last-child td { border-bottom: 0; }
+table.hours th { text-align: left; font-weight: 500; }
+table.hours td { text-align: right; font-weight: 600; white-space: nowrap; }
+table.hours td.off { color: var(--muted); font-weight: 500; }
+.card .fine { color: var(--muted); font-size: .86rem; margin-top: 10px; }
 
-footer { position: relative; z-index: 8; border-top: 1px solid var(--line); background: var(--bg); }
-footer .split { align-items: center; padding-block: 28px; color: var(--muted); font-size: .88rem; }
-.foot-brand { display: flex; align-items: center; gap: 12px; }
+footer .split { align-items: center; padding-block: 32px 40px; color: var(--muted); font-size: .86rem; }
+.foot-brand { display: flex; align-items: center; gap: 14px; }
+.foot-brand img { border-radius: 50%; box-shadow: var(--shadow); }
 footer .r { text-align: right; }
 
 /* Colonna vertebrale fissa al centro: guida e navigazione tra le sezioni.
@@ -153,60 +287,127 @@ footer .r { text-align: right; }
 /* il punto sta sull'asse della colonna; la sigla a destra, fuori dall'ingombro delle vertebre (--lx lo calcola lo script) */
 .spine-nav a { --lx: 24px; position: absolute; left: 50%; top: 50%; width: 24px; height: 24px; transform: translate(-50%, -50%); pointer-events: auto; display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--muted); transition: color .25s; }
 .spine-nav a:nth-child(1) { top: 18%; } .spine-nav a:nth-child(2) { top: 34%; } .spine-nav a:nth-child(3) { top: 50%; } .spine-nav a:nth-child(4) { top: 66%; } .spine-nav a:nth-child(5) { top: 82%; }
-.spine-nav a::before { content: ""; flex: none; width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--accent); background: var(--bg); transition: background .25s, transform .25s; }
-.spine-nav a .lv { position: absolute; left: calc(var(--lx) + 12px); top: 50%; transform: translateY(-50%); padding: 4px 2px; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.spine-nav a::before { content: ""; flex: none; width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--accent); background: var(--bg); transition: background .25s, transform .25s, box-shadow .25s; }
+.spine-nav a .lv { position: absolute; left: calc(var(--lx) + 12px); top: 50%; transform: translateY(-50%); padding: 4px 2px; font-size: .66rem; font-weight: 650; letter-spacing: .14em; text-transform: uppercase; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .spine-nav a.on { color: var(--accent); }
-.spine-nav a.on::before { background: var(--accent); transform: scale(1.25); box-shadow: 0 0 0 2px var(--bg); }
+.spine-nav a.on::before { background: var(--accent); transform: scale(1.3); box-shadow: 0 0 0 3px var(--bg), 0 0 0 4px color-mix(in srgb, var(--accent) 35%, transparent), 0 0 18px 4px color-mix(in srgb, var(--mint) 55%, transparent); }
 .spine-nav a:hover { color: var(--accent); }
 .spine-nav a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 50%; }
-@media (forced-colors: active) {
-  .spine-nav a.on::before { forced-color-adjust: none; background: Highlight; border-color: Highlight; }
-}
 
-.skip { position: absolute; left: 16px; top: -100px; z-index: 20; padding: 10px 16px; border-radius: 8px; background: var(--accent); color: #fff; font-weight: 600; text-decoration: none; }
+.skip { position: absolute; left: 16px; top: -100px; z-index: 20; padding: 10px 16px; border-radius: 10px; background: var(--accent); color: var(--on-accent); font-weight: 650; text-decoration: none; }
 .skip:focus { top: 12px; }
-:root[data-theme="dark"] .skip { color: #0d1f1b; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .skip { color: #0d1f1b; } }
 
+@media (min-width: 900px) {
+  /* le colonne guardano verso la colonna vertebrale */
+  .about .r, .contact .r, .menu, .steps { max-width: 34rem; }
+}
 @media (min-width: 900px) and (max-width: 1180px) {
-  header.top nav { gap: 12px; font-size: .85rem; flex-wrap: nowrap; }
+  header.top nav { gap: 14px; font-size: .82rem; }
+  .brand { letter-spacing: .18em; font-size: .7rem; }
+  .item { padding: 22px 22px 20px; }
+  .card { padding: 24px; }
 }
 
 @media (max-width: 899px) {
-  :root { --edge: 52px; }
+  :root { --edge: 52px; --pad: 20px; }
   .split { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .split > .l, .split > .r { grid-column: 1; }
   main .wrap, .note .wrap, header.top .wrap, footer .wrap { padding-right: calc(var(--edge) + 8px); }
+  .rule { background: var(--line); }
+  .rule.wrap { width: auto; margin-left: var(--pad); margin-right: calc(var(--edge) + 8px); }
   .head { justify-items: start; text-align: left; }
-  .hero .split { min-height: 0; }
-  section { padding-block: 56px; }
+  .sticky { position: static; }
+  .hero { padding-top: 44px; }
+  .hero-main { min-height: 0; gap: 26px; }
+  .hero p.lead { font-size: 1.04rem; }
+  .hero h1 em { display: inline; }
+  .halo { left: auto; right: -70px; width: 220px; transform: none; }
+  .quick { margin-top: 40px; padding-bottom: 56px; gap: 12px; }
+  section { padding-block: 72px; }
   .about .l { justify-content: flex-start; }
-  .portrait { width: 200px; }
+  .portrait { width: min(100%, 240px); }
   header.top nav { display: none; }
-  footer .split { gap: 12px; }
+  footer .split { gap: 14px; }
   footer .r { text-align: left; }
+  .callout { max-width: none; }
+  .contact { grid-template-rows: none; }
+  .contact .head, .contact .r, .contact .hours-wrap { grid-row: auto; }
+  .contact .hours-wrap { margin-top: -12px; justify-content: stretch; }
+  .contact .hours-wrap .card { width: 100%; }
   #spine3d, .spine-nav { left: auto; right: 0; transform: none; width: var(--edge); }
   .spine-nav a { transform: translate(-50%, -50%); width: 44px; height: 44px; justify-content: center; padding: 0; }
   .spine-nav a .lv { display: none; }
 }
-@media (max-width: 359px) {
-  .card { padding: 20px; }
-  .btn { padding-inline: 18px; white-space: nowrap; }
-  .row .v { font-size: 1rem; }
+@media (max-width: 480px) {
+  .item { padding: 22px 20px 20px; }
+  .item h3 { font-size: 1.5rem; }
+  .price { font-size: 1.7rem; }
+  .card { padding: 22px 20px; }
+  .step { grid-template-columns: 3.4rem 1fr; gap: 4px 14px; }
+  .step b { font-size: 3.6rem; }
+  .step h3 { font-size: 1.5rem; }
 }
-@media (prefers-reduced-motion: reduce) { .spine-nav a, .spine-nav a::before { transition: none; } }
-@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media (max-width: 359px) {
+  :root { --pad: 16px; }
+  .btn { padding-inline: 18px; white-space: nowrap; }
+  .row { grid-template-columns: 36px 1fr; gap: 0 12px; }
+  .row .badge { width: 36px; height: 36px; }
+  .row .v { font-size: 1rem; }
+  .item-top { flex-wrap: wrap; gap: 6px 14px; }
+}
+
+/* Movimento: solo se chi visita non l'ha disattivato */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+  /* la luce dello sfondo si sposta seguendo lo scorrimento: nessun lavoro quando la pagina è ferma */
+  @supports (animation-timeline: scroll()) {
+    .mesh::before { animation: drift-a linear both; animation-timeline: scroll(root); }
+    .mesh::after { animation: drift-b linear both; animation-timeline: scroll(root); }
+    .fibers { animation: drift-f linear both; animation-timeline: scroll(root); }
+  }
+  .hero .head > *, .hero .r > * { animation: rise .9s cubic-bezier(.2, .7, .2, 1) both; }
+  .hero .head > :nth-child(2) { animation-delay: .06s; }
+  .hero .r > :nth-child(1) { animation-delay: .14s; }
+  .hero .r > :nth-child(2) { animation-delay: .2s; }
+  .item:hover { transform: translateY(-2px); }
+}
+@keyframes drift-a { from { transform: translate3d(0, 0, 0) rotate(0deg); } to { transform: translate3d(5%, -9%, 0) rotate(7deg); } }
+@keyframes drift-b { from { transform: translate3d(0, 0, 0) scale(1); } to { transform: translate3d(-6%, -12%, 0) scale(1.12); } }
+@keyframes drift-f { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(0, -4%, 0) scale(1.06); } }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+@media (forced-colors: active) {
+  .bg { display: none; }
+  .glass, .btn.ghost, .chips li, .creds li { border: 1px solid CanvasText; }
+  .spine-nav a.on::before { forced-color-adjust: none; background: Highlight; border-color: Highlight; }
+  .note p::before { forced-color-adjust: none; background: CanvasText; }
+}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21.2s-6.6-5.7-6.6-11.1a6.6 6.6 0 0 1 13.2 0c0 5.4-6.6 11.1-6.6 11.1z"/><circle cx="12" cy="10.1" r="2.4"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.6" y="5.2" width="16.8" height="15.2" rx="3"/><path d="M3.6 9.8h16.8M8.2 3.2v3.6M15.8 3.2v3.6M8.6 14.6l2.2 2.1 4.6-4.4"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M20.2 11.6a8.2 8.2 0 0 1-12 7.2L3.8 20l1.3-4a8.2 8.2 0 1 1 15.1-4.4z"/><path d="M8.6 11.8h.01M12 11.8h.01M15.4 11.8h.01" stroke-width="2.2"/></symbol>
+  <symbol id="i-cam" viewBox="0 0 24 24"><rect x="3.6" y="3.6" width="16.8" height="16.8" rx="5"/><circle cx="12" cy="12" r="3.9"/><path d="M17.1 6.9h.01" stroke-width="2.2"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"/><path d="M12 7.6V12l2.9 1.9"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.7 3.6h2.5l1.5 4.1-2.1 1.3a11.2 11.2 0 0 0 6.4 6.4l1.3-2.1 4.1 1.5v2.5a2.1 2.1 0 0 1-2.3 2.1A16.6 16.6 0 0 1 4.6 5.9a2.1 2.1 0 0 1 2.1-2.3z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3.6" y="5.6" width="16.8" height="12.8" rx="2.8"/><path d="m4.6 7.4 7.4 5.8 7.4-5.8"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13.5 6.5 19 12l-5.5 5.5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5.2 12.6 4.4 4.3 9.2-9.6"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 4 8.4 4.3L12 12.6 3.6 8.3z"/><path d="m3.6 12.2 8.4 4.3 8.4-4.3M3.6 16l8.4 4.3 8.4-4.3"/></symbol>
+</svg>
 <a class="skip" href="#contenuto">Salta al contenuto</a>
-<div class="note"><div class="wrap split"><p class="l">Bozza di anteprima: logo vero, ma testi, prezzi e contatti sono ancora esempi da sostituire.</p></div></div>
+<div class="bg" aria-hidden="true"><div class="mesh"></div><div class="halo"></div><div class="fibers"></div><div class="grain"></div></div>
+<div class="note"><div class="wrap split"><p class="l"><span><b>Bozza di anteprima</b>: logo vero, ma testi, prezzi e contatti sono ancora esempi da sostituire.</span></p></div></div>
 
 <header class="top">
   <div class="wrap split">
     <a class="brand l" href="#benvenuto" aria-label="Muscle Flex Therapy">
-      <img src="assets/logo-simbolo.png" alt="" width="34" height="35">
-      Muscle Flex Therapy
+      <img src="assets/logo-simbolo.png" alt="" width="32" height="33">
+      <span>Muscle Flex Therapy</span>
     </a>
     <nav class="r" aria-label="Sezioni">
       <a href="#trattamenti">Trattamenti</a>
@@ -219,88 +420,132 @@ footer .r { text-align: right; }
 
 <main id="contenuto">
   <section id="benvenuto" class="hero">
-    <div class="wrap split">
+    <div class="wrap split hero-main">
       <div class="l head">
-        <span class="eyebrow"><b>C1–C7</b> · Massoterapia e massaggio sportivo · Paratico</span>
+        <span class="eyebrow"><b>C1–C7</b>Massoterapia e massaggio sportivo</span>
         <h1>Recupero e prevenzione <em>su misura</em></h1>
       </div>
       <div class="r">
-        <p class="lead">Sono Camelia, massoterapista e massaggiatrice sportiva. Ricevo su appuntamento a Paratico, dentro la palestra Bengi Fitness. Ogni seduta parte da un breve colloquio su come ti alleni, dove senti tensione e cosa ti serve davvero.</p>
+        <p class="lead">Sono <strong>Camelia</strong>, massoterapista e massaggiatrice sportiva. Ricevo su appuntamento a Paratico, dentro la palestra Bengi Fitness. Ogni seduta parte da un breve colloquio su come ti alleni, dove senti tensione e cosa ti serve davvero.</p>
         <div class="actions">
-          <a class="btn primary" href="#contatti">Prenota una seduta</a>
+          <a class="btn primary" href="#contatti">Prenota una seduta<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
           <a class="btn ghost" href="#trattamenti">Vedi trattamenti e prezzi</a>
         </div>
       </div>
     </div>
+    <div class="wrap split quick">
+      <div class="l qbox glass"><dl aria-label="Dove e quando">
+        <div class="qi">
+          <svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg>
+          <dt>Dove</dt>
+          <dd>Bengi Fitness<small>Paratico (BS) · Lago&nbsp;d'Iseo</small></dd>
+        </div>
+        <div class="qi">
+          <svg class="ico" aria-hidden="true"><use href="#i-cal"/></svg>
+          <dt>Quando</dt>
+          <dd>Su appuntamento<small><span>Lun – Ven 9:00 – 19:30</span> <span>Sab 9:00 – 13:00</span></small></dd>
+        </div>
+      </dl></div>
+      <div class="r qbox glass"><dl aria-label="Come prenotare">
+        <div class="qi">
+          <svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg>
+          <dt>Prenota</dt>
+          <dd><a href="https://wa.me/393330000000">WhatsApp</a><small>+39 333 000 0000</small></dd>
+        </div>
+        <div class="qi">
+          <svg class="ico" aria-hidden="true"><use href="#i-cam"/></svg>
+          <dt>Seguimi</dt>
+          <dd><a href="https://www.instagram.com/muscle_flex_therapy/">Instagram</a><small>@muscle_flex_therapy</small></dd>
+        </div>
+      </dl></div>
+    </div>
   </section>
 
-  <section id="trattamenti" class="band">
+  <div class="rule wrap" role="presentation"></div>
+
+  <section id="trattamenti">
     <div class="wrap split">
-      <div class="l head">
-        <span class="eyebrow"><b>T1–T6</b> · Trattamenti</span>
-        <h2>Listino</h2>
-        <p>Durata e prezzi indicativi. Pacchetti da 5 sedute disponibili su richiesta.</p>
+      <div class="l head sticky">
+        <span class="eyebrow"><b>T1–T6</b>Trattamenti</span>
+        <h2>Trattamenti <em>e prezzi</em></h2>
+        <p>Durata e prezzi indicativi: ogni seduta si adatta a te dopo un breve colloquio.</p>
+        <p class="callout glass"><svg class="ico" aria-hidden="true"><use href="#i-layers"/></svg><strong>Pacchetti da 5 sedute</strong><span>Disponibili su richiesta: chiedimi le condizioni quando prenoti.</span></p>
       </div>
       <ul class="r menu">
-        <li class="item">
-          <h3>Massaggio sportivo</h3>
+        <li class="item glass">
+          <div class="item-top"><h3>Massaggio sportivo</h3><p class="price"><span>€</span>60</p></div>
           <p class="desc">Prima della gara per preparare i muscoli, dopo l'allenamento per recuperare più in fretta e arrivare pronto alla seduta successiva.</p>
-          <div class="price"><strong>€ 60</strong><small>50 min</small></div>
+          <ul class="chips" aria-label="Dettagli"><li class="dur"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>50 min</li><li>Pre-gara</li><li>Post-allenamento</li></ul>
         </li>
-        <li class="item">
-          <h3>Recupero e prevenzione</h3>
+        <li class="item glass">
+          <div class="item-top"><h3>Recupero e prevenzione</h3><p class="price"><span>€</span>55</p></div>
           <p class="desc">Seduta su misura per chi si allena con costanza: scarico dei gruppi muscolari più sollecitati e attenzione ai punti che tendono a irrigidirsi.</p>
-          <div class="price"><strong>€ 55</strong><small>45 min</small></div>
+          <ul class="chips" aria-label="Dettagli"><li class="dur"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>45 min</li><li>Allenamento costante</li><li>Scarico muscolare</li></ul>
         </li>
-        <li class="item">
-          <h3>Massaggio decontratturante</h3>
+        <li class="item glass">
+          <div class="item-top"><h3>Massaggio decontratturante</h3><p class="price"><span>€</span>55</p></div>
           <p class="desc">Lavoro profondo su collo, spalle e schiena per contratture, rigidità e dolori da postura.</p>
-          <div class="price"><strong>€ 55</strong><small>50 min</small></div>
+          <ul class="chips" aria-label="Dettagli"><li class="dur"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>50 min</li><li>Collo · spalle · schiena</li><li>Postura</li></ul>
         </li>
-        <li class="item">
-          <h3>Linfodrenaggio manuale</h3>
+        <li class="item glass">
+          <div class="item-top"><h3>Linfodrenaggio manuale</h3><p class="price"><span>€</span>60</p></div>
           <p class="desc">Tecnica delicata e ritmica che aiuta la circolazione e riduce gonfiore e ritenzione.</p>
-          <div class="price"><strong>€ 60</strong><small>60 min</small></div>
+          <ul class="chips" aria-label="Dettagli"><li class="dur"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>60 min</li><li>Circolazione</li><li>Gonfiore</li></ul>
         </li>
-        <li class="item">
-          <h3>Massaggio rilassante</h3>
+        <li class="item glass">
+          <div class="item-top"><h3>Massaggio rilassante</h3><p class="price"><span>€</span>50</p></div>
           <p class="desc">Manovre lente e avvolgenti per staccare dallo stress e ritrovare un buon sonno.</p>
-          <div class="price"><strong>€ 50</strong><small>50 min</small></div>
+          <ul class="chips" aria-label="Dettagli"><li class="dur"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>50 min</li><li>Stress</li><li>Sonno</li></ul>
         </li>
-        <li class="item">
-          <h3>Trattamento schiena e cervicale</h3>
+        <li class="item glass">
+          <div class="item-top"><h3>Trattamento schiena e cervicale</h3><p class="price"><span>€</span>35</p></div>
           <p class="desc">Seduta mirata e breve per chi ha poco tempo ma un punto preciso che fa male.</p>
-          <div class="price"><strong>€ 35</strong><small>30 min</small></div>
+          <ul class="chips" aria-label="Dettagli"><li class="dur"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>30 min</li><li>Seduta breve</li><li>Zona mirata</li></ul>
         </li>
       </ul>
     </div>
   </section>
 
+  <div class="rule wrap" role="presentation"></div>
+
   <section id="chi-sono">
     <div class="wrap split about">
       <div class="l">
-        <div class="portrait" role="img" aria-label="Spazio per il ritratto di Camelia">Ritratto di Camelia</div>
+        <div class="portrait glass" role="img" aria-label="Spazio per il ritratto di Camelia">
+          <svg viewBox="0 0 320 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+            <g fill="none" stroke="currentColor" stroke-width=".8" vector-effect="non-scaling-stroke">
+              <path d="M-20 300 C 60 250, 120 330, 200 280 S 300 220, 360 250"/>
+              <path d="M-20 316 C 60 266, 120 346, 200 296 S 300 236, 360 266" opacity=".75"/>
+              <path d="M-20 332 C 60 282, 120 362, 200 312 S 300 252, 360 282" opacity=".55"/>
+              <path d="M-20 348 C 60 298, 120 378, 200 328 S 300 268, 360 298" opacity=".4"/>
+              <path d="M-20 364 C 60 314, 120 394, 200 344 S 300 284, 360 314" opacity=".28"/>
+            </g>
+          </svg>
+          <span>Ritratto di Camelia</span>
+        </div>
       </div>
       <div class="r">
-        <span class="eyebrow"><b>T7–T12</b> · Chi sono</span>
-        <h2>Ciao, sono Camelia</h2>
-        <p>Sono massoterapista e massaggiatrice sportiva e da [anni di esperienza] anni aiuto chi si allena, chi lavora tante ore alla scrivania e chi ha bisogno di una pausa vera a recuperare e a prevenire tensioni.</p>
+        <span class="eyebrow"><b>T7–T12</b>Chi sono</span>
+        <h2>Ciao, sono <em>Camelia</em></h2>
+        <p class="intro">Sono massoterapista e massaggiatrice sportiva e da [anni di esperienza] anni aiuto chi si allena, chi lavora tante ore alla scrivania e chi ha bisogno di una pausa vera a recuperare e a prevenire tensioni.</p>
         <p>Ricevo a Paratico, presso la palestra <a href="https://www.instagram.com/bengifitness_only/">Bengi Fitness</a>: se ti alleni lì, il massaggio si inserisce facilmente prima o dopo l'allenamento.</p>
         <p>Credo in un approccio semplice: ascoltarti, capire l'origine della tensione e scegliere insieme il trattamento giusto, senza promesse miracolose.</p>
         <ul class="creds">
-          <li>Massoterapista</li>
-          <li>Massaggiatrice sportiva</li>
-          <li>[Corso o specializzazione]</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Massoterapista</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Massaggiatrice sportiva</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>[Corso o specializzazione]</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <section id="come-funziona" class="band">
+  <div class="rule wrap" role="presentation"></div>
+
+  <section id="come-funziona">
     <div class="wrap split">
-      <div class="l head">
-        <span class="eyebrow"><b>L1–L5</b> · Prima seduta</span>
-        <h2>La tua prima seduta</h2>
+      <div class="l head sticky">
+        <span class="eyebrow"><b>L1–L5</b>Prima seduta</span>
+        <h2>La tua <em>prima seduta</em></h2>
         <p>Dal primo messaggio al trattamento, in tre passaggi.</p>
       </div>
       <ol class="r steps">
@@ -311,30 +556,34 @@ footer .r { text-align: right; }
     </div>
   </section>
 
+  <div class="rule wrap" role="presentation"></div>
+
   <section id="contatti">
     <div class="wrap split contact">
       <div class="l head">
-        <span class="eyebrow"><b>Sacro</b> · Contatti</span>
-        <h2>Prenota il tuo appuntamento</h2>
+        <span class="eyebrow"><b>Sacro</b>Contatti</span>
+        <h2>Prenota il tuo <em>appuntamento</em></h2>
         <p>Ricevo solo su appuntamento, a Paratico presso Bengi Fitness. Il modo più veloce è un messaggio WhatsApp.</p>
       </div>
       <div class="r">
-        <div class="card">
-          <h3 class="eyebrow">Recapiti</h3>
-          <div class="row"><span class="k">Telefono e WhatsApp</span><span class="v">+39 333 000 0000</span></div>
-          <div class="row"><span class="k">Email</span><span class="v">[email]</span></div>
-          <div class="row"><span class="k">Indirizzo</span><span class="v">Bengi Fitness, [via e numero], Paratico (BS)</span></div>
+        <div class="card glass">
+          <h3 class="card-t">Recapiti</h3>
+          <div class="row"><span class="badge" aria-hidden="true"><svg class="ico"><use href="#i-phone"/></svg></span><span class="k">Telefono e WhatsApp</span><a class="v" href="tel:+393330000000">+39 333 000 0000</a></div>
+          <div class="row"><span class="badge" aria-hidden="true"><svg class="ico"><use href="#i-mail"/></svg></span><span class="k">Email</span><span class="v">[email]</span></div>
+          <div class="row"><span class="badge" aria-hidden="true"><svg class="ico"><use href="#i-pin"/></svg></span><span class="k">Indirizzo</span><span class="v">Bengi Fitness, [via e numero], Paratico&nbsp;(BS)</span></div>
           <div class="actions">
-            <a class="btn primary" href="https://wa.me/393330000000">Scrivi su WhatsApp</a>
-            <a class="btn ghost" href="https://www.instagram.com/muscle_flex_therapy/">Instagram</a>
+            <a class="btn primary" href="https://wa.me/393330000000"><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg>Scrivi su WhatsApp</a>
+            <a class="btn ghost" href="https://www.instagram.com/muscle_flex_therapy/"><svg class="ico" aria-hidden="true"><use href="#i-cam"/></svg>Instagram</a>
           </div>
         </div>
-        <div class="card">
-          <h3 class="eyebrow" id="orari-t">Orari (su appuntamento)</h3>
+      </div>
+      <div class="l hours-wrap">
+        <div class="card glass">
+          <h3 class="card-t" id="orari-t"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>Orari (su appuntamento)</h3>
           <table class="hours" aria-labelledby="orari-t">
             <tr><th scope="row">Lunedì – Venerdì</th><td>9:00 – 19:30</td></tr>
             <tr><th scope="row">Sabato</th><td>9:00 – 13:00</td></tr>
-            <tr><th scope="row">Domenica</th><td>Chiuso</td></tr>
+            <tr><th scope="row">Domenica</th><td class="off">Chiuso</td></tr>
           </table>
         </div>
       </div>
@@ -352,8 +601,9 @@ footer .r { text-align: right; }
 </nav>
 
 <footer>
+  <div class="rule wrap" role="presentation"></div>
   <div class="wrap split">
-    <span class="l foot-brand"><img src="assets/logo-tondo.png" alt="" width="56" height="56">© 2026 Muscle Flex Therapy · P.IVA [da inserire]</span>
+    <span class="l foot-brand"><img src="assets/logo-tondo.png" alt="" width="52" height="52">© 2026 Muscle Flex Therapy · P.IVA [da inserire]</span>
     <span class="r">I trattamenti non sostituiscono il parere del medico.</span>
   </div>
 </footer>
@@ -432,11 +682,14 @@ footer .r { text-align: right; }
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
     var TAN = Math.tan(camera.fov * Math.PI / 360);
-    scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-    var key = new THREE.DirectionalLight(0xffffff, 0.85); key.position.set(4, 5, 8); scene.add(key);
-    var rim = new THREE.DirectionalLight(0xffffff, 0.45); rim.position.set(-5, -3, -4); scene.add(rim);
+    // Luce morbida da studio: cielo bianco e riflesso menta dal basso, luce principale frontale,
+    // controluce colorato che accende i bordi delle vertebre
+    var hemi = new THREE.HemisphereLight(0xffffff, 0xbfe8dc, 0.62); scene.add(hemi);
+    var key = new THREE.DirectionalLight(0xffffff, 0.72); key.position.set(4, 5, 8); scene.add(key);
+    var rim = new THREE.DirectionalLight(0xffffff, 0.75); rim.position.set(-5, 2, -6); scene.add(rim);
+    var fill = new THREE.DirectionalLight(0xffffff, 0.22); fill.position.set(-6, -2, 5); scene.add(fill);
 
-    function token(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim() || '#5ac0a8'; }
+    function token(n, fb) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim() || fb || '#5ac0a8'; }
 
     // Anatomia semplificata: 7 cervicali, 12 dorsali, 5 lombari e l'osso sacro
     var VERT = [];
@@ -448,10 +701,10 @@ footer .r { text-align: right; }
     var spine = new THREE.Group();
     var boneMats = [], segCenters = [];
     for (var k = 0; k < SEGS; k++) {
-      boneMats.push(new THREE.MeshStandardMaterial({ roughness: 0.4, metalness: 0.1 }));
+      boneMats.push(new THREE.MeshStandardMaterial({ roughness: 0.3, metalness: 0.04 }));
       segCenters.push({ x: 0, y: 0, z: 0, n: 0, sumX: 0, sumY: 0, sumZ: 0 });
     }
-    var discMat = new THREE.MeshStandardMaterial({ roughness: 0.7, transparent: true, opacity: 0.8 });
+    var discMat = new THREE.MeshStandardMaterial({ roughness: 0.55, transparent: true, opacity: 0.72 });
     var bodyGeo = new THREE.CylinderGeometry(0.34, 0.31, 0.2, 28);
     var discGeo = new THREE.CylinderGeometry(0.31, 0.31, 0.07, 28);
     var procGeo = new THREE.BoxGeometry(0.11, 0.09, 0.4);
@@ -529,9 +782,13 @@ footer .r { text-align: right; }
     var accent = new THREE.Color(), dim = new THREE.Color();
 
     function applyColors() {
-      accent.set(token('--accent'));
-      dim.copy(accent).lerp(new THREE.Color(token('--bg')), 0.55);
-      discMat.color = new THREE.Color(token('--accent-soft')).lerp(accent, 0.25);
+      // vertebre a riposo color porcellana (--bone), tratto attivo che si illumina di menta (--glow)
+      accent.set(token('--glow', token('--accent')));
+      dim.set(token('--bone', '#d3e4df'));
+      var soft = new THREE.Color(token('--accent-soft'));
+      discMat.color = soft.clone().lerp(accent, 0.35);
+      hemi.groundColor = soft.clone().lerp(accent, 0.25);
+      rim.color = accent.clone().lerp(new THREE.Color(0xffffff), 0.35);
       requestRender();
     }
 
@@ -595,7 +852,7 @@ footer .r { text-align: right; }
         glow[i] += (goal - glow[i]) * (reduce ? 1 : Math.min(1, dt * 6));
         if (Math.abs(goal - glow[i]) > 0.01) settling = true; else glow[i] = goal;
         boneMats[i].color.copy(dim).lerp(accent, glow[i]);
-        boneMats[i].emissive.copy(accent).multiplyScalar(0.28 * glow[i]);
+        boneMats[i].emissive.copy(accent).multiplyScalar(0.2 * glow[i]);
       }
       placeLinks();
       renderer.render(scene, camera);

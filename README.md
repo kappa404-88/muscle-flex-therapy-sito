@@ -13,7 +13,8 @@ e poi apri http://localhost:8000 (aperto direttamente come file alcuni browser b
 ## Struttura
 
 - `index.html`: pagina, stili e script della colonna vertebrale 3D.
-- `assets/fonts/`: Figtree e Marcellus ospitati nel sito, nessuna richiesta a Google Fonts.
+- `assets/fonts/`: Cormorant Garamond (titoli) e Manrope (testo) ospitati nel sito, nessuna richiesta a Google Fonts.
+- `assets/fibers.svg`: il motivo di fibre muscolari dello sfondo (usato come maschera, il colore lo decide il CSS).
 - `assets/vendor/three.min.js`: three.js r128, ospitato nel sito.
 - `assets/logo-*.png`, `assets/icon-*.png`, `assets/apple-touch-icon.png`: logo e icone, ricavati da un'immagine di 378 px. Vanno rigenerati dal logo originale in alta qualità.
 - `assets/og.jpg`: immagine di anteprima quando si condivide il link (1200×630).
@@ -27,9 +28,9 @@ Il sito contiene ancora dati di esempio. Da fare, in quest'ordine:
 3. **Sostituire i segnaposto** (tutto ciò che è tra parentesi quadre, più i dati di esempio):
    - Trattamenti: nomi, descrizioni, durate e prezzi del listino (ora sono di esempio); condizioni del pacchetto da 5 sedute.
    - Chi sono: `[anni di esperienza]`, il terzo badge `[Corso o specializzazione]`, il ritratto di Camelia.
-   - Contatti: telefono, email `[email]`, indirizzo di Bengi Fitness `[via e numero]`, orari (ora sono di esempio).
+   - Contatti: telefono, email `[email]`, indirizzo di Bengi Fitness `[via e numero]`, orari (ora sono di esempio). Gli orari compaiono anche nella fascia "Dove / Quando" sotto l'apertura.
    - Piè di pagina: `P.IVA [da inserire]`.
-4. **Il numero di telefono compare in più punti**: nel testo dei contatti e nel link `https://wa.me/39...` del pulsante WhatsApp. Tenerli allineati.
+4. **Il numero di telefono compare in più punti**: nel testo dei contatti, nel link `tel:+39...`, nella fascia "Prenota" sotto l'apertura e nei link `https://wa.me/39...` dei pulsanti WhatsApp. Tenerli allineati.
 5. **Verificare le parole sul tipo di servizio**: i testi usano "massoterapista" e "massaggiatrice sportiva" come nella bio Instagram di Camelia. Confermare il titolo (per esempio il diploma) prima di aggiungere parole come "terapeutico" o promesse sul dolore.
 6. **Aggiungere la pagina dell'informativa privacy** e il link nel piè di pagina. Il sito non usa cookie, quindi non serve il banner.
 7. **Rigenerare logo, icone e `og.jpg`** dal logo originale.
@@ -41,4 +42,4 @@ Hosting ancora da scegliere. Con GitHub Pages: Settings → Pages → Deploy fro
 ## Crediti
 
 - [three.js](https://threejs.org) r128, licenza MIT (`assets/vendor/LICENSE-three.txt`).
-- Font [Figtree](https://github.com/erikdkennedy/figtree) e [Marcellus](https://fonts.google.com/specimen/Marcellus), licenza SIL Open Font License 1.1 (`assets/fonts/`).
+- Font [Cormorant Garamond](https://github.com/CatharsisFonts/Cormorant) e [Manrope](https://github.com/sharanda/manrope), licenza SIL Open Font License 1.1 (`assets/fonts/`).
