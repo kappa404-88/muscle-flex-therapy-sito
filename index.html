@@ -51,8 +51,9 @@ img { max-width: 100%; }
   --display: "Marcellus", "Iowan Old Style", Georgia, serif;
   --body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
   /* corridoio centrale riservato alla colonna: cresce con l'altezza dello schermo,
-     perché la colonna la occupa tutta e si allarga di conseguenza */
-  --gut: clamp(240px, calc(24vh + 140px), min(36vw, 520px));
+     perché la colonna la occupa tutta e si allarga di conseguenza, ma lascia
+     almeno 300px a ciascuna colonna di testo (menu e orari restano su una riga) */
+  --gut: clamp(240px, calc(24vh + 140px), min(36vw, 520px, calc(100vw - 648px)));
   --edge: 0px;            /* striscia della colonna sul telefono */
 }
 @media (prefers-color-scheme: dark) {
@@ -86,7 +87,7 @@ header.top .split { align-items: center; padding-block: 16px; }
 .brand img { display: block; }
 .brand { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-size: 1.35rem; color: var(--fg); text-decoration: none; }
 header.top nav { display: flex; gap: 22px; flex-wrap: wrap; justify-content: flex-end; font-size: .95rem; }
-header.top nav a { color: var(--muted); text-decoration: none; }
+header.top nav a { color: var(--muted); text-decoration: none; white-space: nowrap; }
 header.top nav a:hover { color: var(--accent); }
 
 section { padding-block: 88px; }
@@ -167,7 +168,7 @@ footer .r { text-align: right; }
 :root[data-theme="dark"] .skip { color: #0d1f1b; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .skip { color: #0d1f1b; } }
 
-@media (min-width: 900px) and (max-width: 1000px) {
+@media (min-width: 900px) and (max-width: 1180px) {
   header.top nav { gap: 12px; font-size: .85rem; flex-wrap: nowrap; }
 }
 
@@ -484,20 +485,40 @@ footer .r { text-align: right; }
 
     // Ingombro misurato sui vertici: altezza dalla prima cervicale alla punta del sacro
     // e distanza massima dall'asse di rotazione (la larghezza quando la colonna gira)
-    var YMIN = Infinity, YMAX = -Infinity, HALF = 0, pv = new THREE.Vector3();
+    var YMIN = Infinity, YMAX = -Infinity, HALF = 0, pv = new THREE.Vector3(), all = [];
     spine.updateMatrixWorld(true);
     spine.traverse(function (o) {
       if (!o.isMesh) return;
       var pos = o.geometry.attributes.position;
       for (var j = 0; j < pos.count; j++) {
         pv.fromBufferAttribute(pos, j).applyMatrix4(o.matrixWorld);
+        all.push(pv.x, pv.y, pv.z);
         YMIN = Math.min(YMIN, pv.y); YMAX = Math.max(YMAX, pv.y);
         HALF = Math.max(HALF, Math.sqrt(pv.x * pv.x + pv.z * pv.z));
       }
     });
-    var MID = (YMIN + YMAX) / 2, HALF_SPAN = (YMAX - YMIN) / 2;
-    var END_Z = 0.2;    // profondità tipica delle estremità verso la camera
     scene.add(spine);
+
+    // Inquadratura: con la colonna ruotata di rot e stretta di s, camera (y e distanza) che porta
+    // il punto più alto esattamente sul bordo superiore e il più basso su quello inferiore.
+    // Un punto vicino alla camera appare più in alto/basso, quindi conta y ± TAN·z; bastano i vertici
+    // vicini alle due estremità (gli altri non possono superarle, |z| ≤ HALF).
+    var TOPS = [], BOTS = [];
+    for (var q = 0; q < all.length; q += 3) {
+      if (all[q + 1] > YMAX - 2.2 * TAN * HALF) TOPS.push(all[q], all[q + 1], all[q + 2]);
+      if (all[q + 1] < YMIN + 2.2 * TAN * HALF) BOTS.push(all[q], all[q + 1], all[q + 2]);
+    }
+    all = null;
+    var fit = { y: 0, d: 1 };
+    function frame(rot, s) {
+      var c = Math.cos(rot), sn = Math.sin(rot), A = -Infinity, B = Infinity, j, z;
+      for (j = 0; j < TOPS.length; j += 3) { z = s * (c * TOPS[j + 2] - sn * TOPS[j]); A = Math.max(A, TOPS[j + 1] + TAN * z); }
+      for (j = 0; j < BOTS.length; j += 3) { z = s * (c * BOTS[j + 2] - sn * BOTS[j]); B = Math.min(B, BOTS[j + 1] - TAN * z); }
+      fit.y = (A + B) / 2; fit.d = (A - B) / (2 * TAN);
+      return fit;
+    }
+    // rotazione: -0.9 in cima alla pagina, +0.9π lungo lo scroll, ±0.12 di oscillazione all'apertura
+    var ROT0 = -0.9, ROT_RANGE = Math.PI * 0.9, SWAY = 0.12, ROT_STILL = -0.5;
 
     // Stato condiviso, dichiarato prima di qualunque render
     var ready = false, narrow = false, W = 1, H = 1, labelX = 0;
@@ -520,18 +541,23 @@ footer .r { text-align: right; }
       renderer.setSize(W, H, false);
       camera.aspect = W / H;
       narrow = window.innerWidth < 900;
-      // Distanza: la colonna riempie tutta l'altezza, dalla prima cervicale alla punta del sacro.
-      var d = HALF_SPAN / TAN + END_Z;
-      camera.position.set(0, MID, d);
-      var pxPerUnit = H / (2 * d * TAN);
+      // In altezza la colonna riempie sempre tutto lo schermo (vedi frame(), a ogni disegno).
       // In larghezza resta nel corridoio, lasciando spazio alle sigle a destra; se non basta
-      // si stringe (sempre sul telefono, dove è una striscia sul bordo)
+      // si stringe (sempre sul telefono, dove è una striscia sul bordo). Il calcolo usa la
+      // camera più vicina di tutto lo scroll, cioè la colonna più larga.
       var lv = 0;
       links.forEach(function (a) { var s = a.querySelector('.lv'); if (s) lv = Math.max(lv, s.offsetWidth); });
-      var room = narrow ? W / 2 - 3 : W / 2 - (lv + 16);
-      var sx = Math.min(narrow ? 0.5 : 1, room / (HALF * pxPerUnit));
+      var room = narrow ? W / 2 - 3 : W / 2 - (lv + 28);
+      var cap = narrow ? 0.5 : 1, sx = cap, pxMax = 1;
+      for (var it = 0; it < 3; it++) {
+        var dMin = Infinity;
+        if (reduce) dMin = frame(ROT_STILL, sx).d;
+        else for (var k = 0; k <= 24; k++) dMin = Math.min(dMin, frame(ROT0 - SWAY + (ROT_RANGE + 2 * SWAY) * k / 24, sx).d);
+        pxMax = H / (2 * dMin * TAN);
+        sx = Math.min(cap, room / (HALF * pxMax));
+      }
       spine.scale.set(sx, 1, sx);
-      labelX = W / 2 + HALF * pxPerUnit * sx + 10;
+      labelX = W / 2 + HALF * pxMax * sx + 10;
       camera.updateProjectionMatrix();
       requestRender();
     }
@@ -555,13 +581,15 @@ footer .r { text-align: right; }
       var max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
       var prog = window.scrollY / max;
       var settling = false;
-      if (reduce) spine.rotation.y = -0.5;
+      if (reduce) spine.rotation.y = ROT_STILL;
       else {
         // breve oscillazione all'apertura (5 s), poi la colonna gira solo seguendo lo scroll
         var sway = Math.max(0, 1 - tm / 5);
-        spine.rotation.y = -0.9 + prog * Math.PI * 0.9 + Math.sin(tm * 0.8) * 0.12 * sway;
+        spine.rotation.y = ROT0 + prog * ROT_RANGE + Math.sin(tm * 0.8) * SWAY * sway;
         if (sway > 0) settling = true;
       }
+      frame(spine.rotation.y, spine.scale.x);
+      camera.position.set(0, fit.y, fit.d);
       for (var i = 0; i < SEGS; i++) {
         var goal = i === target ? 1 : 0;
         glow[i] += (goal - glow[i]) * (reduce ? 1 : Math.min(1, dt * 6));
