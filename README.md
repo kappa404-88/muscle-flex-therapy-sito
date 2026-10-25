@@ -19,25 +19,22 @@ e poi apri http://localhost:8000 (aperto direttamente come file alcuni browser b
 - `assets/logo-*.png`, `assets/icon-*.png`, `assets/apple-touch-icon.png`: logo e icone, ricavati da un'immagine di 378 px. Vanno rigenerati dal logo originale in alta qualità.
 - `assets/og.jpg`: immagine di anteprima quando si condivide il link (1200×630).
 
-## Prima di andare online
+## Dati ancora da inserire
 
-Il sito contiene ancora dati di esempio. Da fare, in quest'ordine:
+Il sito è visibile a Google: niente dati di esempio, ciò che non è confermato è nascosto. Appena Camelia li manda, aggiungere:
 
-1. **Togliere il `noindex`**: in `index.html` eliminare `<meta name="robots" content="noindex">`. Finché resta, Google non indicizza il sito.
-2. **Togliere la fascia "Bozza di anteprima"** in cima alla pagina (`<div class="note">`).
-3. **Sostituire i segnaposto** (tutto ciò che è tra parentesi quadre, più i dati di esempio):
-   - Trattamenti: nomi, descrizioni, durate e prezzi del listino (ora sono di esempio); condizioni del pacchetto da 5 sedute.
-   - Chi sono: `[anni di esperienza]`, il terzo badge `[Corso o specializzazione]`, il ritratto di Camelia.
-   - Contatti: telefono, email `[email]`, indirizzo di Bengi Fitness `[via e numero]`, orari (ora sono di esempio). Gli orari compaiono anche nella fascia "Dove / Quando" sotto l'apertura.
-   - Piè di pagina: `P.IVA [da inserire]`.
-4. **Il numero di telefono compare in più punti**: nel testo dei contatti, nel link `tel:+39...`, nella fascia "Prenota" sotto l'apertura e nei link `https://wa.me/39...` dei pulsanti WhatsApp. Tenerli allineati.
-5. **Verificare le parole sul tipo di servizio**: i testi usano "massoterapista" e "massaggiatrice sportiva" come nella bio Instagram di Camelia. Confermare il titolo (per esempio il diploma) prima di aggiungere parole come "terapeutico" o promesse sul dolore.
-6. **Aggiungere la pagina dell'informativa privacy** e il link nel piè di pagina. Il sito non usa cookie, quindi non serve il banner.
-7. **Rigenerare logo, icone e `og.jpg`** dal logo originale.
+1. **Telefono e WhatsApp**: oggi si prenota solo con un messaggio su Instagram (`https://ig.me/m/muscle_flex_therapy`). Con il numero vero si possono rimettere il pulsante WhatsApp (`https://wa.me/39NUMERO?text=...`), il link `tel:` e il pulsante "Chiama" nella barra in basso sul telefono.
+2. **Prezzi e durate** del listino (oggi "Prezzi su richiesta") e conferma dei 6 trattamenti elencati.
+3. **Orari**, **email**, **via e numero** di Bengi Fitness, **anni di esperienza**, eventuali corsi o attestati.
+4. **P.IVA** nel piè di pagina (obbligatoria per legge sul sito di un'attività) e la pagina dell'**informativa privacy**.
+5. **Ritratto di Camelia** al posto del logo nella sezione "Chi sono".
+6. **Logo, icone e `og.jpg`** rigenerati dal logo originale in alta qualità.
+
+Ogni volta che si cambia qualcosa, aggiornare `lastmod` in `sitemap.xml`.
 
 ## Pubblicazione
 
-Il repository è già pronto per GitHub Pages: contiene `CNAME` (con `muscleflextherapy.it`), `.nojekyll` e una pagina `404.html`. Quando si decide di pubblicare:
+Il repository è pronto per GitHub Pages: contiene `CNAME` (con `muscleflextherapy.it`), `.nojekyll`, una pagina `404.html`, `robots.txt` e `sitemap.xml`. Registrar dei domini: Register.it. Quando si decide di pubblicare:
 
 1. Unire la PR in `main`.
 2. Su GitHub: Settings → Pages → Build and deployment → Deploy from a branch → `main` / `/ (root)`. Il dominio personalizzato viene letto dal file `CNAME`.
@@ -47,7 +44,8 @@ Il repository è già pronto per GitHub Pages: contiene `CNAME` (con `muscleflex
    - record **CNAME** per `www`: `kappa404-88.github.io`
 4. Quando GitHub conferma il dominio (può volerci fino a un giorno), attivare "Enforce HTTPS".
 5. **muscleflextherapy.art, .online e .shop**: GitHub Pages accetta un solo dominio per sito, quindi vanno reindirizzati con l'inoltro (redirect 301) del registrar verso `https://muscleflextherapy.it`.
-6. Prima del lancio vero, togliere il `noindex` e la fascia "Bozza" (vedi sopra).
+6. Google: in [Search Console](https://search.google.com/search-console) aggiungere la proprietà di tipo Dominio `muscleflextherapy.it`, inserire nei DNS il record TXT che Google indica, poi inviare la sitemap `https://muscleflextherapy.it/sitemap.xml`.
+7. Consigliata la scheda Google Business Profile di Muscle Flex Therapy presso Bengi Fitness, Paratico.
 
 ## Crediti
 
