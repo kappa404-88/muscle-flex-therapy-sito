@@ -25,7 +25,7 @@ Il sito è visibile a Google: niente dati di esempio, ciò che non è confermato
 
 1. **Telefono e WhatsApp**: oggi si prenota solo con un messaggio su Instagram (`https://ig.me/m/muscle_flex_therapy`). Con il numero vero si possono rimettere il pulsante WhatsApp (`https://wa.me/39NUMERO?text=...`), il link `tel:` e il pulsante "Chiama" nella barra in basso sul telefono.
 2. **Prezzi e durate** del listino (oggi "Prezzi su richiesta") e conferma dei 6 trattamenti elencati.
-3. **Orari**, **email**, **via e numero** di Bengi Fitness, **anni di esperienza**, eventuali corsi o attestati.
+3. **Orari**, **via e numero** di Bengi Fitness, **anni di esperienza**, eventuali corsi o attestati.
 4. **P.IVA** nel piè di pagina (obbligatoria per legge sul sito di un'attività) e la pagina dell'**informativa privacy**.
 5. **Logo, icone e `og.jpg`** rigenerati dal logo originale in alta qualità.
 
