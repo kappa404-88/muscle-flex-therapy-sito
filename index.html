@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Muscle Flex Therapy: massaggi decontratturanti, sportivi, linfodrenaggio e trattamenti rilassanti con Camelia, su appuntamento.">
+<link rel="icon" type="image/png" href="assets/logo-simbolo.png">
+<style>
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+</style>
+<title>Muscle Flex Therapy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Figtree:wght@400;500;600&display=swap">
+<style>
+/* Layout: colonna centrale ariosa, fasce a tutta larghezza alternate, listino come tabella di menu */
+:root {
+  --bg: #f5f8f7;
+  --surface: #ffffff;
+  --band: #e4f1ed;
+  --fg: #1f2d2a;
+  --muted: #566a65;
+  --line: #cfe0db;
+  --accent: #187a66;      /* verde acqua del logo, scurito per la leggibilità */
+  --accent-soft: #d6efe8;
+  --leaf: #2c6b7a;        /* blu petrolio di supporto */
+  --display: "Marcellus", "Iowan Old Style", Georgia, serif;
+  --body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121a19; --surface: #1a2422; --band: #16211f; --fg: #e6efec; --muted: #9fb3ad;
+    --line: #2a3a37; --accent: #5ac0a8; --accent-soft: #173a33; --leaf: #8cc6d4; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121a19; --surface: #1a2422; --band: #16211f; --fg: #e6efec; --muted: #9fb3ad;
+  --line: #2a3a37; --accent: #5ac0a8; --accent-soft: #173a33; --leaf: #8cc6d4; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 17px; line-height: 1.6; }
+.wrap { max-width: 1040px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.15; text-wrap: balance; margin: 0; }
+h2 { font-size: clamp(1.8rem, 4vw, 2.4rem); }
+p { margin: 0; }
+a { color: var(--accent); }
+a:focus-visible, .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.eyebrow { font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--leaf); font-weight: 600; }
+.note { background: var(--accent-soft); color: var(--fg); font-size: .85rem; text-align: center; padding-block: 8px; }
+
+header.top { border-bottom: 1px solid var(--line); background: var(--bg); }
+header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 16px; flex-wrap: wrap; }
+.brand img { display: block; }
+.brand { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-size: 1.35rem; color: var(--fg); text-decoration: none; }
+nav { display: flex; gap: 20px; flex-wrap: wrap; font-size: .95rem; }
+nav a { color: var(--muted); text-decoration: none; }
+nav a:hover { color: var(--accent); }
+
+.hero { position: relative; overflow: hidden; background: radial-gradient(120% 90% at 78% 40%, var(--accent-soft), transparent 60%), var(--bg); }
+#hero3d { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+.hero .wrap { position: relative; z-index: 1; min-height: 560px; }
+.hero-space { min-height: 1px; }
+.hero .wrap { display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center; padding-block: 64px 72px; }
+.hero h1 { font-size: clamp(2.4rem, 6vw, 3.8rem); margin-block: 14px 18px; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero p.lead { color: var(--muted); font-size: 1.12rem; max-width: 34em; }
+.actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+.btn { display: inline-block; padding: 13px 22px; border-radius: 999px; font-weight: 600; text-decoration: none; font-size: .98rem; }
+.btn.primary { background: var(--accent); color: #fff; }
+:root[data-theme="dark"] .btn.primary { color: #0d1f1b; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn.primary { color: #0d1f1b; } }
+.btn.ghost { border: 1px solid var(--line); color: var(--fg); }
+.hero-art { aspect-ratio: 4/5; max-width: 100%; border-radius: 200px 200px 16px 16px; background: var(--band); display: grid; place-items: center; overflow: hidden; }
+.hero-art span { font-size: .85rem; color: var(--muted); }
+
+section { padding-block: 72px; }
+.band { background: var(--band); }
+.head { display: grid; gap: 10px; margin-bottom: 36px; max-width: 40em; }
+.head p { color: var(--muted); }
+
+.menu { border-top: 1px solid var(--line); }
+.item { display: grid; grid-template-columns: 1fr auto; gap: 6px 24px; padding-block: 22px; border-bottom: 1px solid var(--line); }
+.item h3 { font-size: 1.35rem; }
+.item .desc { color: var(--muted); grid-column: 1; max-width: 38em; font-size: .97rem; }
+.item .price { grid-row: 1 / span 2; grid-column: 2; text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.price strong { display: block; font-family: var(--display); font-size: 1.5rem; font-weight: 400; color: var(--accent); }
+.price small { color: var(--muted); font-size: .85rem; }
+
+.about { display: grid; grid-template-columns: .8fr 1.2fr; gap: 48px; align-items: center; }
+.portrait { aspect-ratio: 1; max-width: 100%; border-radius: 50%; background: var(--surface); border: 1px solid var(--line); display: grid; place-items: center; color: var(--muted); font-size: .85rem; }
+.about .text { display: grid; gap: 16px; min-width: 0; }
+.about .text p { color: var(--muted); max-width: 36em; }
+.creds { display: flex; flex-wrap: wrap; gap: 8px; }
+.creds span { border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; font-size: .85rem; background: var(--surface); }
+
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.step { display: grid; gap: 8px; align-content: start; }
+.step b { font-family: var(--display); font-weight: 400; color: var(--accent); font-size: 1.6rem; }
+.step h3 { font-size: 1.25rem; }
+.step p { color: var(--muted); font-size: .97rem; }
+
+.contact { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 28px; display: grid; gap: 18px; align-content: start; min-width: 0; }
+.row { display: grid; gap: 2px; }
+.row .k { font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.row .v { font-size: 1.1rem; user-select: all; overflow-wrap: anywhere; }
+table.hours { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+table.hours td { padding-block: 7px; border-bottom: 1px solid var(--line); }
+table.hours td:last-child { text-align: right; color: var(--muted); }
+
+footer { border-top: 1px solid var(--line); }
+.foot-brand { display: flex; align-items: center; gap: 12px; }
+footer .wrap { align-items: center; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-block: 28px; color: var(--muted); font-size: .88rem; }
+
+@media (max-width: 760px) {
+  .hero .wrap, .about, .contact { grid-template-columns: 1fr; }
+  .hero .wrap { min-height: 0; padding-block: 48px 340px; }
+  .hero-space { display: none; }
+  .portrait { width: 200px; }
+  .steps { grid-template-columns: 1fr; gap: 24px; }
+  nav { display: none; }
+  section { padding-block: 52px; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+</head>
+<body>
+<div class="note">Bozza di anteprima: logo vero, ma testi, prezzi e contatti sono ancora esempi da sostituire.</div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Muscle Flex Therapy">
+      <img src="assets/logo-simbolo.png" alt="" width="34" height="35">
+      Muscle Flex Therapy
+    </a>
+    <nav aria-label="Sezioni">
+      <a href="#trattamenti">Trattamenti</a>
+      <a href="#chi-sono">Chi sono</a>
+      <a href="#come-funziona">Come funziona</a>
+      <a href="#contatti">Contatti</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <canvas id="hero3d" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Massoterapia con Camelia · [Città]</span>
+        <h1>Mani esperte per <em>sciogliere</em> tensioni e dolori</h1>
+        <p class="lead">Massaggi terapeutici, decontratturanti e rilassanti su appuntamento. Ogni seduta parte da un breve colloquio per capire dove senti dolore e cosa ti serve davvero.</p>
+        <div class="actions">
+          <a class="btn primary" href="#contatti">Prenota una seduta</a>
+          <a class="btn ghost" href="#trattamenti">Vedi trattamenti e prezzi</a>
+        </div>
+      </div>
+      <div class="hero-space" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <section id="trattamenti" class="band">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Trattamenti</span>
+        <h2>Listino</h2>
+        <p>Durata e prezzi indicativi. Pacchetti da 5 sedute disponibili su richiesta.</p>
+      </div>
+      <div class="menu">
+        <div class="item">
+          <h3>Massaggio decontratturante</h3>
+          <p class="desc">Lavoro profondo su collo, spalle e schiena per contratture, rigidità e dolori da postura.</p>
+          <div class="price"><strong>€ 55</strong><small>50 min</small></div>
+        </div>
+        <div class="item">
+          <h3>Massaggio sportivo</h3>
+          <p class="desc">Prima o dopo l'allenamento o la gara: prepara i muscoli e accelera il recupero.</p>
+          <div class="price"><strong>€ 60</strong><small>50 min</small></div>
+        </div>
+        <div class="item">
+          <h3>Linfodrenaggio manuale</h3>
+          <p class="desc">Tecnica delicata e ritmica che aiuta la circolazione e riduce gonfiore e ritenzione.</p>
+          <div class="price"><strong>€ 60</strong><small>60 min</small></div>
+        </div>
+        <div class="item">
+          <h3>Massaggio rilassante</h3>
+          <p class="desc">Manovre lente e avvolgenti per staccare dallo stress e ritrovare un buon sonno.</p>
+          <div class="price"><strong>€ 50</strong><small>50 min</small></div>
+        </div>
+        <div class="item">
+          <h3>Trattamento schiena e cervicale</h3>
+          <p class="desc">Seduta mirata e breve per chi ha poco tempo ma un punto preciso che fa male.</p>
+          <div class="price"><strong>€ 35</strong><small>30 min</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="chi-sono">
+    <div class="wrap about">
+      <div class="portrait" role="img" aria-label="Spazio per il ritratto di Camelia">Ritratto di Camelia</div>
+      <div class="text">
+        <span class="eyebrow">Chi sono</span>
+        <h2>Ciao, sono Camelia</h2>
+        <p>Sono massoterapista diplomata e da anni aiuto persone di ogni età a stare meglio nel proprio corpo: sportivi, chi lavora tante ore alla scrivania, chi ha bisogno di una pausa vera.</p>
+        <p>Credo in un approccio semplice: ascoltarti, capire l'origine della tensione e scegliere insieme il trattamento giusto, senza promesse miracolose.</p>
+        <div class="creds">
+          <span>Diploma di Massoterapista (MCB)</span>
+          <span>Massaggio sportivo</span>
+          <span>Linfodrenaggio Vodder</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="come-funziona" class="band">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Come funziona</span>
+        <h2>La tua prima seduta</h2>
+      </div>
+      <div class="steps">
+        <div class="step"><b>1</b><h3>Prenoti</h3><p>Scrivimi su WhatsApp o chiamami: troviamo insieme giorno e orario.</p></div>
+        <div class="step"><b>2</b><h3>Parliamo</h3><p>Pochi minuti per capire dove senti dolore, le tue abitudini ed eventuali controindicazioni.</p></div>
+        <div class="step"><b>3</b><h3>Trattamento</h3><p>Il massaggio vero e proprio, con qualche consiglio pratico da portarti a casa.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contatti">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Contatti</span>
+        <h2>Prenota il tuo appuntamento</h2>
+        <p>Ricevo solo su appuntamento. Il modo più veloce è un messaggio WhatsApp.</p>
+      </div>
+      <div class="contact">
+        <div class="card">
+          <div class="row"><span class="k">Telefono e WhatsApp</span><span class="v">+39 333 000 0000</span></div>
+          <div class="row"><span class="k">Email</span><span class="v">info@muscleflextherapy.it</span></div>
+          <div class="row"><span class="k">Indirizzo</span><span class="v">Via Esempio 12, [Città]</span></div>
+          <div class="actions" style="margin-top:4px">
+            <a class="btn primary" href="https://wa.me/393330000000">Scrivi su WhatsApp</a>
+            <a class="btn ghost" href="https://www.instagram.com/muscle_flex_therapy/">Instagram</a>
+          </div>
+        </div>
+        <div class="card">
+          <span class="k eyebrow">Orari</span>
+          <table class="hours">
+            <tr><td>Lunedì – Venerdì</td><td>9:00 – 19:30</td></tr>
+            <tr><td>Sabato</td><td>9:00 – 13:00</td></tr>
+            <tr><td>Domenica</td><td>Chiuso</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="foot-brand"><img src="assets/logo-tondo.png" alt="Logo Muscle Flex Therapy" width="56" height="56">© 2026 Muscle Flex Therapy · P.IVA [da inserire]</span>
+    <span>I trattamenti non sostituiscono il parere del medico.</span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function () {
+  var canvas = document.getElementById('hero3d');
+  if (!canvas || !window.THREE) return;
+  var hero = canvas.parentElement;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var renderer;
+  try { renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true }); } catch (e) { return; }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
+  camera.position.set(0, 0, 9);
+
+  function token(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || '#5ac0a8'; }
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+  var key = new THREE.DirectionalLight(0xffffff, 0.9); key.position.set(3, 4, 6); scene.add(key);
+  var rim = new THREE.DirectionalLight(0xffffff, 0.5); rim.position.set(-4, -2, -3); scene.add(rim);
+
+  // Colonna vertebrale stilizzata: vertebre e dischi lungo una curva a S, come nel logo
+  var spine = new THREE.Group();
+  var boneMat = new THREE.MeshStandardMaterial({ roughness: 0.35, metalness: 0.15 });
+  var discMat = new THREE.MeshStandardMaterial({ roughness: 0.6, metalness: 0, transparent: true, opacity: 0.85 });
+  var bodyGeo = new THREE.CylinderGeometry(0.34, 0.3, 0.2, 32);
+  var discGeo = new THREE.CylinderGeometry(0.31, 0.31, 0.06, 32);
+  var procGeo = new THREE.BoxGeometry(0.12, 0.1, 0.38);
+  var wingGeo = new THREE.BoxGeometry(0.62, 0.07, 0.1);
+  var N = 18;
+  for (var i = 0; i < N; i++) {
+    var t = i / (N - 1);
+    var y = 2.5 - t * 5;
+    var x = Math.sin(t * Math.PI * 1.6) * 0.45;
+    var z = Math.cos(t * Math.PI * 1.2) * 0.35;
+    var s = 0.75 + t * 0.45;
+    var v = new THREE.Group();
+    var body = new THREE.Mesh(bodyGeo, boneMat); v.add(body);
+    var pr = new THREE.Mesh(procGeo, boneMat); pr.position.set(0, 0, -0.42); pr.rotation.x = 0.35; v.add(pr);
+    var wg = new THREE.Mesh(wingGeo, boneMat); wg.position.set(0, 0, -0.22); v.add(wg);
+    v.position.set(x, y, z); v.scale.setScalar(s);
+    var dx = Math.cos(t * Math.PI * 1.6) * 0.45 * Math.PI * 1.6 / 5;
+    v.rotation.z = Math.atan(dx);
+    spine.add(v);
+    if (i < N - 1) {
+      var d = new THREE.Mesh(discGeo, discMat);
+      var t2 = (i + 0.5) / (N - 1);
+      d.position.set(Math.sin(t2 * Math.PI * 1.6) * 0.45, 2.5 - t2 * 5, Math.cos(t2 * Math.PI * 1.2) * 0.35);
+      d.scale.setScalar(0.75 + t2 * 0.45); d.rotation.z = v.rotation.z;
+      spine.add(d);
+    }
+  }
+  scene.add(spine);
+
+  // Onda di particelle sullo sfondo, come un tessuto che si distende
+  var COLS = 90, ROWS = 36, pos = new Float32Array(COLS * ROWS * 3);
+  for (var r = 0; r < ROWS; r++) for (var c = 0; c < COLS; c++) {
+    var k = (r * COLS + c) * 3;
+    pos[k] = (c / (COLS - 1) - 0.5) * 22; pos[k + 1] = 0; pos[k + 2] = (r / (ROWS - 1) - 0.5) * 10;
+  }
+  var waveGeo = new THREE.BufferGeometry();
+  waveGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  var waveMat = new THREE.PointsMaterial({ size: 0.05, transparent: true, opacity: 0.55, depthWrite: false });
+  var wave = new THREE.Points(waveGeo, waveMat);
+  wave.position.set(0, -2.3, -3); wave.rotation.x = 0.28;
+  scene.add(wave);
+
+  function applyColors() {
+    var a = new THREE.Color(token('--accent'));
+    var light = new THREE.Color(token('--accent-soft'));
+    boneMat.color = a.clone().lerp(new THREE.Color(0xffffff), 0.15);
+    discMat.color = light.clone().lerp(a, 0.35);
+    waveMat.color = a;
+  }
+  applyColors();
+  var mq = window.matchMedia('(prefers-color-scheme: dark)');
+  if (mq.addEventListener) mq.addEventListener('change', applyColors);
+  new MutationObserver(applyColors).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+  var narrow = false;
+  function resize() {
+    var w = hero.clientWidth, hgt = hero.clientHeight;
+    renderer.setSize(w, hgt, false);
+    camera.aspect = w / hgt; camera.updateProjectionMatrix();
+    narrow = w < 760;
+    var halfH = Math.tan(camera.fov * Math.PI / 360) * camera.position.z;
+    if (narrow) { spine.position.set(0.4, -halfH + 1.25, 0); spine.scale.setScalar(0.42); spine.rotation.x = 0; }
+    else {
+      // colonna a destra del testo, a circa il 75% della larghezza
+      var halfW = Math.tan(camera.fov * Math.PI / 360) * camera.position.z * camera.aspect;
+      spine.position.set(halfW * 0.5, 0, 0); spine.scale.setScalar(0.95);
+    }
+  }
+  window.addEventListener('resize', resize); resize();
+
+  var mx = 0, my = 0;
+  window.addEventListener('pointermove', function (e) {
+    mx = (e.clientX / window.innerWidth - 0.5); my = (e.clientY / window.innerHeight - 0.5);
+  });
+
+  var visible = true;
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; if (visible && !reduce) loop(); }).observe(hero);
+
+  var start = performance.now(), running = false;
+  function frame(now) {
+    var tm = (now - start) / 1000;
+    spine.rotation.y = 0.5 + tm * 0.25 + mx * 0.4;
+    spine.rotation.x = narrow ? 0 : my * 0.15;
+    for (var i = 0; i < pos.length; i += 3) pos[i + 1] = Math.sin(pos[i] * 0.45 + tm * 0.9) * Math.cos(pos[i + 2] * 0.6 + tm * 0.6) * 0.35;
+    waveGeo.attributes.position.needsUpdate = true;
+    renderer.render(scene, camera);
+  }
+  function loop() {
+    if (running) return; running = true;
+    (function tick(now) {
+      if (!visible || document.hidden) { running = false; return; }
+      frame(now); requestAnimationFrame(tick);
+    })(performance.now());
+  }
+  document.addEventListener('visibilitychange', function () { if (!document.hidden && !reduce) loop(); });
+  if (reduce) frame(start + 2000); else loop();
+})();
+</script>
+</body>
+</html>
