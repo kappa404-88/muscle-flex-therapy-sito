@@ -3,9 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Camelia, massoterapista e massaggiatrice sportiva a Paratico (BS), presso Bengi Fitness. Recupero e prevenzione su misura, solo su appuntamento. Prenota con un messaggio WhatsApp.">
-<!-- BOZZA: togliere il noindex prima del lancio (vedi README) -->
-<meta name="robots" content="noindex">
+<meta name="description" content="Camelia, massoterapista e massaggiatrice sportiva a Paratico (BS), presso Bengi Fitness. Recupero e prevenzione su misura, solo su appuntamento. Prenota con un messaggio su Instagram.">
 <meta name="theme-color" content="#000000">
 <link rel="icon" type="image/png" sizes="48x48" href="assets/icon-48.png">
 <link rel="icon" type="image/png" sizes="96x96" href="assets/icon-96.png">
@@ -257,6 +255,8 @@ ul.menu, ul.creds, ol.steps, ul.chips { list-style: none; margin: 0; padding: 0;
 .item-top { display: flex; align-items: baseline; justify-content: space-between; gap: 18px; }
 .item h3 { font-size: 1.7rem; font-weight: 550; line-height: 1.1; }
 .price { flex: none; font-family: var(--display); font-size: 2rem; font-weight: 500; line-height: 1; color: var(--accent); font-variant-numeric: lining-nums tabular-nums; white-space: nowrap; }
+.hours-note { margin: 0; color: var(--muted); line-height: 1.6; }
+.portrait .portrait-logo { position: relative; width: 44%; height: auto; border-radius: 50%; }
 .price span { font-size: .6em; vertical-align: .32em; margin-right: .12em; font-weight: 500; }
 .item .desc { color: var(--muted); font-size: .96rem; line-height: 1.62; }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
@@ -387,6 +387,7 @@ footer .r { text-align: right; }
   /* barra Prenota sempre a portata di pollice, a sinistra della striscia della colonna */
   .book-bar { position: fixed; left: 0; right: var(--edge); bottom: 0; z-index: 11; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px var(--pad) calc(10px + env(safe-area-inset-bottom, 0px)); background: color-mix(in srgb, var(--bg) 82%, transparent); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-top: 1px solid var(--line); }
   .book-bar .btn { justify-content: center; padding-block: 12px; }
+  .book-bar { grid-template-columns: 1fr; }
   body { padding-bottom: calc(70px + env(safe-area-inset-bottom, 0px)); }
 }
 @media (min-width: 900px) { .menu-btn, .book-bar { display: none; } }
@@ -437,6 +438,13 @@ footer .r { text-align: right; }
   .note p::before { forced-color-adjust: none; background: CanvasText; }
 }
 </style>
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "HealthAndBeautyBusiness", "name": "Muscle Flex Therapy",
+ "description": "Massoterapia e massaggio sportivo con Camelia a Paratico, presso Bengi Fitness: recupero e prevenzione su misura, su appuntamento.",
+ "url": "https://muscleflextherapy.it/", "image": "https://muscleflextherapy.it/assets/og.jpg", "logo": "https://muscleflextherapy.it/assets/logo-tondo.png",
+ "address": {"@type": "PostalAddress", "addressLocality": "Paratico", "addressRegion": "BS", "addressCountry": "IT"},
+ "sameAs": ["https://www.instagram.com/muscle_flex_therapy/"]}
+</script>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -453,7 +461,6 @@ footer .r { text-align: right; }
 </svg>
 <a class="skip" href="#contenuto">Salta al contenuto</a>
 <div class="bg" aria-hidden="true"><div class="mesh"></div><div class="halo"></div><div class="fibers"></div><div class="grain"></div></div>
-<div class="note"><div class="wrap split"><p class="l"><span><b>Bozza di anteprima</b>: logo vero, ma testi, prezzi e contatti sono ancora esempi da sostituire.</span></p></div></div>
 
 <header class="top">
   <div class="wrap split">
@@ -496,14 +503,14 @@ footer .r { text-align: right; }
         <div class="qi">
           <svg class="ico" aria-hidden="true"><use href="#i-cal"/></svg>
           <dt>Quando</dt>
-          <dd>Su appuntamento<small><span>Lun – Ven 9:00 – 19:30</span> <span>Sab 9:00 – 13:00</span></small></dd>
+          <dd>Su appuntamento<small>Giorno e orario da concordare</small></dd>
         </div>
       </dl></div>
       <div class="r qbox glass"><dl aria-label="Come prenotare">
         <div class="qi">
           <svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg>
           <dt>Prenota</dt>
-          <dd><a href="https://wa.me/393330000000?text=Ciao%20Camelia%2C%20vorrei%20prenotare%20un%20massaggio">WhatsApp</a><small>+39 333 000 0000</small></dd>
+          <dd><a href="https://ig.me/m/muscle_flex_therapy">Messaggio su Instagram</a><small>Rispondo in giornata</small></dd>
         </div>
         <div class="qi">
           <svg class="ico" aria-hidden="true"><use href="#i-cam"/></svg>
@@ -520,40 +527,40 @@ footer .r { text-align: right; }
     <div class="wrap split">
       <div class="l head sticky">
         <span class="eyebrow"><b>T1–T6</b>Trattamenti</span>
-        <h2>Trattamenti <em>e prezzi</em></h2>
-        <p>Durata e prezzi indicativi: ogni seduta si adatta a te dopo un breve colloquio.</p>
-        <p class="callout glass"><svg class="ico" aria-hidden="true"><use href="#i-layers"/></svg><strong>Pacchetti da 5 sedute</strong><span>Disponibili su richiesta: chiedimi le condizioni quando prenoti.</span></p>
+        <h2>I <em>trattamenti</em></h2>
+        <p>Ogni seduta si adatta a te dopo un breve colloquio su come ti alleni e dove senti tensione.</p>
+        <p class="callout glass"><svg class="ico" aria-hidden="true"><use href="#i-layers"/></svg><strong>Prezzi su richiesta</strong><span>Scrivimi su Instagram: ti dico durata e costo della seduta più adatta a te.</span></p>
       </div>
       <ul class="r menu flash">
         <li class="item glass">
-          <div class="item-top"><h3>Massaggio sportivo</h3><p class="price"><span>€</span>60</p></div>
+          <div class="item-top"><h3>Massaggio sportivo</h3></div>
           <p class="desc">Prima della gara per preparare i muscoli, dopo l'allenamento per recuperare più in fretta e arrivare pronto alla seduta successiva.</p>
-          <ul class="chips" aria-label="Dettagli"><li class="dur"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>50 min</li><li>Pre-gara</li><li>Post-allenamento</li></ul>
+          <ul class="chips" aria-label="Dettagli"><li>Pre-gara</li><li>Post-allenamento</li></ul>
         </li>
         <li class="item glass">
-          <div class="item-top"><h3>Recupero e prevenzione</h3><p class="price"><span>€</span>55</p></div>
+          <div class="item-top"><h3>Recupero e prevenzione</h3></div>
           <p class="desc">Seduta su misura per chi si allena con costanza: scarico dei gruppi muscolari più sollecitati e attenzione ai punti che tendono a irrigidirsi.</p>
-          <ul class="chips" aria-label="Dettagli"><li class="dur"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>45 min</li><li>Allenamento costante</li><li>Scarico muscolare</li></ul>
+          <ul class="chips" aria-label="Dettagli"><li>Allenamento costante</li><li>Scarico muscolare</li></ul>
         </li>
         <li class="item glass">
-          <div class="item-top"><h3>Massaggio decontratturante</h3><p class="price"><span>€</span>55</p></div>
+          <div class="item-top"><h3>Massaggio decontratturante</h3></div>
           <p class="desc">Lavoro profondo su collo, spalle e schiena per contratture, rigidità e dolori da postura.</p>
-          <ul class="chips" aria-label="Dettagli"><li class="dur"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>50 min</li><li>Collo · spalle · schiena</li><li>Postura</li></ul>
+          <ul class="chips" aria-label="Dettagli"><li>Collo · spalle · schiena</li><li>Postura</li></ul>
         </li>
         <li class="item glass">
-          <div class="item-top"><h3>Linfodrenaggio manuale</h3><p class="price"><span>€</span>60</p></div>
+          <div class="item-top"><h3>Linfodrenaggio manuale</h3></div>
           <p class="desc">Tecnica delicata e ritmica che aiuta la circolazione e riduce gonfiore e ritenzione.</p>
-          <ul class="chips" aria-label="Dettagli"><li class="dur"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>60 min</li><li>Circolazione</li><li>Gonfiore</li></ul>
+          <ul class="chips" aria-label="Dettagli"><li>Circolazione</li><li>Gonfiore</li></ul>
         </li>
         <li class="item glass">
-          <div class="item-top"><h3>Massaggio rilassante</h3><p class="price"><span>€</span>50</p></div>
+          <div class="item-top"><h3>Massaggio rilassante</h3></div>
           <p class="desc">Manovre lente e avvolgenti per staccare dallo stress e ritrovare un buon sonno.</p>
-          <ul class="chips" aria-label="Dettagli"><li class="dur"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>50 min</li><li>Stress</li><li>Sonno</li></ul>
+          <ul class="chips" aria-label="Dettagli"><li>Stress</li><li>Sonno</li></ul>
         </li>
         <li class="item glass">
-          <div class="item-top"><h3>Trattamento schiena e cervicale</h3><p class="price"><span>€</span>35</p></div>
+          <div class="item-top"><h3>Trattamento schiena e cervicale</h3></div>
           <p class="desc">Seduta mirata e breve per chi ha poco tempo ma un punto preciso che fa male.</p>
-          <ul class="chips" aria-label="Dettagli"><li class="dur"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>30 min</li><li>Seduta breve</li><li>Zona mirata</li></ul>
+          <ul class="chips" aria-label="Dettagli"><li>Seduta breve</li><li>Zona mirata</li></ul>
         </li>
       </ul>
     </div>
@@ -564,7 +571,7 @@ footer .r { text-align: right; }
   <section id="chi-sono">
     <div class="wrap split about">
       <div class="l">
-        <div class="portrait glass" role="img" aria-label="Spazio per il ritratto di Camelia">
+        <div class="portrait glass" role="img" aria-label="Logo di Muscle Flex Therapy">
           <svg viewBox="0 0 320 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
             <g fill="none" stroke="currentColor" stroke-width=".8" vector-effect="non-scaling-stroke">
               <path d="M-20 300 C 60 250, 120 330, 200 280 S 300 220, 360 250"/>
@@ -574,19 +581,19 @@ footer .r { text-align: right; }
               <path d="M-20 364 C 60 314, 120 394, 200 344 S 300 284, 360 314" opacity=".28"/>
             </g>
           </svg>
-          <span>Ritratto di Camelia</span>
+          <img class="portrait-logo" src="assets/logo-tondo.png" alt="" width="140" height="140">
         </div>
       </div>
       <div class="r flash panel">
         <span class="eyebrow"><b>T7–T12</b>Chi sono</span>
         <h2>Ciao, sono <em>Camelia</em></h2>
-        <p class="intro">Sono massoterapista e massaggiatrice sportiva e da [anni di esperienza] anni aiuto chi si allena, chi lavora tante ore alla scrivania e chi ha bisogno di una pausa vera a recuperare e a prevenire tensioni.</p>
+        <p class="intro">Sono massoterapista e massaggiatrice sportiva e aiuto chi si allena, chi lavora tante ore alla scrivania e chi ha bisogno di una pausa vera a recuperare e a prevenire tensioni.</p>
         <p>Ricevo a Paratico, presso la palestra <a href="https://www.instagram.com/bengifitness_only/">Bengi Fitness</a>: se ti alleni lì, il massaggio si inserisce facilmente prima o dopo l'allenamento.</p>
         <p>Credo in un approccio semplice: ascoltarti, capire l'origine della tensione e scegliere insieme il trattamento giusto, senza promesse miracolose.</p>
         <ul class="creds">
           <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Massoterapista</li>
           <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Massaggiatrice sportiva</li>
-          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>[Corso o specializzazione]</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Recupero e prevenzione</li>
         </ul>
       </div>
     </div>
@@ -602,7 +609,7 @@ footer .r { text-align: right; }
         <p>Dal primo messaggio al trattamento, in tre passaggi.</p>
       </div>
       <ol class="r steps flash panel">
-        <li class="step"><b aria-hidden="true">1</b><h3>Prenoti</h3><p>Scrivimi su WhatsApp o chiamami: troviamo insieme giorno e orario.</p></li>
+        <li class="step"><b aria-hidden="true">1</b><h3>Prenoti</h3><p>Scrivimi un messaggio su Instagram: troviamo insieme giorno e orario.</p></li>
         <li class="step"><b aria-hidden="true">2</b><h3>Parliamo</h3><p>Pochi minuti per capire dove senti tensione, conoscere le tue abitudini e verificare eventuali controindicazioni.</p></li>
         <li class="step"><b aria-hidden="true">3</b><h3>Trattamento</h3><p>Il massaggio vero e proprio, con qualche consiglio pratico da portarti a casa.</p></li>
       </ol>
@@ -616,28 +623,23 @@ footer .r { text-align: right; }
       <div class="l head">
         <span class="eyebrow"><b>Sacro</b>Contatti</span>
         <h2>Prenota il tuo <em>appuntamento</em></h2>
-        <p>Ricevo solo su appuntamento, a Paratico presso Bengi Fitness. Il modo più veloce è un messaggio WhatsApp.</p>
+        <p>Ricevo solo su appuntamento, a Paratico presso Bengi Fitness. Il modo più veloce è un messaggio su Instagram.</p>
       </div>
       <div class="r flash">
         <div class="card glass">
           <h3 class="card-t">Recapiti</h3>
-          <div class="row"><span class="badge" aria-hidden="true"><svg class="ico"><use href="#i-phone"/></svg></span><span class="k">Telefono e WhatsApp</span><a class="v" href="tel:+393330000000">+39 333 000 0000</a></div>
-          <div class="row"><span class="badge" aria-hidden="true"><svg class="ico"><use href="#i-mail"/></svg></span><span class="k">Email</span><span class="v">[email]</span></div>
-          <div class="row"><span class="badge" aria-hidden="true"><svg class="ico"><use href="#i-pin"/></svg></span><span class="k">Indirizzo</span><span class="v">Bengi Fitness, [via e numero], Paratico&nbsp;(BS)</span></div>
+          <div class="row"><span class="badge" aria-hidden="true"><svg class="ico"><use href="#i-cam"/></svg></span><span class="k">Instagram</span><a class="v" href="https://www.instagram.com/muscle_flex_therapy/">@muscle_flex_therapy</a></div>
+          <div class="row"><span class="badge" aria-hidden="true"><svg class="ico"><use href="#i-pin"/></svg></span><span class="k">Dove</span><span class="v">Bengi Fitness, Paratico&nbsp;(BS)</span></div>
           <div class="actions">
-            <a class="btn primary" href="https://wa.me/393330000000?text=Ciao%20Camelia%2C%20vorrei%20prenotare%20un%20massaggio"><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg>Scrivi su WhatsApp</a>
-            <a class="btn ghost" href="https://www.instagram.com/muscle_flex_therapy/"><svg class="ico" aria-hidden="true"><use href="#i-cam"/></svg>Instagram</a>
+            <a class="btn primary" href="https://ig.me/m/muscle_flex_therapy"><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg>Scrivimi su Instagram</a>
+            <a class="btn ghost" href="https://www.instagram.com/bengifitness_only/"><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg>Bengi Fitness</a>
           </div>
         </div>
       </div>
       <div class="l hours-wrap">
         <div class="card glass">
           <h3 class="card-t" id="orari-t"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>Orari (su appuntamento)</h3>
-          <table class="hours" aria-labelledby="orari-t">
-            <tr><th scope="row">Lunedì – Venerdì</th><td>9:00 – 19:30</td></tr>
-            <tr><th scope="row">Sabato</th><td>9:00 – 13:00</td></tr>
-            <tr><th scope="row">Domenica</th><td class="off">Chiuso</td></tr>
-          </table>
+          <p class="hours-note">Ricevo su appuntamento dentro Bengi Fitness, anche prima o dopo il tuo allenamento. Scrivimi e troviamo insieme giorno e orario.</p>
         </div>
       </div>
     </div>
@@ -655,14 +657,13 @@ footer .r { text-align: right; }
 </nav>
 
 <div class="book-bar" aria-label="Prenota">
-  <a class="btn primary" href="https://wa.me/393330000000?text=Ciao%20Camelia%2C%20vorrei%20prenotare%20un%20massaggio"><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg>WhatsApp</a>
-  <a class="btn ghost" href="tel:+393330000000"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>Chiama</a>
+  <a class="btn primary" href="https://ig.me/m/muscle_flex_therapy"><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg>Prenota su Instagram</a>
 </div>
 
 <footer>
   <div class="rule wrap" role="presentation"></div>
   <div class="wrap split">
-    <span class="l foot-brand"><img src="assets/logo-tondo.png" alt="" width="52" height="52">© 2026 Muscle Flex Therapy · P.IVA [da inserire]</span>
+    <span class="l foot-brand"><img src="assets/logo-tondo.png" alt="" width="52" height="52">© 2026 Muscle Flex Therapy</span>
     <span class="r">I trattamenti non sostituiscono il parere del medico.</span>
   </div>
 </footer>
