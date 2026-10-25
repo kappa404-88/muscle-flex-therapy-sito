@@ -127,7 +127,7 @@ a:focus-visible, .btn:focus-visible, button:focus-visible { outline: 2px solid v
 .sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
 /* Sfondo: nero profondo. Due luci verde acqua scivolano piano verso la card della sezione attiva
-   e un fascio di luce scende lungo la colonna fino al tratto acceso (stessa altezza dei punti) */
+   e un fascio di luce scende lungo la colonna; il bagliore sta all'altezza del punto acceso (--hy dallo script) */
 .bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; background: radial-gradient(90% 55% at 50% -12%, var(--sky), transparent 70%), var(--bg); }
 .bg > * { position: absolute; }
 .aura { left: 0; top: 0; width: 110vmax; height: 110vmax; transition: transform 2.4s cubic-bezier(.45, 0, .2, 1); }
@@ -145,11 +145,7 @@ a:focus-visible, .btn:focus-visible, button:focus-visible { outline: 2px solid v
 .bg[data-s="4"] .a1 { transform: translate(calc(62vw - 55vmax), calc(82vh - 55vmax)); }
 .bg[data-s="4"] .a2 { transform: translate(calc(14vw - 55vmax), calc(18vh - 55vmax)); }
 .beam { top: 0; bottom: 0; left: 50%; width: calc(var(--gut) * 1.6); transform: translateX(-50%); background: linear-gradient(90deg, transparent, var(--beam) 50%, transparent); -webkit-mask: linear-gradient(transparent, #000 10%, #000 90%, transparent); mask: linear-gradient(transparent, #000 10%, #000 90%, transparent); }
-.hot { --hw: calc(var(--gut) * 1.5); top: 0; left: calc(50% - var(--hw) / 2); width: var(--hw); height: var(--hw); border-radius: 50%; background: radial-gradient(closest-side, var(--hot), color-mix(in srgb, var(--hot) 30%, transparent) 45%, transparent 72%); transform: translateY(calc(18vh - 50%)); transition: transform 1.2s cubic-bezier(.45, 0, .2, 1); }
-.bg[data-s="1"] .hot { transform: translateY(calc(34vh - 50%)); }
-.bg[data-s="2"] .hot { transform: translateY(calc(50vh - 50%)); }
-.bg[data-s="3"] .hot { transform: translateY(calc(66vh - 50%)); }
-.bg[data-s="4"] .hot { transform: translateY(calc(82vh - 50%)); }
+.hot { --hw: calc(var(--gut) * 1.5); top: 0; left: calc(50% - var(--hw) / 2); width: var(--hw); height: var(--hw); border-radius: 50%; background: radial-gradient(closest-side, var(--hot), color-mix(in srgb, var(--hot) 30%, transparent) 45%, transparent 72%); transform: translateY(calc(var(--hy, 18vh) - 50%)); transition: transform 1.2s cubic-bezier(.45, 0, .2, 1); }
 .vignette { inset: 0; background: radial-gradient(130% 95% at 50% 45%, transparent 55%, rgba(0, 0, 0, .6) 100%); }
 .grain { inset: 0; background-image: var(--grain); background-size: 180px; opacity: var(--grain-o); }
 
@@ -183,19 +179,21 @@ section { padding-block: 112px; scroll-margin-top: 0; }
   --r: 24px; --side: 1; --clip0: inset(-80px calc(100% - 14px) -80px -80px round var(--r));
   opacity: 0; clip-path: var(--clip0);
   transform: translate3d(calc(var(--side) * -40px), 44px, 0) scale(.96);
-  transition: opacity .4s ease, transform .5s cubic-bezier(.5, 0, .75, 0), clip-path .45s cubic-bezier(.5, 0, .75, 0);
+  transition: opacity .4s ease, transform .5s cubic-bezier(.5, 0, .75, 0), clip-path .45s cubic-bezier(.5, 0, .75, 0), translate .35s;
 }
 .js .fc.glass { --r: 22px; }
 .js .fc.up { transform: translate3d(calc(var(--side) * -40px), -44px, 0) scale(.96); }
 .js .fc.in {
   opacity: 1; transform: none; clip-path: inset(-80px round var(--r));
-  transition: opacity .5s ease var(--d, 0s), transform .95s cubic-bezier(.16, .84, .24, 1) var(--d, 0s), clip-path 1.05s cubic-bezier(.65, 0, .2, 1) calc(var(--d, 0s) + .06s);
+  transition: opacity .5s ease var(--d, 0s), transform .95s cubic-bezier(.16, .84, .24, 1) var(--d, 0s), clip-path 1.05s cubic-bezier(.65, 0, .2, 1) calc(var(--d, 0s) + .06s), translate .35s;
   animation: flash-glow 2s ease-out var(--d, 0s) 1;
 }
 .js .fc > * { opacity: 0; transform: translateY(12px); transition: opacity .25s ease, transform .3s ease; }
 .js .fc.in > * { opacity: 1; transform: none; transition: opacity .6s ease calc(var(--d, 0s) + .36s + var(--k, 0) * 70ms), transform .8s cubic-bezier(.16, .84, .24, 1) calc(var(--d, 0s) + .36s + var(--k, 0) * 70ms); }
 .fc > :nth-child(2) { --k: 1; } .fc > :nth-child(3) { --k: 2; } .fc > :nth-child(4) { --k: 3; }
 .fc > :nth-child(5) { --k: 4; } .fc > :nth-child(6) { --k: 5; } .fc > :nth-child(n+7) { --k: 6; }
+.js .fc:has(:focus-visible), .js .fc:has(:focus-visible) > * { opacity: 1; transform: none; }
+.js .fc:has(:focus-visible) { clip-path: inset(-80px round var(--r)); }
 @keyframes flash-glow {
   0%, 100% { box-shadow: var(--shadow); }
   35% { box-shadow: var(--shadow), 0 0 0 1px var(--accent), 0 0 70px -12px var(--accent); }
@@ -208,8 +206,12 @@ section { padding-block: 112px; scroll-margin-top: 0; }
 .tie .tie-a { fill: var(--accent); }
 .tie .tie-b { fill: var(--bg); stroke: var(--accent); stroke-width: 1.5; }
 @media (prefers-reduced-motion: reduce) {
-  .js .fc, .js .fc > * { opacity: 1; transform: none; clip-path: none; transition: none; }
+  .js .fc, .js .fc.up, .js .fc > *, .js .fc.in > * { opacity: 1; transform: none; clip-path: none; transition: none; }
   .js .fc.in, .tie.draw path { animation: none; }
+}
+@media print {
+  .js .fc, .js .fc > * { opacity: 1 !important; transform: none !important; clip-path: none !important; transition: none !important; animation: none !important; }
+  .tie { display: none; }
 }
 @media (forced-colors: active) { .tie path, .tie .tie-b { stroke: Highlight; filter: none; } .tie .tie-a { fill: Highlight; } }
 .eyebrow { display: block; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--leaf); font-weight: 650; line-height: 1.4; }
@@ -279,7 +281,7 @@ section { padding-block: 112px; scroll-margin-top: 0; }
 .callout span { color: var(--muted); font-size: .88rem; line-height: 1.5; }
 ul.menu, ul.creds, ol.steps, ul.chips { list-style: none; margin: 0; padding: 0; }
 .menu { display: grid; gap: 16px; }
-.item { padding: 26px 28px 24px; display: grid; gap: 12px; transition: transform .35s, box-shadow .35s; }
+.item { padding: 26px 28px 24px; display: grid; gap: 12px; transition: translate .35s, box-shadow .35s; }
 .item-top { display: flex; align-items: baseline; justify-content: space-between; gap: 18px; }
 .item h3 { font-size: 1.7rem; font-weight: 550; line-height: 1.1; }
 .price { flex: none; font-family: var(--display); font-size: 2rem; font-weight: 500; line-height: 1; color: var(--accent); font-variant-numeric: lining-nums tabular-nums; white-space: nowrap; }
@@ -443,14 +445,10 @@ footer .r { text-align: right; }
 /* Movimento: solo se chi visita non l'ha disattivato */
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
-  /* le luci respirano piano: solo trasformazioni, nessun ridisegno */
-  .a1::before { animation: breathe 13s ease-in-out infinite alternate; }
-  .a2::before { animation: breathe 17s ease-in-out -6s infinite alternate; }
   .hero .head > * { animation: rise .9s cubic-bezier(.2, .7, .2, 1) both; }
   .hero .head > :nth-child(2) { animation-delay: .06s; }
-  .js .item.fc.in:hover { transform: translateY(-2px); transition: transform .35s, box-shadow .35s; }
+  .item:hover { translate: 0 -2px; }
 }
-@keyframes breathe { from { transform: scale(1); opacity: .82; } to { transform: scale(1.08); opacity: 1; } }
 @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
@@ -693,7 +691,7 @@ document.documentElement.classList.add('js');
   var canvas = document.getElementById('spine3d');
   var links = Array.prototype.slice.call(document.querySelectorAll('.spine-nav a'));
   var sections = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var motionMq = window.matchMedia('(prefers-reduced-motion: reduce)'), reduce = motionMq.matches;
   var bgEl = document.querySelector('.bg');
 
   // Sezione attiva: l'ultima il cui inizio ha superato la linea di lettura.
@@ -748,7 +746,7 @@ document.documentElement.classList.add('js');
   var unitSec = units.map(function (u) { return flashes.indexOf(u.closest('.flash')); });
   var tie = document.querySelector('.tie'), tieP = tie && tie.querySelector('path');
   var tieA = tie && tie.querySelector('.tie-a'), tieB = tie && tie.querySelector('.tie-b');
-  var tieFor = -1, frameQueued = false, geo = [];
+  var tieFor = -1, frameQueued = false, geo = [], hotY = -99, followEnd = 0, following = false;
   function drawTie() {
     if (!tie) return;
     var vh = window.innerHeight, idx = -1, r = null, best = Infinity;
@@ -795,7 +793,8 @@ document.documentElement.classList.add('js');
       var g = geo[i]; if (!g) return;
       var top = g.t - y, bot = top + g.h;
       var st = u.classList.contains('in') ? 'in' : u.classList.contains('up') ? 'up' : 'down', next = st;
-      if (st === 'in') { if (bot < vh * 0.24) next = 'up'; else if (top > vh * 0.96) next = 'down'; }
+      if (keyFocus(u)) next = 'in';   // una card con il focus da tastiera resta aperta
+      else if (st === 'in') { if (bot < vh * 0.24) next = 'up'; else if (top > vh * 0.96) next = 'down'; }
       else if (st === 'down') { if (top < vh * 0.88 && bot > vh * 0.24) next = 'in'; else if (bot < vh * 0.24) next = 'up'; }
       else { if (bot > vh * 0.34 && top < vh * 0.88) next = 'in'; else if (top > vh * 0.96) next = 'down'; }
       if (next === st) return;
@@ -810,22 +809,45 @@ document.documentElement.classList.add('js');
     });
     if (moved) follow(1200);
   }
-  function tick() { frameQueued = false; updateCards(); drawTie(); }
-  function queueTie() { if (!frameQueued) { frameQueued = true; requestAnimationFrame(tick); } }
-  function follow(ms) {   // segue la card mentre si apre
-    var end = performance.now() + ms;
-    (function step(t) { drawTie(); if (t < end) requestAnimationFrame(step); })(performance.now());
+  function keyFocus(u) {
+    var el = document.activeElement;
+    if (!el || el === document.body || !u.contains(el)) return false;
+    try { return el.matches(':focus-visible'); } catch (e) { return true; }
   }
-  if (reduce) {
-    units.forEach(function (u) { u.classList.add('in'); });
+  // il bagliore dello sfondo va all'altezza del punto acceso; si aggiorna solo quando si sposta davvero
+  function syncHot() {
+    var a = links[active], y = a ? Math.round(parseFloat(a.style.top)) : NaN;
+    if (!bgEl || isNaN(y) || Math.abs(y - hotY) < 6) return;
+    hotY = y; bgEl.style.setProperty('--hy', y + 'px');
+  }
+  function showAll() {
+    units.forEach(function (u) { u.classList.remove('up'); u.classList.add('in'); });
     flashes.forEach(function (f) { if (f) f.classList.add('in'); });
-  } else {
-    measure();
-    if ('ResizeObserver' in window) new ResizeObserver(function () { measure(); queueTie(); }).observe(document.body);
-    window.addEventListener('load', function () { measure(); queueTie(); });
   }
+  function tick() { frameQueued = false; if (!reduce) updateCards(); drawTie(); syncHot(); }
+  function queueTie() { if (!frameQueued) { frameQueued = true; requestAnimationFrame(tick); } }
+  function follow(ms) {   // segue la card mentre si apre: un solo giro alla volta, allungato se serve
+    followEnd = Math.max(followEnd, performance.now() + ms);
+    if (following) return;
+    following = true;
+    requestAnimationFrame(function step(t) {
+      drawTie();
+      if (t < followEnd) requestAnimationFrame(step); else following = false;
+    });
+  }
+  if (reduce) showAll();
+  measure();
+  if ('ResizeObserver' in window) new ResizeObserver(function () { measure(); queueTie(); }).observe(document.body);
+  window.addEventListener('load', function () { measure(); queueTie(); });
   window.addEventListener('scroll', queueTie, { passive: true });
-  window.addEventListener('resize', function () { if (!reduce) measure(); queueTie(); });
+  window.addEventListener('resize', function () { measure(); queueTie(); });
+  document.addEventListener('focusin', queueTie);
+  document.addEventListener('focusout', queueTie);
+  if (motionMq.addEventListener) motionMq.addEventListener('change', function () {
+    reduce = motionMq.matches;
+    if (reduce) showAll();
+    queueTie();
+  });
 
   // Menu delle sezioni sul telefono
   var head = document.querySelector('header.top'), menuBtn = head && head.querySelector('.menu-btn');
