@@ -104,8 +104,10 @@ img { max-width: 100%; }
   --shadow: 0 0 0 1px rgba(0, 0, 0, .4), 0 24px 48px -24px rgba(0, 0, 0, .8);
   --m1: rgba(40, 150, 125, .16); --m2: rgba(30, 90, 110, .15); --m3: rgba(20, 60, 54, .2); --m4: rgba(60, 160, 150, .08);
   --halo: rgba(88, 192, 168, .07); --fiber: rgba(140, 225, 203, .06);
+  --aura1: rgba(64, 196, 164, .2); --aura2: rgba(40, 118, 142, .18);
+  --beam: rgba(116, 211, 188, .045); --hot: rgba(116, 211, 188, .16); --sky: rgba(116, 211, 188, .07);
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .85 0 0 0 0 1 0 0 0 0 .95 0 0 0 1.25 -.58'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
-  --grain-o: .16; --bone: #35524c; --glow: #6fd8bf;
+  --grain-o: .07; --bone: #35524c; --glow: #6fd8bf;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -124,21 +126,27 @@ a:focus-visible, .btn:focus-visible, button:focus-visible { outline: 2px solid v
 .ico { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.35; stroke-linecap: round; stroke-linejoin: round; }
 .sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
-/* Sfondo: mesh di luce che scorre piano, fibre muscolari sottilissime, grana leggera */
-.bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+/* Sfondo: nero profondo. Due luci verde acqua scivolano piano verso la card della sezione attiva
+   e un fascio di luce scende lungo la colonna; il bagliore sta all'altezza del punto acceso (--hy dallo script) */
+.bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; background: radial-gradient(90% 55% at 50% -12%, var(--sky), transparent 70%), var(--bg); }
 .bg > * { position: absolute; }
-.mesh { inset: -18%; }
-.mesh::before, .mesh::after { content: ""; position: absolute; inset: 0; }
-.mesh::before { background:
-  radial-gradient(32% 28% at 20% 16%, var(--m1), transparent 72%),
-  radial-gradient(30% 34% at 86% 26%, var(--m2), transparent 70%),
-  radial-gradient(44% 36% at 50% 62%, var(--m3), transparent 72%); }
-.mesh::after { background:
-  radial-gradient(30% 30% at 16% 78%, var(--m2), transparent 70%),
-  radial-gradient(34% 30% at 80% 84%, var(--m1), transparent 72%),
-  radial-gradient(26% 24% at 62% 8%, var(--m4), transparent 70%); }
-.halo { top: 0; bottom: 0; left: 50%; width: calc(var(--gut) * 1.7); transform: translateX(-50%); background: radial-gradient(50% 58% at 50% 50%, var(--halo), transparent 74%); }
-.fibers { inset: 0; background: var(--fiber); -webkit-mask: url("assets/fibers.svg") center / cover no-repeat; mask: url("assets/fibers.svg") center / cover no-repeat; }
+.aura { left: 0; top: 0; width: 110vmax; height: 110vmax; transition: transform 2.4s cubic-bezier(.45, 0, .2, 1); }
+.aura::before { content: ""; position: absolute; inset: 0; border-radius: 50%; }
+.a1::before { background: radial-gradient(closest-side, var(--aura1), color-mix(in srgb, var(--aura1) 38%, transparent) 40%, transparent 72%); }
+.a2::before { background: radial-gradient(closest-side, var(--aura2), color-mix(in srgb, var(--aura2) 34%, transparent) 42%, transparent 70%); }
+.a1 { transform: translate(calc(74vw - 55vmax), calc(30vh - 55vmax)); }
+.a2 { transform: translate(calc(12vw - 55vmax), calc(94vh - 55vmax)); }
+.bg[data-s="1"] .a1 { transform: translate(calc(80vw - 55vmax), calc(60vh - 55vmax)); }
+.bg[data-s="1"] .a2 { transform: translate(calc(10vw - 55vmax), calc(14vh - 55vmax)); }
+.bg[data-s="2"] .a1 { transform: translate(calc(22vw - 55vmax), calc(46vh - 55vmax)); }
+.bg[data-s="2"] .a2 { transform: translate(calc(90vw - 55vmax), calc(88vh - 55vmax)); }
+.bg[data-s="3"] .a1 { transform: translate(calc(78vw - 55vmax), calc(48vh - 55vmax)); }
+.bg[data-s="3"] .a2 { transform: translate(calc(16vw - 55vmax), calc(90vh - 55vmax)); }
+.bg[data-s="4"] .a1 { transform: translate(calc(62vw - 55vmax), calc(82vh - 55vmax)); }
+.bg[data-s="4"] .a2 { transform: translate(calc(14vw - 55vmax), calc(18vh - 55vmax)); }
+.beam { top: 0; bottom: 0; left: 50%; width: calc(var(--gut) * 1.6); transform: translateX(-50%); background: linear-gradient(90deg, transparent, var(--beam) 50%, transparent); -webkit-mask: linear-gradient(transparent, #000 10%, #000 90%, transparent); mask: linear-gradient(transparent, #000 10%, #000 90%, transparent); }
+.hot { --hw: calc(var(--gut) * 1.5); top: 0; left: calc(50% - var(--hw) / 2); width: var(--hw); height: var(--hw); border-radius: 50%; background: radial-gradient(closest-side, var(--hot), color-mix(in srgb, var(--hot) 30%, transparent) 45%, transparent 72%); transform: translateY(calc(var(--hy, 18vh) - 50%)); transition: transform 1.2s cubic-bezier(.45, 0, .2, 1); }
+.vignette { inset: 0; background: radial-gradient(130% 95% at 50% 45%, transparent 55%, rgba(0, 0, 0, .6) 100%); }
 .grain { inset: 0; background-image: var(--grain); background-size: 180px; opacity: var(--grain-o); }
 
 .note, header.top, main, footer { position: relative; z-index: 8; }
@@ -165,12 +173,30 @@ section { padding-block: 112px; scroll-margin-top: 0; }
 @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
   .panel { background: var(--glass); -webkit-backdrop-filter: blur(18px) saturate(140%); backdrop-filter: blur(18px) saturate(140%); }
 }
-.js .flash { opacity: 0; transform: translateY(56px) scale(.96); transition: opacity .8s ease, transform .9s cubic-bezier(.16, .84, .24, 1); }
-.js .flash.in { opacity: 1; transform: none; }
-.panel.in { animation: flash-glow 1.4s ease-out .2s 1 both; }
+/* Ogni card esce dalla colonna quando arriva sullo schermo: si apre dal lato della colonna mentre il filo
+   la raggiunge, poi compare il contenuto. Quando la superi rientra nella colonna; tornando indietro riesce */
+.js .fc {
+  --r: 24px; --side: 1; --clip0: inset(-80px calc(100% - 14px) -80px -80px round var(--r));
+  opacity: 0; clip-path: var(--clip0);
+  transform: translate3d(calc(var(--side) * -40px), 44px, 0) scale(.96);
+  transition: opacity .4s ease, transform .5s cubic-bezier(.5, 0, .75, 0), clip-path .45s cubic-bezier(.5, 0, .75, 0), translate .35s;
+}
+.js .fc.glass { --r: 22px; }
+.js .fc.up { transform: translate3d(calc(var(--side) * -40px), -44px, 0) scale(.96); }
+.js .fc.in {
+  opacity: 1; transform: none; clip-path: inset(-80px round var(--r));
+  transition: opacity .5s ease var(--d, 0s), transform .95s cubic-bezier(.16, .84, .24, 1) var(--d, 0s), clip-path 1.05s cubic-bezier(.65, 0, .2, 1) calc(var(--d, 0s) + .06s), translate .35s;
+  animation: flash-glow 2s ease-out var(--d, 0s) 1;
+}
+.js .fc > * { opacity: 0; transform: translateY(12px); transition: opacity .25s ease, transform .3s ease; }
+.js .fc.in > * { opacity: 1; transform: none; transition: opacity .6s ease calc(var(--d, 0s) + .36s + var(--k, 0) * 70ms), transform .8s cubic-bezier(.16, .84, .24, 1) calc(var(--d, 0s) + .36s + var(--k, 0) * 70ms); }
+.fc > :nth-child(2) { --k: 1; } .fc > :nth-child(3) { --k: 2; } .fc > :nth-child(4) { --k: 3; }
+.fc > :nth-child(5) { --k: 4; } .fc > :nth-child(6) { --k: 5; } .fc > :nth-child(n+7) { --k: 6; }
+.js .fc:has(:focus-visible), .js .fc:has(:focus-visible) > * { opacity: 1; transform: none; }
+.js .fc:has(:focus-visible) { clip-path: inset(-80px round var(--r)); }
 @keyframes flash-glow {
-  0% { box-shadow: var(--shadow), 0 0 0 1px var(--accent), 0 0 70px -12px var(--accent); }
-  100% { box-shadow: var(--shadow); }
+  0%, 100% { box-shadow: var(--shadow); }
+  35% { box-shadow: var(--shadow), 0 0 0 1px var(--accent), 0 0 70px -12px var(--accent); }
 }
 .tie { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 9; pointer-events: none; overflow: visible; transition: opacity .3s; }
 .tie.off { opacity: 0; }
@@ -180,8 +206,12 @@ section { padding-block: 112px; scroll-margin-top: 0; }
 .tie .tie-a { fill: var(--accent); }
 .tie .tie-b { fill: var(--bg); stroke: var(--accent); stroke-width: 1.5; }
 @media (prefers-reduced-motion: reduce) {
-  .js .flash { opacity: 1; transform: none; transition: none; }
-  .panel.in, .tie.draw path { animation: none; }
+  .js .fc, .js .fc.up, .js .fc > *, .js .fc.in > * { opacity: 1; transform: none; clip-path: none; transition: none; }
+  .js .fc.in, .tie.draw path { animation: none; }
+}
+@media print {
+  .js .fc, .js .fc > * { opacity: 1 !important; transform: none !important; clip-path: none !important; transition: none !important; animation: none !important; }
+  .tie { display: none; }
 }
 @media (forced-colors: active) { .tie path, .tie .tie-b { stroke: Highlight; filter: none; } .tie .tie-a { fill: Highlight; } }
 .eyebrow { display: block; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--leaf); font-weight: 650; line-height: 1.4; }
@@ -251,7 +281,7 @@ section { padding-block: 112px; scroll-margin-top: 0; }
 .callout span { color: var(--muted); font-size: .88rem; line-height: 1.5; }
 ul.menu, ul.creds, ol.steps, ul.chips { list-style: none; margin: 0; padding: 0; }
 .menu { display: grid; gap: 16px; }
-.item { padding: 26px 28px 24px; display: grid; gap: 12px; transition: transform .35s, box-shadow .35s; }
+.item { padding: 26px 28px 24px; display: grid; gap: 12px; transition: translate .35s, box-shadow .35s; }
 .item-top { display: flex; align-items: baseline; justify-content: space-between; gap: 18px; }
 .item h3 { font-size: 1.7rem; font-weight: 550; line-height: 1.1; }
 .price { flex: none; font-family: var(--display); font-size: 2rem; font-weight: 500; line-height: 1; color: var(--accent); font-variant-numeric: lining-nums tabular-nums; white-space: nowrap; }
@@ -282,6 +312,9 @@ ul.menu, ul.creds, ol.steps, ul.chips { list-style: none; margin: 0; padding: 0;
 .steps { display: grid; counter-reset: s; }
 .step { display: grid; grid-template-columns: 5.2rem 1fr; gap: 6px 18px; padding-block: 28px; border-top: 1px solid var(--line); }
 .step:last-child { border-bottom: 1px solid var(--line); }
+ol.steps.panel { padding-block: 4px; padding-inline: clamp(20px, 2.6vw, 40px); }
+.steps.panel .step:first-child { border-top: 0; }
+.steps.panel .step:last-child { border-bottom: 0; }
 .step b { grid-row: span 2; font-family: var(--display); font-weight: 300; font-size: 5.6rem; line-height: .78; color: var(--accent); letter-spacing: -.04em; font-variant-numeric: lining-nums; }
 .step h3 { font-size: 1.7rem; font-weight: 550; align-self: end; }
 .step p { color: var(--muted); font-size: .97rem; max-width: 30em; }
@@ -314,7 +347,6 @@ table.hours td.off { color: var(--muted); font-weight: 500; }
 
 footer .split { align-items: center; padding-block: 32px 40px; color: var(--muted); font-size: .86rem; }
 .foot-brand { display: flex; align-items: center; gap: 14px; }
-.foot-brand img { border-radius: 50%; box-shadow: var(--shadow); }
 footer .r { text-align: right; }
 
 /* Colonna vertebrale fissa al centro: guida e navigazione tra le sezioni.
@@ -359,7 +391,9 @@ footer .r { text-align: right; }
   .hero-main { min-height: 0; gap: 26px; }
   .hero p.lead { font-size: 1.04rem; }
   .hero h1 em { display: inline; }
-  .halo { left: auto; right: -70px; width: 220px; transform: none; }
+  .beam { left: auto; right: -60px; width: 200px; transform: none; }
+  .hot { --hw: 300px; left: calc(100% - var(--edge) / 2 - var(--hw) / 2); }
+  .js .fc { --side: -1; --clip0: inset(-80px -80px -80px calc(100% - 14px) round var(--r)); }
   .quick { margin-top: 40px; padding-bottom: 56px; gap: 12px; }
   section { padding-block: 72px; }
   .about .l { justify-content: flex-start; }
@@ -413,21 +447,10 @@ footer .r { text-align: right; }
 /* Movimento: solo se chi visita non l'ha disattivato */
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
-  /* la luce dello sfondo si sposta seguendo lo scorrimento: nessun lavoro quando la pagina è ferma */
-  @supports (animation-timeline: scroll()) {
-    .mesh::before { animation: drift-a linear both; animation-timeline: scroll(root); }
-    .mesh::after { animation: drift-b linear both; animation-timeline: scroll(root); }
-    .fibers { animation: drift-f linear both; animation-timeline: scroll(root); }
-  }
-  .hero .head > *, .hero .r > * { animation: rise .9s cubic-bezier(.2, .7, .2, 1) both; }
+  .hero .head > * { animation: rise .9s cubic-bezier(.2, .7, .2, 1) both; }
   .hero .head > :nth-child(2) { animation-delay: .06s; }
-  .hero .r > :nth-child(1) { animation-delay: .14s; }
-  .hero .r > :nth-child(2) { animation-delay: .2s; }
-  .item:hover { transform: translateY(-2px); }
+  .item:hover { translate: 0 -2px; }
 }
-@keyframes drift-a { from { transform: translate3d(0, 0, 0) rotate(0deg); } to { transform: translate3d(5%, -9%, 0) rotate(7deg); } }
-@keyframes drift-b { from { transform: translate3d(0, 0, 0) scale(1); } to { transform: translate3d(-6%, -12%, 0) scale(1.12); } }
-@keyframes drift-f { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(0, -4%, 0) scale(1.06); } }
 @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
@@ -462,7 +485,7 @@ footer .r { text-align: right; }
   <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 4 8.4 4.3L12 12.6 3.6 8.3z"/><path d="m3.6 12.2 8.4 4.3 8.4-4.3M3.6 16l8.4 4.3 8.4-4.3"/></symbol>
 </svg>
 <a class="skip" href="#contenuto">Salta al contenuto</a>
-<div class="bg" aria-hidden="true"><div class="mesh"></div><div class="halo"></div><div class="fibers"></div><div class="grain"></div></div>
+<div class="bg" aria-hidden="true" data-s="0"><div class="aura a1"></div><div class="aura a2"></div><div class="beam"></div><div class="hot"></div><div class="vignette"></div><div class="grain"></div></div>
 
 <header class="top">
   <div class="wrap split">
@@ -487,8 +510,8 @@ footer .r { text-align: right; }
         <span class="eyebrow"><b>C1–C7</b>Massoterapia e massaggio sportivo</span>
         <h1>Recupero e prevenzione <em>su misura</em></h1>
       </div>
-      <div class="r flash panel">
-        <p class="lead">Sono <strong>Camelia</strong>, massoterapista e massaggiatrice sportiva. Ricevo su appuntamento a Paratico, dentro la palestra Bengi Fitness. Ogni seduta parte da un breve colloquio su come ti alleni, dove senti tensione e cosa ti serve davvero.</p>
+      <div class="r flash panel fc">
+        <p class="lead">Un massaggio costruito sul tuo corpo e su come ti alleni: per sciogliere le tensioni, <strong>recuperare più in fretta</strong> e staccare davvero dopo una giornata alla scrivania.</p>
         <div class="actions">
           <a class="btn primary" href="#contatti">Prenota una seduta<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
           <a class="btn ghost" href="#trattamenti">Vedi trattamenti e prezzi</a>
@@ -534,32 +557,32 @@ footer .r { text-align: right; }
         <p class="callout glass"><svg class="ico" aria-hidden="true"><use href="#i-layers"/></svg><strong>Prezzi su richiesta</strong><span>Scrivimi su Instagram: ti dico durata e costo della seduta più adatta a te.</span></p>
       </div>
       <ul class="r menu flash">
-        <li class="item glass">
+        <li class="item glass fc">
           <div class="item-top"><h3>Massaggio sportivo</h3></div>
           <p class="desc">Prima della gara per preparare i muscoli, dopo l'allenamento per recuperare più in fretta e arrivare pronto alla seduta successiva.</p>
           <ul class="chips" aria-label="Dettagli"><li>Pre-gara</li><li>Post-allenamento</li></ul>
         </li>
-        <li class="item glass">
+        <li class="item glass fc">
           <div class="item-top"><h3>Recupero e prevenzione</h3></div>
           <p class="desc">Seduta su misura per chi si allena con costanza: scarico dei gruppi muscolari più sollecitati e attenzione ai punti che tendono a irrigidirsi.</p>
           <ul class="chips" aria-label="Dettagli"><li>Allenamento costante</li><li>Scarico muscolare</li></ul>
         </li>
-        <li class="item glass">
+        <li class="item glass fc">
           <div class="item-top"><h3>Massaggio decontratturante</h3></div>
           <p class="desc">Lavoro profondo su collo, spalle e schiena per contratture, rigidità e dolori da postura.</p>
           <ul class="chips" aria-label="Dettagli"><li>Collo · spalle · schiena</li><li>Postura</li></ul>
         </li>
-        <li class="item glass">
+        <li class="item glass fc">
           <div class="item-top"><h3>Linfodrenaggio manuale</h3></div>
           <p class="desc">Tecnica delicata e ritmica che aiuta la circolazione e riduce gonfiore e ritenzione.</p>
           <ul class="chips" aria-label="Dettagli"><li>Circolazione</li><li>Gonfiore</li></ul>
         </li>
-        <li class="item glass">
+        <li class="item glass fc">
           <div class="item-top"><h3>Massaggio rilassante</h3></div>
           <p class="desc">Manovre lente e avvolgenti per staccare dallo stress e ritrovare un buon sonno.</p>
           <ul class="chips" aria-label="Dettagli"><li>Stress</li><li>Sonno</li></ul>
         </li>
-        <li class="item glass">
+        <li class="item glass fc">
           <div class="item-top"><h3>Trattamento schiena e cervicale</h3></div>
           <p class="desc">Seduta mirata e breve per chi ha poco tempo ma un punto preciso che fa male.</p>
           <ul class="chips" aria-label="Dettagli"><li>Seduta breve</li><li>Zona mirata</li></ul>
@@ -580,7 +603,7 @@ footer .r { text-align: right; }
           </picture>
         </div>
       </div>
-      <div class="r flash panel">
+      <div class="r flash panel fc">
         <span class="eyebrow"><b>T7–T12</b>Chi sono</span>
         <h2>Ciao, sono <em>Camelia</em></h2>
         <p class="intro">Sono massoterapista e massaggiatrice sportiva e aiuto chi si allena, chi lavora tante ore alla scrivania e chi ha bisogno di una pausa vera a recuperare e a prevenire tensioni.</p>
@@ -604,7 +627,7 @@ footer .r { text-align: right; }
         <h2>La tua <em>prima seduta</em></h2>
         <p>Dal primo messaggio al trattamento, in tre passaggi.</p>
       </div>
-      <ol class="r steps flash panel">
+      <ol class="r steps flash panel fc">
         <li class="step"><b aria-hidden="true">1</b><h3>Prenoti</h3><p>Scrivimi un messaggio su Instagram: troviamo insieme giorno e orario.</p></li>
         <li class="step"><b aria-hidden="true">2</b><h3>Parliamo</h3><p>Pochi minuti per capire dove senti tensione, conoscere le tue abitudini e verificare eventuali controindicazioni.</p></li>
         <li class="step"><b aria-hidden="true">3</b><h3>Trattamento</h3><p>Il massaggio vero e proprio, con qualche consiglio pratico da portarti a casa.</p></li>
@@ -622,7 +645,7 @@ footer .r { text-align: right; }
         <p>Ricevo solo su appuntamento, a Paratico presso Bengi Fitness. Il modo più veloce è un messaggio su Instagram.</p>
       </div>
       <div class="r flash">
-        <div class="card glass">
+        <div class="card glass fc">
           <h3 class="card-t">Recapiti</h3>
           <div class="row"><span class="badge" aria-hidden="true"><svg class="ico"><use href="#i-cam"/></svg></span><span class="k">Instagram</span><a class="v" href="https://www.instagram.com/muscle_flex_therapy/">@muscle_flex_therapy</a></div>
           <div class="row"><span class="badge" aria-hidden="true"><svg class="ico"><use href="#i-mail"/></svg></span><span class="k">Email</span><a class="v" href="mailto:infomuscleflextherapy@gmail.com">infomuscleflextherapy<wbr>@gmail.com</a></div>
@@ -660,7 +683,7 @@ footer .r { text-align: right; }
 <footer>
   <div class="rule wrap" role="presentation"></div>
   <div class="wrap split">
-    <span class="l foot-brand"><img src="assets/logo-tondo.png" alt="" width="52" height="52">© 2026 Muscle Flex Therapy</span>
+    <span class="l foot-brand"><img src="assets/logo-simbolo.png" alt="" width="32" height="33">© 2026 Muscle Flex Therapy</span>
     <span class="r">I trattamenti non sostituiscono il parere del medico.</span>
   </div>
 </footer>
@@ -672,7 +695,8 @@ document.documentElement.classList.add('js');
   var canvas = document.getElementById('spine3d');
   var links = Array.prototype.slice.call(document.querySelectorAll('.spine-nav a'));
   var sections = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var motionMq = window.matchMedia('(prefers-reduced-motion: reduce)'), reduce = motionMq.matches;
+  var bgEl = document.querySelector('.bg');
 
   // Sezione attiva: l'ultima il cui inizio ha superato la linea di lettura.
   // Dopo un clic su un link interno resta accesa la sezione scelta finché chi legge non scorre di nuovo.
@@ -685,6 +709,7 @@ document.documentElement.classList.add('js');
       if (i === idx) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
     });
     if (onActive) onActive(idx);
+    if (bgEl) bgEl.setAttribute('data-s', idx);
     queueTie();
   }
   function updateActive() {
@@ -718,14 +743,15 @@ document.documentElement.classList.add('js');
   }, { passive: true });
   window.addEventListener('resize', updateActive);
 
-  // Flash card: ogni sezione entra quando arriva sullo schermo; un filo parte dal tratto di colonna
-  // della card più vicina al centro dello schermo e arriva alla card
+  // Flash card: ogni card esce dalla colonna quando arriva sullo schermo e ci rientra quando la superi.
+  // Un filo parte dal tratto di colonna della sezione più vicina al centro e arriva alla sua card accesa
   var flashes = sections.map(function (s) { return s && s.querySelector('.flash'); });
+  var units = Array.prototype.slice.call(document.querySelectorAll('.fc'));
+  var unitSec = units.map(function (u) { return flashes.indexOf(u.closest('.flash')); });
   var tie = document.querySelector('.tie'), tieP = tie && tie.querySelector('path');
   var tieA = tie && tie.querySelector('.tie-a'), tieB = tie && tie.querySelector('.tie-b');
-  var tieFor = -1, tieQueued = false;
+  var tieFor = -1, frameQueued = false, geo = [], hotY = -99, followEnd = 0, following = false;
   function drawTie() {
-    tieQueued = false;
     if (!tie) return;
     var vh = window.innerHeight, idx = -1, r = null, best = Infinity;
     flashes.forEach(function (f, i) {
@@ -733,12 +759,19 @@ document.documentElement.classList.add('js');
       var b = f.getBoundingClientRect();
       if (b.bottom < 40 || b.top > vh - 40) return;
       var dist = Math.abs((Math.max(b.top, 0) + Math.min(b.bottom, vh)) / 2 - vh / 2);
-      if (dist < best) { best = dist; idx = i; r = b; }
+      if (dist < best) { best = dist; idx = i; }
     });
     var a = links[idx];
     links.forEach(function (l, i) { l.classList.toggle('tied', i === idx); });
-    if (!r || !a) { tie.classList.add('off'); return; }
+    if (!a) { tie.classList.add('off'); return; }
     var d = a.getBoundingClientRect(), dx = d.left + d.width / 2, dy = d.top + d.height / 2;
+    best = Infinity;
+    units.forEach(function (u, j) {   // nella sezione scelta: la card accesa più vicina al punto sulla colonna
+      if (unitSec[j] !== idx || !u.classList.contains('in')) return;
+      var b = u.getBoundingClientRect(), gap = Math.abs(Math.max(b.top, Math.min(b.bottom, dy)) - dy);
+      if (gap < best) { best = gap; r = b; }
+    });
+    if (!r) { tie.classList.add('off'); return; }
     var ey = Math.max(16, Math.min(vh - 16, Math.max(r.top + 28, Math.min(r.bottom - 28, dy))));
     // il filo parte dal punto sulla colonna e passa dietro la sigla; sul telefono la colonna
     // è sul bordo destro e il filo va verso sinistra
@@ -749,22 +782,76 @@ document.documentElement.classList.add('js');
     tie.classList.remove('off');
     if (tieFor !== idx) { tieFor = idx; tie.classList.remove('draw'); void tie.getBoundingClientRect(); tie.classList.add('draw'); }
   }
-  function queueTie() { if (!tieQueued) { tieQueued = true; requestAnimationFrame(drawTie); } }
-  function follow(ms) {   // segue la card mentre entra
-    var end = performance.now() + ms;
-    (function step(t) { drawTie(); if (t < end) requestAnimationFrame(step); })(performance.now());
+  // posizioni senza le trasformazioni dell'animazione, così una card che si sposta non cambia il proprio stato
+  function measure() {
+    geo = units.map(function (u) {
+      var t = 0, el = u;
+      while (el) { t += el.offsetTop; el = el.offsetParent; }
+      return { t: t, h: u.offsetHeight };
+    });
   }
-  if ('IntersectionObserver' in window && !reduce) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (!en.isIntersecting) return;
-        en.target.classList.add('in'); io.unobserve(en.target); follow(1000);
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
-    flashes.forEach(function (f) { if (f) io.observe(f); });
-  } else flashes.forEach(function (f) { if (f) f.classList.add('in'); });
+  // fuori in basso -> accesa -> superata (in alto) e ritorno, con margini diversi per non farla lampeggiare
+  function updateCards() {
+    var vh = window.innerHeight, y = window.scrollY, entering = 0, moved = false;
+    units.forEach(function (u, i) {
+      var g = geo[i]; if (!g) return;
+      var top = g.t - y, bot = top + g.h;
+      var st = u.classList.contains('in') ? 'in' : u.classList.contains('up') ? 'up' : 'down', next = st;
+      if (keyFocus(u)) next = 'in';   // una card con il focus da tastiera resta aperta
+      else if (st === 'in') { if (bot < vh * 0.24) next = 'up'; else if (top > vh * 0.96) next = 'down'; }
+      else if (st === 'down') { if (top < vh * 0.88 && bot > vh * 0.24) next = 'in'; else if (bot < vh * 0.24) next = 'up'; }
+      else { if (bot > vh * 0.34 && top < vh * 0.88) next = 'in'; else if (top > vh * 0.96) next = 'down'; }
+      if (next === st) return;
+      // più card che entrano insieme escono una dopo l'altra
+      u.style.setProperty('--d', next === 'in' ? (entering++ * 0.09) + 's' : '0s');
+      u.classList.toggle('in', next === 'in');
+      u.classList.toggle('up', next === 'up');
+      moved = true;
+    });
+    flashes.forEach(function (f, i) {
+      if (f) f.classList.toggle('in', units.some(function (u, j) { return unitSec[j] === i && u.classList.contains('in'); }));
+    });
+    if (moved) follow(1200);
+  }
+  function keyFocus(u) {
+    var el = document.activeElement;
+    if (!el || el === document.body || !u.contains(el)) return false;
+    try { return el.matches(':focus-visible'); } catch (e) { return true; }
+  }
+  // il bagliore dello sfondo va all'altezza del punto acceso; si aggiorna solo quando si sposta davvero
+  function syncHot() {
+    var a = links[active], y = a ? Math.round(parseFloat(a.style.top)) : NaN;
+    if (!bgEl || isNaN(y) || Math.abs(y - hotY) < 6) return;
+    hotY = y; bgEl.style.setProperty('--hy', y + 'px');
+  }
+  function showAll() {
+    units.forEach(function (u) { u.classList.remove('up'); u.classList.add('in'); });
+    flashes.forEach(function (f) { if (f) f.classList.add('in'); });
+  }
+  function tick() { frameQueued = false; if (!reduce) updateCards(); drawTie(); syncHot(); }
+  function queueTie() { if (!frameQueued) { frameQueued = true; requestAnimationFrame(tick); } }
+  function follow(ms) {   // segue la card mentre si apre: un solo giro alla volta, allungato se serve
+    followEnd = Math.max(followEnd, performance.now() + ms);
+    if (following) return;
+    following = true;
+    requestAnimationFrame(function step(t) {
+      drawTie();
+      if (t < followEnd) requestAnimationFrame(step); else following = false;
+    });
+  }
+  if (reduce) showAll();
+  measure();
+  if ('ResizeObserver' in window) new ResizeObserver(function () { measure(); queueTie(); }).observe(document.body);
+  window.addEventListener('load', function () { measure(); queueTie(); });
   window.addEventListener('scroll', queueTie, { passive: true });
-  window.addEventListener('resize', queueTie);
+  window.addEventListener('resize', function () { measure(); queueTie(); });
+  document.addEventListener('focusin', queueTie);
+  document.addEventListener('focusout', queueTie);
+  if (motionMq.addEventListener) motionMq.addEventListener('change', function () {
+    reduce = motionMq.matches;
+    if (reduce) showAll();
+    queueTie();
+  });
 
   // Menu delle sezioni sul telefono
   var head = document.querySelector('header.top'), menuBtn = head && head.querySelector('.menu-btn');
