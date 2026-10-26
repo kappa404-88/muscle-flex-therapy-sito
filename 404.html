@@ -1,14 +1,23 @@
 <!doctype html>
 <html lang="it">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GDZXNY26WM"></script>
+<!-- Google tag (gtag.js): parte solo dopo il consenso ("Accetto" nel banner), prima nessun cookie -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
   gtag('js', new Date());
 
   gtag('config', 'G-GDZXNY26WM');
+  window.mftLoadGa = function () {
+    if (window.mftGaLoaded) return;
+    window.mftGaLoaded = true;
+    gtag('consent', 'update', { analytics_storage: 'granted' });
+    var s = document.createElement('script');
+    s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=G-GDZXNY26WM';
+    document.head.appendChild(s);
+  };
+  try { if (localStorage.getItem('mft-consenso') === 'si') window.mftLoadGa(); } catch (e) {}
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">

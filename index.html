@@ -1,14 +1,23 @@
 <!doctype html>
 <html lang="it">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GDZXNY26WM"></script>
+<!-- Google tag (gtag.js): parte solo dopo il consenso ("Accetto" nel banner), prima nessun cookie -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
   gtag('js', new Date());
 
   gtag('config', 'G-GDZXNY26WM');
+  window.mftLoadGa = function () {
+    if (window.mftGaLoaded) return;
+    window.mftGaLoaded = true;
+    gtag('consent', 'update', { analytics_storage: 'granted' });
+    var s = document.createElement('script');
+    s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=G-GDZXNY26WM';
+    document.head.appendChild(s);
+  };
+  try { if (localStorage.getItem('mft-consenso') === 'si') window.mftLoadGa(); } catch (e) {}
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -218,7 +227,20 @@ section { padding-block: 112px; scroll-margin-top: 0; }
   .js .fc, .js .fc.up, .js .fc > *, .js .fc.in > * { opacity: 1; transform: none; clip-path: none; transition: none; }
   .js .fc.in, .tie.draw path { animation: none; }
 }
+/* Banner per la misurazione delle visite: stesso vetro scuro delle card */
+.consent { position: fixed; z-index: 30; left: 24px; bottom: 24px; width: min(420px, calc(100vw - 48px)); display: grid; gap: 16px; padding: 22px 22px 20px; border-radius: 22px; background: var(--glass-solid); border: 1px solid var(--glass-edge); box-shadow: var(--shadow); }
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .consent { background: var(--glass); -webkit-backdrop-filter: blur(18px) saturate(140%); backdrop-filter: blur(18px) saturate(140%); }
+}
+.consent[hidden] { display: none; }
+.consent p { margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.55; }
+.consent-t { display: block; margin-bottom: 6px; font-family: var(--display); font-size: 1.35rem; font-weight: 500; line-height: 1.2; color: var(--fg); }
+.consent-actions { display: flex; gap: 10px; }
+.consent-actions .btn { flex: 1 1 0; justify-content: center; padding-block: 12px; cursor: pointer; font: inherit; font-weight: 650; }
+.foot-link { padding: 0; border: 0; background: none; font: inherit; color: inherit; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.foot-link:hover { color: var(--accent); }
 @media print {
+  .consent { display: none !important; }
   .js .fc, .js .fc > * { opacity: 1 !important; transform: none !important; clip-path: none !important; transition: none !important; animation: none !important; }
   .tie { display: none; }
 }
@@ -433,6 +455,7 @@ footer .r { text-align: right; }
   .book-bar .btn { justify-content: center; padding-block: 12px; }
   .book-bar { grid-template-columns: 1fr; }
   body { padding-bottom: calc(70px + env(safe-area-inset-bottom, 0px)); }
+  .consent { left: 12px; right: calc(var(--edge) + 4px); width: auto; bottom: calc(78px + env(safe-area-inset-bottom, 0px)); padding: 18px 18px 16px; }
 }
 @media (min-width: 900px) { .menu-btn, .book-bar { display: none; } }
 @media (max-width: 480px) {
@@ -693,10 +716,45 @@ footer .r { text-align: right; }
   <div class="rule wrap" role="presentation"></div>
   <div class="wrap split">
     <span class="l foot-brand"><img src="assets/logo-simbolo.png" alt="" width="32" height="33">© 2026 Muscle Flex Therapy</span>
-    <span class="r">I trattamenti non sostituiscono il parere del medico.</span>
+    <span class="r">I trattamenti non sostituiscono il parere del medico. · <button class="foot-link" type="button" data-consenso-apri>Preferenze cookie</button></span>
   </div>
 </footer>
 
+<div class="consent" id="consenso" role="region" aria-label="Misurazione delle visite" hidden>
+  <p><span class="consent-t">Misurazione delle visite</span>Uso Google Analytics per sapere quante persone visitano il sito e come lo trovano. Si attiva solo se accetti; puoi cambiare idea quando vuoi da &laquo;Preferenze cookie&raquo; in fondo alla pagina.</p>
+  <div class="consent-actions">
+    <button class="btn primary" type="button" data-consenso="si">Accetto</button>
+    <button class="btn ghost" type="button" data-consenso="no">Rifiuto</button>
+  </div>
+</div>
+<script>
+// Consenso alla misurazione: la scelta resta nel browser; "Rifiuto" dopo un "Accetto" toglie i cookie di Analytics
+(function () {
+  var box = document.getElementById('consenso'), KEY = 'mft-consenso';
+  function get() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function set(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+  function dropGaCookies() {
+    var host = location.hostname.replace(/^www\./, '');
+    document.cookie.split(';').forEach(function (c) {
+      var n = c.split('=')[0].trim();
+      if (!/^_ga/.test(n)) return;
+      ['', '; domain=' + host, '; domain=.' + host].forEach(function (d) { document.cookie = n + '=; Max-Age=0; path=/' + d; });
+    });
+  }
+  if (!get()) box.hidden = false;
+  box.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-consenso]');
+    if (!b) return;
+    var v = b.getAttribute('data-consenso'), was = get();
+    set(v); box.hidden = true;
+    if (v === 'si') window.mftLoadGa();
+    else if (was === 'si' || window.mftGaLoaded) { dropGaCookies(); location.reload(); }
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-consenso-apri]'), function (a) {
+    a.addEventListener('click', function () { box.hidden = false; box.querySelector('[data-consenso="si"]').focus(); });
+  });
+})();
+</script>
 <script src="assets/vendor/three.min.js"></script>
 <script>
 document.documentElement.classList.add('js');
