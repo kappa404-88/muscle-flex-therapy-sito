@@ -312,6 +312,9 @@ ul.menu, ul.creds, ol.steps, ul.chips { list-style: none; margin: 0; padding: 0;
 .steps { display: grid; counter-reset: s; }
 .step { display: grid; grid-template-columns: 5.2rem 1fr; gap: 6px 18px; padding-block: 28px; border-top: 1px solid var(--line); }
 .step:last-child { border-bottom: 1px solid var(--line); }
+ol.steps.panel { padding-block: 4px; padding-inline: clamp(20px, 2.6vw, 40px); }
+.steps.panel .step:first-child { border-top: 0; }
+.steps.panel .step:last-child { border-bottom: 0; }
 .step b { grid-row: span 2; font-family: var(--display); font-weight: 300; font-size: 5.6rem; line-height: .78; color: var(--accent); letter-spacing: -.04em; font-variant-numeric: lining-nums; }
 .step h3 { font-size: 1.7rem; font-weight: 550; align-self: end; }
 .step p { color: var(--muted); font-size: .97rem; max-width: 30em; }
@@ -344,7 +347,6 @@ table.hours td.off { color: var(--muted); font-weight: 500; }
 
 footer .split { align-items: center; padding-block: 32px 40px; color: var(--muted); font-size: .86rem; }
 .foot-brand { display: flex; align-items: center; gap: 14px; }
-.foot-brand img { border-radius: 50%; box-shadow: var(--shadow); }
 footer .r { text-align: right; }
 
 /* Colonna vertebrale fissa al centro: guida e navigazione tra le sezioni.
@@ -681,7 +683,7 @@ footer .r { text-align: right; }
 <footer>
   <div class="rule wrap" role="presentation"></div>
   <div class="wrap split">
-    <span class="l foot-brand"><img src="assets/logo-tondo.png" alt="" width="52" height="52">© 2026 Muscle Flex Therapy</span>
+    <span class="l foot-brand"><img src="assets/logo-simbolo.png" alt="" width="32" height="33">© 2026 Muscle Flex Therapy</span>
     <span class="r">I trattamenti non sostituiscono il parere del medico.</span>
   </div>
 </footer>
